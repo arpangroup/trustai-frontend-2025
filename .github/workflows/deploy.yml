@@ -36,5 +36,8 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "dist/* dist/**/*"
+          source: "."
           target: ${{ env.DEPLOY_PATH }}
+          strip_components: 0
+          rm: true
+          tar_tmp_path: "dist"
