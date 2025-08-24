@@ -1,6 +1,7 @@
 import React from "react";
+// import styles from "./NftList.module.css"; 
 import "./NftList.css";
-import NftCard from "./NftCard";
+// import NftCard from "./NftCard";
 
 import Image1 from '../../assets/bids1.png';
 import Image2 from '../../assets/bids2.png';

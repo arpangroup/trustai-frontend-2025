@@ -2,14 +2,14 @@
   display: flex;
   align-items: center;
   gap: 26px;
-  padding: 10px 15px;
+  padding: 20px 15px 6px 24px;
   overflow-x: auto;
   scrollbar-width: none;
   margin-top: -10px;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   -webkit-overflow-scrolling: touch;
-  position: sticky;
+  /* position: sticky; */
   top: 60px;
   z-index: 999;
   background-color: #fff;
@@ -32,6 +32,7 @@
   color: #2952ad;
   border-bottom: 2.5px solid #2584f9;
   background: none;
+  font-weight: 700;
 }
 .tab-content-container {
   background: #fff;
