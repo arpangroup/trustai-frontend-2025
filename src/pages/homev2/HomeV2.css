@@ -388,11 +388,25 @@ body {
   display: none;
 }
 /* BOTTOM NAVBAR */
-.bottom-nav {
+/* .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100vw;
+  background: #fff;
+  display: flex;
+  border-top: 1px solid #e1e5ef;
+  z-index: 100;
+  padding: 4px 0;
+  box-shadow: 0 -1px 10px #ddd3;
+} */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
   background: #fff;
   display: flex;
   border-top: 1px solid #e1e5ef;
