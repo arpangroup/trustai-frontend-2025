@@ -8,7 +8,7 @@ import BottomNav from "../../components/bottomnav/BottomNav";
 import Carousel from "../../components/carousel/Carousel";
 import NavRow from "../../components/navrow/NavRow";
 import Tabs from "../../components/tabs/Tabs";
-import NftList from "../../components/NftList/NftList";
+import NftList from "../../components/nftList/NftList";
 import TopCollectionList from "../../components/topCollectionList/TopCollectionList";
 import FeatureSection from "./feature/FeatureSection";
 import BiddingSection from "./bidding/BiddingSection";
