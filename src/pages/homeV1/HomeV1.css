@@ -1,0 +1,249 @@
+body {
+    background: linear-gradient(to bottom, #daeafe 0%, #f8fafd 100%);
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+
+.container {
+    max-width: 430px;
+    margin: 0px auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 2px 24px rgba(18, 28, 38, 0.07);
+    overflow: hidden;
+    padding-bottom: 30px;
+    height: 100vh;
+}
+
+/* ---------- Header ----------- */
+.header {
+    padding: 24px 24px 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #e6fafd;
+    margin-right: 16px;
+    border: 2px solid #cceeff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar img {
+    width: 40px;
+    height: 40px;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+}
+
+.level {
+    display: inline-block;
+    background: #ffe977;
+    color: #444;
+    border-radius: 8px;
+    padding: 2px 9px;
+    font-size: 0.9em;
+    margin-right: 6px;
+    font-weight: 600;
+}
+
+.points {
+    background: #e3f1ff;
+    color: #0073e6;
+    border-radius: 8px;
+    padding: 2px 9px;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.header-icons {
+    display: flex;
+    gap: 16px;
+}
+
+.header-icons .icon {
+    font-size: 1.3em;
+    background: #f5f9ff;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* ---------- Navigation Row ----------- */
+.nav-row {
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 24px 18px 24px;
+}
+
+.nav-item {
+    background: #f2fbff;
+    border-radius: 20px;
+    flex: 1;
+    margin: 0 6px;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.2s;
+    border: none;
+    outline: none;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background: #e5fafd;
+    font-weight: bold;
+    color: #0099ff;
+}
+
+/* ---------- Tabs ----------- */
+.tabs {
+    display: flex;
+    gap: 18px;
+    padding: 0 24px;
+    border-bottom: 1px solid #f3f3f7;
+    margin-bottom: -1px;
+}
+
+.tab {
+    font-size: 1.1em;
+    color: #aaa;
+    padding: 12px 0 8px 0;
+    cursor: pointer;
+    border-bottom: 2.5px solid transparent;
+    transition: 0.2s;
+}
+
+.tab.active {
+    color: #222;
+    border-bottom: 2.5px solid #3ea6f5;
+    font-weight: bold;
+}
+
+/* ---------- Tab Content ----------- */
+.tab-content {
+    display: none;
+    padding: 20px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ---------- NFT Horizontal Scroll ----------- */
+.nft-list {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 10px 0;
+    scroll-snap-type: x mandatory;
+
+    /* Hide scrollbar for all browsers */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.nft-list::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari */
+}
+
+.nft-card {
+    background: #f8fafd;
+    border-radius: 18px;
+    width: 250px;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    box-shadow: 0 2px 12px rgba(18, 28, 38, 0.06);
+    overflow: hidden;
+    padding-bottom: 15px;
+}
+
+.nft-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+}
+
+.nft-info {
+    padding: 11px 14px 0 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.nft-title {
+    font-size: 1.13em;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.nft-timer {
+    color: #999;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nft-creator {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    gap: 9px;
+}
+
+.creator-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #e6fafd;
+    object-fit: cover;
+}
+
+.creator-name {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #333;
+}
+
+.nft-price {
+    margin-top: 10px;
+    background: #e6fafd;
+    border-radius: 11px;
+    padding: 5px 12px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #0099ae;
+    display: inline-block;
+}

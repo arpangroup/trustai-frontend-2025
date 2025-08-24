@@ -1,0 +1,430 @@
+html,
+body {
+  background: #cce2fd54;
+  padding: 0;
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #23272f;
+  height: 100%;
+  width: 100%;
+  background-color: #f6faf7;
+}
+/* Always MOBILE - on desktop or mobile */
+.mobile-container {
+  width: 100vw;
+  max-width: 430px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #cce2fd54;
+  box-shadow: 0 0 0 1px #eaeaea, 0 2px 18px 7px #e6eefe;
+  position: relative;
+}
+@media (max-width: 430px) {
+  .mobile-container {
+    box-shadow: none;
+  }
+}
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, #a4d1ff, #e5ecfc);
+  padding: 16px 14px 8px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+.welcome-text {
+  margin-left: 4px;
+}
+.welcome {
+  font-size: 15px;
+  font-weight: 600;
+}
+.signin {
+  color: #3896e1;
+  font-size: 12px;
+}
+.header-icons {
+  display: flex;
+  gap: 10px;
+}
+.icon-btn {
+  background: #fff;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 18px;
+  box-shadow: 0 1px 6px rgba(131, 154, 213, 0.09);
+  color: #4b7ade;
+}
+/* CAROUSEL */
+.carousel {
+  position: relative;
+  margin: 18px 0 4px 0;
+  width: 100vw;
+  max-width: 100%;
+  overflow: hidden;
+  padding-top: 16px;
+}
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0.8, 0.6, 1);
+  will-change: transform;
+}
+.carousel-slide {
+  min-width: 100vw;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+.banner {
+  background: #d2ebff;
+  border-radius: 18px;
+  box-shadow: 0 1px 12px rgba(99, 143, 221, 0.05);
+  display: flex;
+  align-items: center;
+  height: 120px;
+  overflow: hidden;
+  position: relative;
+  padding: 16px;
+}
+.banner-img {
+  width: 90px;
+  height: 100%;
+  border-radius: 0 18px 18px 0;
+  object-fit: cover;
+  margin-right: 13px;
+}
+.banner-txt {
+  padding: 10px 0;
+}
+.banner-title {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+.banner-desc {
+  font-size: 12px;
+  color: #4461a9;
+  margin-bottom: 4px;
+}
+.banner-learn {
+  color: #3498db;
+  font-size: 12px;
+}
+.carousel-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 7px;
+}
+.carousel-dot {
+  width: 7px;
+  height: 7px;
+  background: #b2cade;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.carousel-dot.active {
+  background: #3185fa;
+  width: 20px;
+  border-radius: 9px;
+  transition: all 0.3s;
+}
+/* NAV ROW */
+.nav-row {
+  display: flex;
+  justify-content: space-around;
+  padding: 32px 16px;
+  gap: 0;
+  /* background: #f6faf7; */
+}
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 7px;
+  cursor: pointer;
+}
+.nav-btn-inner {
+  background: linear-gradient(135deg, #e5f5ff 10%, #e5dcdc 100%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+  box-shadow: 0 1px 8px rgba(131, 154, 213, 0.19);
+}
+.nav-icon {
+  color: #fff;
+  font-size: 22px;
+}
+.nav-label {
+  color: #3e5f85;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}
+/* CATEGORY-TABS */
+.category-row {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  padding: 10px 15px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-top: -10px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  -webkit-overflow-scrolling: touch;
+  position: sticky;
+  top: 60px;
+  z-index: 999;
+  background-color: #fff;
+}
+.category-row::-webkit-scrollbar {
+  display: none;
+}
+.category-tab {
+  font-size: 16px;
+  font-weight: 500;
+  color: #878fae;
+  cursor: pointer;
+  border-bottom: 2.5px solid transparent;
+  padding-bottom: 6px;
+  transition: color 0.2s;
+  background: none;
+}
+.category-tab.active {
+  color: #2952ad;
+  border-bottom: 2.5px solid #2584f9;
+  background: none;
+}
+.tab-container {
+  background: #fff;
+}
+/* HORIZONTAL NFT LIST */
+.nft-list {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 15px;
+  padding: 10px 0 10px 14px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.nft-card {
+  background: #f8fafd;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(18, 28, 38, 0.06);
+  width: 250px;
+  min-width: 180px;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+.nft-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 1px 8px rgba(160, 180, 220, 0.11);
+}
+.nft-title-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 7px;
+}
+.nft-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #23272f;
+}
+.nft-time {
+  font-size: 11px;
+  color: #37b3ec;
+  background: #eaf6fb;
+  border-radius: 7px;
+  padding: 1.5px 8px;
+}
+.nft-info-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2px;
+}
+.nft-owner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #2a448f;
+}
+.nft-owner img {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+.nft-price {
+  background: #e6f8f3;
+  color: #19ac74;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 7px;
+  font-size: 13px;
+}
+/* Top Collections Section */
+.section-title {
+  color: #333d5a;
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0 0 12px 16px;
+  padding-top: 12px;
+}
+.collection-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin: 0 0 16px 0;
+  padding-left: 0;
+  width: 100%;
+}
+.collection-item {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 12px 13px;
+  border-radius: 13px;
+  margin: 0 14px;
+  box-shadow: 0 2px 7px 1px rgba(143, 175, 255, 0.06);
+  position: relative;
+  gap: 10px;
+}
+.collection-rank {
+  background: linear-gradient(135deg, #ffbb4c 55%, #f5831f);
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 8px;
+  margin-right: 7px;
+}
+.collection-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-right: 10px;
+  box-shadow: 0 1px 4px rgba(212, 202, 241, 0.13);
+}
+.collection-details {
+  flex: 1;
+  min-width: 0;
+}
+.collection-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #23272f;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+.collection-floor {
+  font-size: 12px;
+  color: #8b99bc;
+}
+.collection-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: #2bc979;
+  margin-right: 3px;
+}
+.collection-change {
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 4px;
+  color: #e55b6f;
+}
+/* Other Tab Content Placeholder */
+.tab-content {
+  padding: 28px 0 30px 0;
+  width: 100%;
+  text-align: center;
+  color: #8598ba;
+  font-size: 18px;
+  font-weight: 500;
+  display: none;
+}
+/* BOTTOM NAVBAR */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background: #fff;
+  display: flex;
+  border-top: 1px solid #e1e5ef;
+  z-index: 100;
+  padding: 4px 0;
+  box-shadow: 0 -1px 10px #ddd3;
+}
+.bottom-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 5px 0 0 0;
+  cursor: pointer;
+}
+.bottom-nav-icon {
+  font-size: 20px;
+  color: #4461a9;
+}
+.bottom-nav-label {
+  font-size: 12px;
+  color: #8da5cc;
+}
+@media (min-width: 600px) {
+  .mobile-container,
+  .carousel-slide {
+    max-width: 430px;
+    min-width: 430px;
+  }
+  .carousel-slide {
+    min-width: 430px;
+  }
+}
