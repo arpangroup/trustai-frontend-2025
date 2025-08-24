@@ -1,0 +1,42 @@
+.bid-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 12px;
+  background: #fff;
+  max-width: 400px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin-bottom: 12px;
+}
+
+.bid-main {
+  display: flex;
+  gap: 12px;
+}
+
+.bid-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.bid-info {
+  flex: 1;
+}
+
+.bid-footer {
+  border-top: 1px solid #ddd;
+  margin-top: 12px;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #555;
+}
+
+.bid-footer strong,
+.bid-footer span {
+  color: #00a87e;
+}

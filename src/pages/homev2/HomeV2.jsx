@@ -10,6 +10,8 @@ import NavRow from "../../components/navrow/NavRow";
 import Tabs from "../../components/tabs/Tabs";
 import NftList from "../../components/NftList/NftList";
 import TopCollectionList from "../../components/topCollectionList/TopCollectionList";
+import FeatureSection from "./feature/FeatureSection";
+import BiddingSection from "./bidding/BiddingSection";
 
 const carouselSlides = [
     {
@@ -75,10 +77,10 @@ const collections = [
 ];
 
 const navButtons = [
-    { icon: "💎", label: "Stake" },
-    { icon: "🎨", label: "Mint" },
-    { icon: "🗓️", label: "Reserve" },
-    { icon: "⚖️", label: "Govern" },
+    { icon: "💎", label: "Stake", link: '/stakes'},
+    { icon: "🎨", label: "Mint",},
+    { icon: "🗓️", label: "Reserve", link: '/store' },
+    { icon: "⚖️", label: "Govern", },
 ];
 
 const tabsData = [
@@ -117,6 +119,12 @@ export default function HomeV2() {
 
             {/* TOP COLLECTIONS */}
             <TopCollectionList collections={collections} />
+
+            {/* Feature Section */}
+            <FeatureSection />
+
+            {/* Stake and Bidding Section */}
+            <BiddingSection/>
 
             {/* BOTTOM NAV */}
             <BottomNav />

@@ -10,6 +10,10 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import HomeV2 from './pages/homev2/HomeV2'
 import Login from './pages/login/Login';
 import RegisterForm from './pages/registration/RegisterForm ';
+import ProtectedRoute from './utils/ProtectedRoute';
+
+import StakeList from './pages/stakeList/StakeList';
+import Store from './pages/store/Store';
 
 
 function App() {
@@ -29,6 +33,16 @@ function App() {
           <Route path="/" element={<HomeV2/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<RegisterForm/>} />
+          {/* <Route path="/forgot" element={<Forgot />} /> */}
+
+
+          {/* Protected routes grouped under ProtectedRoute */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/stakes" element={<HomeV2 />} />
+            <Route path="/store" element={<Store />} />
+            <Route path="/assets" element={<Store />} />
+            <Route path="/profile" element={<Store />} />
+          </Route>
 
         </Routes>
         
