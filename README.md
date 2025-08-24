@@ -20,16 +20,33 @@ npm run preview
 This will start a local server (usually on http://localhost:4173
 
 
+---
 
-# React + Vite
+## Give Write Permissions to the Deployment User
+If the remote directory` /var/www/trustai.co.in` already exists, and is owned by another user (e.g. root), you'll need to:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Option A: Change Ownership (recommended)
 
-Currently, two official plugins are available:
+````bash
+sudo chown -R deploy:deploy /var/www/trustai.co.in
+````
+> Replace `deploy` with the actual username you're using in the GitHub Action.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Option B: Adjust Permissions (less secure)
+Allow group or world write access:
 
-## Expanding the ESLint configuration
+````bash
+sudo chmod -R 775 /var/www/trustai.co.in
+````
+Or, if desperate:
+````bash
+sudo chmod -R 777 /var/www/trustai.co.in  # ⚠️ Not recommended for production
+````
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🔧 Option 2: Use a Writable Directory (e.g. in Home)
+If you're not allowed to write to `/var/www/`, you can change the deploy path temporarily to something like:
+
+````bash
+env:
+  DEPLOY_PATH: "/home/youruser/deploy/trustai.co.in"
+````
