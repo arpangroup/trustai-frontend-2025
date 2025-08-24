@@ -40,4 +40,4 @@ jobs:
           target: ${{ env.DEPLOY_PATH }}
           tar_tmp_path: "dist"
           strip_components: 0
-          rm:  # optional - deletes remote folder before upload
+          rm: true  # optional - deletes remote folder before upload
