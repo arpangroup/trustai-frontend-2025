@@ -39,5 +39,5 @@ jobs:
           source: "."
           target: ${{ env.DEPLOY_PATH }}
           strip_components: 0
-          rm: true
+          rm: false
           tar_tmp_path: "dist"
