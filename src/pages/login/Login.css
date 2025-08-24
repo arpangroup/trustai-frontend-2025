@@ -1,0 +1,160 @@
+/* Background Gradient */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #e0ebff, #ffffff);
+  font-family: 'Arial', sans-serif;
+}
+
+/* Card */
+.login-box {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  width: 350px;
+  text-align: center;
+}
+
+/* Logo + Text */
+.logo {
+  margin-bottom: 20px;
+}
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 35px);
+  grid-gap: 5px;
+  justify-content: center;
+  margin: 0 auto 10px auto;
+}
+.logo-square {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #6ec1ff, #d28fff);
+}
+.logo h2 {
+  font-weight: bold;
+  color: #0a2d5f;
+  margin-top: 8px;
+}
+
+/* Headings */
+h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.sub-text {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Labels */
+label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 14px;
+  text-align: left;
+  font-weight: bold;
+}
+.required {
+  color: red;
+  margin-right: 4px;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  margin-bottom: 10px;
+}
+
+input:focus {
+  border-color: #3f72ff;
+}
+
+/* Password wrapper */
+.password-wrapper {
+  position: relative;
+}
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Forgot link */
+.forgot {
+  text-align: right;
+  margin-bottom: 15px;
+}
+.forgot a {
+  color: #3f72ff;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+/* Sign In Button */
+.btn-signin {
+  width: 100%;
+  padding: 12px;
+  background: #3f72ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+.btn-signin:hover {
+  background: #2c57cc;
+}
+
+/* Sign up */
+.signup-text {
+  font-size: 14px;
+}
+.signup-text a {
+  color: #3f72ff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/*  */
+
+.logo {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 35px);
+  grid-gap: 5px;
+  margin-bottom: 10px; /* space between squares and text */
+}
+
+.logo-square {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #6ec1ff, #d28fff);
+}
+
+.logo h2 {
+  font-weight: bold;
+  color: #0a2d5f;
+  margin: 0;
+  font-size: 20px;
+}
