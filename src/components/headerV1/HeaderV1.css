@@ -1,0 +1,49 @@
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, #a4d1ff, #e5ecfc);
+  padding: 16px 14px 8px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+.welcome-text {
+  margin-left: 4px;
+}
+.welcome {
+  font-size: 15px;
+  font-weight: 600;
+}
+.signin {
+  color: #3896e1;
+  font-size: 12px;
+}
+.header-icons {
+  display: flex;
+  gap: 10px;
+}
+.icon-btn {
+  background: #fff;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 18px;
+  box-shadow: 0 1px 6px rgba(131, 154, 213, 0.09);
+  color: #4b7ade;
+}

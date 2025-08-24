@@ -1,0 +1,39 @@
+
+/* NAV ROW */
+.nav-row {
+  display: flex;
+  justify-content: space-around;
+  padding: 32px 16px;
+  gap: 0;
+  /* background: #f6faf7; */
+}
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 7px;
+  cursor: pointer;
+}
+.nav-btn-inner {
+  background: linear-gradient(135deg, #e5f5ff 10%, #e5dcdc 100%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+  box-shadow: 0 1px 8px rgba(131, 154, 213, 0.19);
+}
+.nav-icon {
+  color: #fff;
+  font-size: 22px;
+}
+.nav-label {
+  color: #3e5f85;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}

@@ -1,15 +1,17 @@
 import React from "react";
+import "./NavRow.css";
 
-const NavRow = ({ items }) => {
+export default function NavRow({ navButtons }) {
   return (
     <div className="nav-row">
-      {items.map((item, idx) => (
-        <button key={idx} className="nav-item">
-          {item}
-        </button>
+      {navButtons.map(({ icon, label }, i) => (
+        <div className="nav-btn" key={i} role="button" tabIndex={0}>
+          <div className="nav-btn-inner">
+            <span className="nav-icon">{icon}</span>
+          </div>
+          <div className="nav-label">{label}</div>
+        </div>
       ))}
     </div>
   );
-};
-
-export default NavRow;
+}

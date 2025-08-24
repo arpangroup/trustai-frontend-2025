@@ -1,24 +1,26 @@
 import React from "react";
+import "./HeaderV1.css";
 
-const HeaderV1 = ({ username, avatar, level, points }) => {
+import Image1 from '../../assets/bids1.png';
+
+export default function HeaderV1() {
   return (
     <div className="header">
-      <div className="user-info">
-        <div className="avatar">
-          <img src={avatar} alt="User Avatar" />
-        </div>
-        <div className="user-details">
-          <span className="username">{username}</span>
-          <span className="level">{level}</span>
-          <span className="points">{points}</span>
+      <div className="header-content">
+        <img src={Image1} className="avatar" alt="User" />
+        <div className="welcome-text">
+          <div className="welcome">Welcome to TrustAI</div>
+          <div className="signin">Click to sign in</div>
         </div>
       </div>
       <div className="header-icons">
-        <span className="icon">&#128276;</span>
-        <span className="icon">&#9776;</span>
+        <div className="icon-btn" aria-label="Notifications" role="button">
+          🔔
+        </div>
+        <div className="icon-btn" aria-label="Menu" role="button">
+          ☰
+        </div>
       </div>
     </div>
   );
-};
-
-export default HeaderV1;
+}

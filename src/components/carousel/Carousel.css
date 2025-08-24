@@ -1,0 +1,77 @@
+
+/* CAROUSEL */
+.carousel {
+  position: relative;
+  margin: 18px 0 4px 0;
+  width: 100vw;
+  max-width: 100%;
+  overflow: hidden;
+  padding-top: 16px;
+}
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0.8, 0.6, 1);
+  will-change: transform;
+}
+.carousel-slide {
+  min-width: 100vw;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+.banner {
+  background: #d2ebff;
+  border-radius: 18px;
+  box-shadow: 0 1px 12px rgba(99, 143, 221, 0.05);
+  display: flex;
+  align-items: center;
+  height: 120px;
+  overflow: hidden;
+  position: relative;
+  padding: 16px;
+}
+.banner-img {
+  width: 90px;
+  height: 100%;
+  border-radius: 0 18px 18px 0;
+  object-fit: cover;
+  margin-right: 13px;
+}
+.banner-txt {
+  padding: 10px 0;
+}
+.banner-title {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+.banner-desc {
+  font-size: 12px;
+  color: #4461a9;
+  margin-bottom: 4px;
+}
+.banner-learn {
+  color: #3498db;
+  font-size: 12px;
+}
+.carousel-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 7px;
+}
+.carousel-dot {
+  width: 7px;
+  height: 7px;
+  background: #b2cade;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.carousel-dot.active {
+  background: #3185fa;
+  width: 20px;
+  border-radius: 9px;
+  transition: all 0.3s;
+}
