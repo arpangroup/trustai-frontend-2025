@@ -1,0 +1,40 @@
+name: Deploy React App
+
+on:
+  push:
+    branches: ["main"]
+
+env:
+  DEPLOY_PATH: "/var/www/trustai.co.in"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout source
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Setup Node
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 3. Install and build
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build React app
+        run: npm run build
+
+      # 4. Copy build folder to remote server
+      - name: Deploy to server
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "dist/*"
+          target: ${{ env.DEPLOY_PATH }}
