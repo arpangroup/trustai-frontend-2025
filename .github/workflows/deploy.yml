@@ -38,6 +38,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "."
           target: ${{ env.DEPLOY_PATH }}
-          strip_components: 0
-          rm: false
           tar_tmp_path: "dist"
+          strip_components: 0
+          rm:  # optional - deletes remote folder before upload
