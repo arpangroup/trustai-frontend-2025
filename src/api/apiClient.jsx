@@ -3,7 +3,7 @@ import createAuthRefreshInterceptor from 'axios-auth-refresh';
 import { API_ROUTES } from './apiRoutes';
 
 const apiClient = axios.create({
-  baseURL: '/', // ✅ enables Vite's proxy
+  baseURL: import.meta.env.VITE_API_BASE_URL || '/', // ✅ '/' enables proxy in dev
 });
 
 
