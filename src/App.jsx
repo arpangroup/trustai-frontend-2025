@@ -7,7 +7,7 @@ import Navbar from './components/navbar/Navbar'
 import { Route, Routes, useLocation } from 'react-router-dom'
 // import Home from './pages/home/Home'
 // import HomeV1 from './pages/homeV1/HomeV1'
-import HomeV2 from './pages/homev2/HomeV2'
+import Home from './pages/home/Home'
 import Login from './pages/login/Login';
 import RegisterForm from './pages/registration/RegisterForm ';
 import ProtectedRoute from './utils/ProtectedRoute';
@@ -31,7 +31,7 @@ function App() {
         {/* <Route path="/forgot" element={<Forgot />} /> */}
 
         <Route path="/" element={<MobileLayout />}>
-          <Route path="" element={<HomeV2 />} />
+          <Route path="" element={<Home />} />
 
 
 
