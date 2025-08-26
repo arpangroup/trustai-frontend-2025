@@ -77,7 +77,7 @@ const collections = [
 ];
 
 const navButtons = [
-    { icon: "💎", label: "Stake", link: '/stakes'},
+    { icon: "💎", label: "Explore", link: '/explore'},
     { icon: "🎨", label: "Mint",},
     { icon: "🗓️", label: "Reserve", link: '/store' },
     { icon: "⚖️", label: "Govern", },

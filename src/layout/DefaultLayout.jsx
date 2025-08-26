@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './DefaultLayout.css';
 import HeaderV2 from "../components/headerV2/HeaderV2";
 import { Outlet } from 'react-router-dom';
 import BottomNav from '../components/bottomnav/BottomNav';

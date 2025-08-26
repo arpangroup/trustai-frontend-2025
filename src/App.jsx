@@ -16,6 +16,7 @@ import StakeList from './pages/stakeList/StakeList';
 import Store from './pages/store/Store';
 import MobileLayout from './layout/MobileLayout';
 import DefaultLayout from './layout/DefaultLayout';
+import Explore from './pages/explore/Explore';
 
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
 
           <Route element={<ProtectedRoute />}>
             <Route element={<DefaultLayout />}>
-              <Route path="stakes" element={<h1>Stakes</h1>} />
+              <Route path="explore" element={<Explore/>} />
               <Route path="store" element={<Store />} />
               <Route path="assets" element={<Store />} />
               <Route path="profile" element={<Store />} />

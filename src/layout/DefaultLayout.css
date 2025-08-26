@@ -1,0 +1,8 @@
+.main {
+  max-width: 480px;   /* or whatever width you want for mobile layout */
+  margin: 0 auto;     /* center on desktop */
+  position: relative; /* so header can be positioned inside */
+  background: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}

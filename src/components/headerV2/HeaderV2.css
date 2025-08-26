@@ -14,6 +14,9 @@
   background: #fff;
   border-bottom: 1px solid #e1e6ef;
   padding-left: 16px;
+  
+  max-width: 420px; 
+  margin: 0 auto;
 }
 
 .headerWhite .logo {
