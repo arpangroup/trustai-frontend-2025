@@ -1,17 +1,5 @@
-/* html,
-body {
-  background: #cce2fd54;
-  background: #cce2fd54;
-  padding: 0;
-  margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  color: #23272f;
-  height: 100%;
-  width: 100%;
-  background-color: #f6faf7;
-} */
 /* Always MOBILE - on desktop or mobile */
-/* .mobile-container {
+.mobile-container {
   width: 100vw;
   max-width: 430px;
   min-height: 100vh;
@@ -25,5 +13,4 @@ body {
   .mobile-container {
     box-shadow: none;
   }
-} */
-
+}

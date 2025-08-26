@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./HomeV2.css";
+// import "./HomeV2.css";
 
 import Image1 from '../../assets/bids1.png';
 import Image2 from '../../assets/bids2.png';
@@ -104,7 +104,7 @@ export default function HomeV2() {
     }, []);
 
     return (
-        <div className="mobile-container">
+        <div>
             {/* HEADER */}
             <HeaderV1 />
 

@@ -1,0 +1,74 @@
+
+.headerWhite { 
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  width: 100%;
+  height: 64px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-bottom: 1px solid #e1e6ef;
+  padding-left: 16px;
+}
+
+.headerWhite .logo {
+    display: flex;
+    align-items: center;
+}
+
+.headerWhite .logoIcon {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    background: linear-gradient(135deg, #98e7ff 30%, #a584ff 100%);
+    border-radius: 8px;
+}
+
+.headerWhite .logoText {
+    font-weight: bold;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+}
+
+.headerWhite .headerTitle {
+    flex: 1;
+    margin-left: 8px;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.headerWhite .headerIcons {
+    display: flex;
+    gap: 16px;
+    margin-right: 16px;
+}
+
+.headerWhite .headerIcon {
+    width: 22px;
+    height: 22px;
+    opacity: 0.65;
+}
+
+.headerWhite .headerIcons {
+  display: flex;
+  gap: 24px;
+  padding-right: 16px; /* Optional: adds some spacing on the right */
+  color: #807f7f;
+}
+
+.headerWhite .headerIcon {
+  width: 22px;
+  height: 22px;
+  opacity: 0.65;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.headerWhite .headerIcon:hover {
+  opacity: 1;
+}

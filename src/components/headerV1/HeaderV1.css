@@ -1,6 +1,11 @@
 
 /* HEADER */
 .header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+
   background: linear-gradient(135deg, #a4d1ff, #e5ecfc);
   padding: 16px 14px 8px 14px;
   display: flex;
@@ -8,6 +13,7 @@
   justify-content: space-between;
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;
+  z-index: 1000; /* keeps it above everything else */
 }
 .header-content {
   display: flex;

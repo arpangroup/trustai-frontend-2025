@@ -2,7 +2,7 @@ name: Deploy React App
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "ui-implement"]
 
 env:
   DEPLOY_PATH: "/var/www/trustai.co.in"

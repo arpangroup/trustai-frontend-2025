@@ -14,6 +14,8 @@ import ProtectedRoute from './utils/ProtectedRoute';
 
 import StakeList from './pages/stakeList/StakeList';
 import Store from './pages/store/Store';
+import MobileLayout from './layout/MobileLayout';
+import DefaultLayout from './layout/DefaultLayout';
 
 
 function App() {
@@ -22,34 +24,31 @@ function App() {
   const showNavbar = !hideNavbarPaths.includes(location.pathname);
 
   return (
-    <div>
-      {/* {showNavbar && <Navbar/>} */}
+    <>
+      <Routes>
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<RegisterForm />} />
+        {/* <Route path="/forgot" element={<Forgot />} /> */}
 
-      {/* Apply top margin only if Navbar is visible */}
-      <div>
-      {/* <div style={{ marginTop: showNavbar ? '60px' : '0' }}> */}
-        <Routes>
-          {/* Public routes */}
-          <Route path="/" element={<HomeV2/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/signup" element={<RegisterForm/>} />
-          {/* <Route path="/forgot" element={<Forgot />} /> */}
+        <Route path="/" element={<MobileLayout />}>
+          <Route path="" element={<HomeV2 />} />
 
 
-          {/* Protected routes grouped under ProtectedRoute */}
+
           <Route element={<ProtectedRoute />}>
-            <Route path="/stakes" element={<HomeV2 />} />
-            <Route path="/store" element={<Store />} />
-            <Route path="/assets" element={<Store />} />
-            <Route path="/profile" element={<Store />} />
+            <Route element={<DefaultLayout />}>
+              <Route path="stakes" element={<h1>Stakes</h1>} />
+              <Route path="store" element={<Store />} />
+              <Route path="assets" element={<Store />} />
+              <Route path="profile" element={<Store />} />
+            </Route>
           </Route>
 
-        </Routes>
-        
-      </div>
-       {/* <Footer/> */}
-        {/* {showNavbar && <BottomNav/>} */}
-    </div>
+        </Route>
+
+
+      </Routes>
+    </>
   )
 }
 

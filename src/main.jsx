@@ -19,11 +19,12 @@ createRoot(document.getElementById('root')).render(
   //   </AuthProvider>
   // </BrowserRouter>
 
-  <BrowserRouter>
-    <AuthProvider>
-      <NotificationProvider>
+  // <React.StrictMode>
+    <BrowserRouter>
+      <AuthProvider>
+        {/* <NotificationProvider></NotificationProvider> */}
         <App />
-      </NotificationProvider>
-    </AuthProvider>
-  </BrowserRouter>
+      </AuthProvider>
+    </BrowserRouter>
+  // </React.StrictMode>
 )
