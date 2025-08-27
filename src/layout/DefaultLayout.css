@@ -3,6 +3,7 @@
   margin: 0 auto;     /* center on desktop */
   position: relative; /* so header can be positioned inside */
   background: #fff;
+  background: #f3f8fa;
   min-height: 100vh;
   overflow-x: hidden;
 }

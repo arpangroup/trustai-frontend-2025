@@ -55,11 +55,11 @@
     margin-left: 0;
 }
 
-.tab-content {
+.tab-content.stake-tab-content {
     display: none;
     margin-top: 10px;
 }
 
-.tab-content.active {
+.tab-content.stake-tab-content.active {
     display: block;
 }

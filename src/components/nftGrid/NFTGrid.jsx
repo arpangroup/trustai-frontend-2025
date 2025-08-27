@@ -1,6 +1,6 @@
 import React from "react"; 
 import "./NFTGrid.css";
-import NFTCard from "../nftCard/NFTCard";
+import NFTCard from "../cards/myStakeCard/MyStakeCard";
 
 
 export default function NFTGrid({ nfts }) {

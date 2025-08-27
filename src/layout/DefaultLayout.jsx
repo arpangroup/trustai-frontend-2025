@@ -6,9 +6,9 @@ import BottomNav from '../components/bottomnav/BottomNav';
 
 const DefaultLayout = () => {
   return (
-    <div className='main' style={{overflowY: 'hidden'}}>
+    <div className='main-wrapper' style={{overflowY: 'hidden'}}>
       <HeaderV2/> 
-      <div style={{ paddingTop: '64px' }}>
+      <div className='main' style={{ paddingTop: '64px' }}>
         <Outlet /> {/* This will render matched route component */}
       </div>
       <BottomNav/>

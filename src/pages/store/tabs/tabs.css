@@ -1,0 +1,35 @@
+
+.tabs.tabs-panel {
+  display: flex;
+  margin: 20px 0 0 0;
+  background: #f6f8fb;
+  border-bottom: 1.5px solid #dde5ea;
+}
+
+.tab {
+  flex: 1;
+  padding: 13px 0;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1em;
+  color: #a0adc8;
+  background: #f6f8fb;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: color 0.15s;
+}
+
+.tab.active {
+  color: #305fc7;
+  border-bottom: 2.5px solid #305fc7;
+  background: #fff;
+  background: none;
+}
+
+.tab-content {
+  background: #fff;
+  background: #f6f8fb;
+  padding: 16px 0px;
+  /* padding: 12px; */
+}

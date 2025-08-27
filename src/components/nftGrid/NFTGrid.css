@@ -1,0 +1,6 @@
+.nft-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    padding: 0px 18px 32px 18px;
+}

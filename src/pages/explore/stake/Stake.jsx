@@ -2,15 +2,21 @@ import React, { useRef, useState } from "react";
 import './Stake.css';
 import Tabs from "../tabs/Tabs";
 import OptionsArea from "../optionsArea/OptionsArea";
-import StakeCard from "../stakeCard/StakeCard";
-import NFTGrid from "../nftGrid/NFTGrid";
+import StakeCard from "../../../components/cards/stakeCard/StakeCard";
+import NFTGrid from "../../../components/nftGrid/NFTGrid";
+import NoData from "../../../components/NoData";
+
+import Image1 from '../../../assets/bids1.png';
+import Image2 from '../../../assets/bids2.png';
+import Image3 from '../../../assets/bids3.png';
+import Image4 from '../../../assets/bids4.png';
 
   // Demo NFT data
   const NFTS = [
-    { id: 1, imgSrc: "images/01.jpg", title: "NoxiousAudience#01...", price: "873.03" },
-    { id: 2, imgSrc: "images/02.jpg", title: "NoxiousAudience#03...", price: "962.39" },
-    { id: 3, imgSrc: "images/03.jpg", title: "NoxiousAudience#04...", price: "857.38" },
-    { id: 4, imgSrc: "images/04.jpg", title: "NoxiousAudience#81...", price: "837.98" }
+    { id: 1, imgSrc: Image1, title: "NoxiousAudience#01...", price: "873.03" },
+    { id: 2, imgSrc: Image2, title: "NoxiousAudience#03...", price: "962.39" },
+    { id: 3, imgSrc: Image3, title: "NoxiousAudience#04...", price: "857.38" },
+    { id: 4, imgSrc: Image4, title: "NoxiousAudience#81...", price: "837.98" }
   ];
 
 export default function Stake() {
@@ -42,7 +48,7 @@ export default function Stake() {
         <div id="tabContentArea">
           {/* Stake Tab Content */}
           {currentTab === "stake" && (
-            <div className="tab-content active" id="stakeContent">
+            <div className="tab-content stake-tab-content active" id="stakeContent">
               <OptionsArea
                 showOptions={showOptions}
                 setShowOptions={setShowOptions}
@@ -116,14 +122,7 @@ export default function Stake() {
           {/* Collection Tab Content */}
           {currentTab === "collection" && (
             <div className="tab-content active" id="collectionContent">
-              <h3>Collection</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Aenean quis porta felis.
-              </p>
-              <p>
-                Nulla facilisi. Duis nec velit sed lorem feugiat cursus.
-              </p>
+              <NoData/>
             </div>
           )}
         </div>

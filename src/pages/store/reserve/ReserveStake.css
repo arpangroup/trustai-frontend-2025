@@ -1,0 +1,78 @@
+.reserve-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 24px;
+}
+
+.reserve-content .select-wrapper {
+  position: relative;
+  flex: 1 1 0;
+  max-width: 48%;
+}
+
+/* If you still use the native select */
+.reserve-dropdown {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #fff;
+  color: #333;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 40px 10px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: inset 0 0 5px #eee;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover/focus */
+.reserve-dropdown:hover,
+.reserve-dropdown:focus {
+  border-color: #1a73e8;
+  outline: none;
+  box-shadow: 0 0 8px #1a73e8;
+  color: #111;
+}
+
+.select-wrapper:hover::after,
+.reserve-dropdown:focus + .select-wrapper::after {
+  border-color: #1a73e8;
+}
+
+.reserve-btn {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  margin: 12px auto 0 auto;
+  padding: 14px 0;
+  background-color: #1a73e8;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(26, 115, 232, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reserve-btn:hover,
+.reserve-btn:focus {
+  background-color: #155ab6;
+  box-shadow: 0 6px 14px rgba(21, 90, 182, 0.5);
+  outline: none;
+}
+
+.reserve-btn:disabled {
+  background-color: #ddd;
+  color: #999;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.6;
+}

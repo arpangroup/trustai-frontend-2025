@@ -1,0 +1,58 @@
+
+.panel,
+.panel-mid {
+  background: #fff;
+  border-radius: 13px;
+  padding: 14px 0 6px 12px;
+  flex: 1;
+  min-width: 0;
+  box-shadow: 0 1px 3px 0 #e6e9f1;
+}
+
+.panel {
+  padding: 20px 14px 16px 20px;
+  /* Added extra padding */
+}
+
+.panel.earnings {
+  background: linear-gradient(135deg, #e6f1fd 0%, #e6f1fd 100%);
+  color: white;
+}
+
+.panel.income {
+  background: linear-gradient(135deg, #edeefc 0%, #edeefc 100%);
+  color: white;
+}
+
+.panel-mid {
+  background: #f6f8fb;
+  background: #fff;
+  font-size: 0.9em;
+  color: #686f85;
+  padding-top: 12px;
+  padding-bottom: 4px;
+  margin-bottom: 3px;
+}
+
+.panel-title {
+  font-size: 0.90em;
+  color: #7780a1;
+  margin-bottom: 2px;
+}
+
+.panel-value {
+  font-size: 1.16em;
+  font-weight: 600;
+  color: #305fc7;
+}
+
+.panel.earnings .panel-value,
+.panel.income .panel-value {
+  color: #000;
+  font-weight: 700;
+}
+
+.panel.earnings .panel-title,
+.panel.income .panel-title {
+  color: #000;
+}

@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 import Image1 from '../../assets/bids1.png';
 import Image2 from '../../assets/bids2.png';
-import HeaderV1 from "../../components/headerV1/HeaderV1";
+import Header from "../../components/header/Header";
 import BottomNav from "../../components/bottomnav/BottomNav";
 import Carousel from "../../components/carousel/Carousel";
 import NavRow from "../../components/navrow/NavRow";
@@ -106,7 +106,7 @@ export default function Home() {
     return (
         <div>
             {/* HEADER */}
-            <HeaderV1 />
+            <Header />
 
             {/* CAROUSEL SLIDER */}
             <Carousel slides={carouselSlides} />

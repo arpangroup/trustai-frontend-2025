@@ -12,7 +12,6 @@ import Login from './pages/login/Login';
 import RegisterForm from './pages/registration/RegisterForm ';
 import ProtectedRoute from './utils/ProtectedRoute';
 
-import StakeList from './pages/stakeList/StakeList';
 import Store from './pages/store/Store';
 import MobileLayout from './layout/MobileLayout';
 import DefaultLayout from './layout/DefaultLayout';

@@ -2,12 +2,12 @@ import React, { useState, useRef, useEffect } from "react";
 import './Explore.css';
 import HeaderMenu  from "./headerMenu/HeaderMenu";
 import Stake from "./stake/Stake";
+import NoData from "../../components/NoData";
 
 export default function Explore() {
   // Menus and Tabs Config
   const MENUS = [
     { key: "stake", label: "Stake" },
-    { key: "polygonNFT", label: "PolygonNFT" },
     { key: "art", label: "Art" },
     { key: "collectibles", label: "Collectibles" }
   ];
@@ -59,35 +59,18 @@ export default function Explore() {
         menuRef={headerMenuRef}
       />
 
-      <div id="headerContentArea" style={{marginTop: "40px"}}>
+      <div id="headerContentArea" style={{marginTop: "40px", alignItems: 'center', minHeight: '600px'}}>
         {/* PolygonNFT Content */}
         {currentMenu === "stake" && (
           <Stake/>
         )}
 
-        {/* Art Content */}
-        {currentMenu === "art" && (
-          <div className="header-tab-content active" id="art">
-            <div className="dummy-content" style={{ padding: "40px 24px" }}>
-              <h2>Art Menu Content</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur convallis mi sed urna pulvinar.
-              </p>
-            </div>
+         {(currentMenu === "polygonNFT" || currentMenu === "art" || currentMenu === "collectibles") && (
+          <div style={{display: "flex", justifyContent: 'center', alignItems: 'center', height: '400px'}}>
+            <NoData/>
           </div>
         )}
-
-        {/* Collectibles Content */}
-        {currentMenu === "collectibles" && (
-          <div className="header-tab-content active" id="collectibles">
-            <div className="dummy-content" style={{ padding: "40px 24px" }}>
-              <h2>Collectibles Menu Content</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius ligula vitae diam dignissim.
-              </p>
-            </div>
-          </div>
-        )}
+        
       </div>
     </div>
   );

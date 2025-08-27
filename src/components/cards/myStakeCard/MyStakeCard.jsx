@@ -1,7 +1,7 @@
 import React from 'react';
-import './NFTCard.css';
+import './MyStakeCard.css';
 
-export default function NFTCard({ imgSrc, title, price, onBuy }) {
+export default function MyStakeCard({ imgSrc, title, price, onBuy }) {
   return (
     <div className="nft-card">
       <img src={imgSrc} alt={title} />
@@ -12,7 +12,7 @@ export default function NFTCard({ imgSrc, title, price, onBuy }) {
           {price} USDT
           <span className="price-trend">↗</span>
         </div>
-        <button className="buy-btn" onClick={onBuy}>Buy</button>
+        <button className="buy-btn" onClick={onBuy}>Sell</button>
       </div>
     </div>
   );

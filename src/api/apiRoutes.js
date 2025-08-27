@@ -7,5 +7,10 @@ export const API_ROUTES = {
     VERIFY_REGISTRATION_OTP: "/api/v1/register/verify",
     RESEND_REGISTRATION_OTP: "/api/v1/register/verify",
   },
+
+  
+  INVESTMENTS_API : {
+    ELIGIBLE_SUMMARY: "/api/v1/reservations/eligibility"
+  },
 };
 

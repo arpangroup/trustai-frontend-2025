@@ -1,13 +1,55 @@
 
 import React, { useState } from "react";
 import './Store.css'
-import HeaderV2 from "../../components/headerV2/HeaderV2";
+import Panel from "../../components/panel/Panel";
+import PanelMid from "../../components/panel/PanelMid";
+import Tabs from "./tabs/Tabs";
+import OrderCard from "../../components/cards/orderCard/OrderCard";
+import ReserveStake from "./reserve/ReserveStake";
+import NFTGrid from "../../components/nftGrid/NFTGrid";
+
 
 import Image1 from '../../assets/bids1.png';
 import Image2 from '../../assets/bids2.png';
+import Image3 from '../../assets/bids3.png';
+import Image4 from '../../assets/bids4.png';
+
+const orders = [
+    {
+        number: "192243555000402432",
+        status: "Won",
+        date: "2025-05-14 00:35:28",
+        reservation: "50 - 1000",
+        image: Image1,
+        title: "Penguin_Pals_24016",
+        price: "55.68807335",
+    },
+    {
+        number: "1922102924427812864",
+        status: "Won",
+        date: "2025-05-13 02:33:43",
+        reservation: "50 - 1000",
+        image: Image2,
+        title: "NoxiousAudience_12621",
+        price: "54.14",
+    },
+];
+
+  const NFTS = [
+    { id: 1, imgSrc: Image1, title: "NoxiousAudience#01...", price: "873.03" },
+    { id: 2, imgSrc: Image2, title: "NoxiousAudience#03...", price: "962.39" },
+    { id: 3, imgSrc: Image3, title: "NoxiousAudience#04...", price: "857.38" },
+    { id: 4, imgSrc: Image4, title: "NoxiousAudience#81...", price: "837.98" }
+  ];
 
 const Store = () => {
-    const [activeTab, setActiveTab] = useState("today");
+    const [activeTab, setActiveTab] = useState("orders");
+
+    const tabs = [
+        { key: "orders", label: "Orders" },
+        { key: "reserve", label: "Reserve Stake" },
+        { key: "sell", label: "Sell Stake" },
+    ];
 
     const showTab = (tab) => {
         setActiveTab(tab);
@@ -16,132 +58,46 @@ const Store = () => {
     return (
 
         <div className="dashboard">
+
+            {/* Top Panels */}
             <div className="panel-row">
-                <div className="panel earnings">
-                    <div className="panel-title">Today's Earnings</div>
-                    <div className="panel-value">0</div>
-                </div>
-                <div className="panel income">
-                    <div className="panel-title">Cumulative Income</div>
-                    <div className="panel-value">34.71332532</div>
-                </div>
+                <Panel title="Today's Earnings" value="0" type="earnings" />
+                <Panel title="Cumulative Income" value="34.71332532" type="income" />
             </div>
+
             <div className="panel-row">
-                <div className="panel-mid">
-                    Reservation Range
-                    <br />
-                    <span style={{ color: "#4cb18d", fontWeight: "500" }}>50 - 2,000</span>
-                </div>
-                <div className="panel-mid">
-                    Wallet Balance
-                    <br />
-                    <span style={{ color: "#ecb424", fontWeight: "500" }}>0</span>
-                </div>
-                <div className="panel-mid">
-                    Balance for Reservation
-                    <br />
-                    <span style={{ color: "#eb5555", fontWeight: "500" }}>0</span>
-                </div>
+                <PanelMid label="Reservation Range" value="50 - 2,000" color="#4cb18d" />
+                <PanelMid label="Wallet Balance" value="0" color="#ecb424" />
+                <PanelMid label="Balance for Reservation" value="0" color="#eb5555" />
             </div>
-            <div className="tabs">
-                <button
-                    className={"tab " + (activeTab === "today" ? "active" : "")}
-                    onClick={() => showTab("today")}
-                >
-                    Today's
-                </button>
-                <button
-                    className={"tab " + (activeTab === "reserve" ? "active" : "")}
-                    onClick={() => showTab("reserve")}
-                >
-                    Reserve
-                </button>
-                <button
-                    className={"tab " + (activeTab === "collection" ? "active" : "")}
-                    onClick={() => showTab("collection")}
-                >
-                    Collection
-                </button>
-            </div>
-            <div
-                className="tab-content"
-                style={{ display: activeTab === "today" ? "" : "none" }}
-                id="tab-today"
-            >
-                <div className="order-card">
-                    <div className="order-top">
-                        <div className="order-number">
-                            Order Number: <span>192243555000402432</span>
-                        </div>
-                        <div className="order-status">Won</div>
-                    </div>
-                    <div className="order-date">Reservation Date: 2025-05-14 00:35:28</div>
-                    <div className="order-reserve">
-                        Reservation Amount{" "}
-                        <span style={{ color: "#47cc96" }}>🪙 50 - 1000</span>
-                    </div>
-                    <div className="nft-row">
-                        <img
-                            className="nft-img"
-                            src={Image1}
-                            alt="Penguin Pals"
-                            loading="lazy"
-                        />
-                        <div className="nft-details">
-                            <div className="nft-title">Penguin_Pals_24016</div>
-                            <div className="nft-price">
-                                Price <span className="nft-currency">🪙</span> 55.68807335
-                            </div>
-                        </div>
+
+            {/* Tabs */}
+            <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+
+
+            {/* Tab Contents */}
+            {activeTab === "orders" && (
+                <div className="tab-content" id="tab-today">
+                    {orders.map((order, index) => (
+                        <OrderCard key={index} order={order} />
+                    ))}
+                </div>
+            )}
+
+            {activeTab === "reserve" && (
+                <div className="tab-content" id="tab-reserve">
+                    <ReserveStake/>
+                </div>
+            )}
+
+            {activeTab === "sell" && (
+                <div className="tab-content" id="tab-collection">
+                    <div className="tab-content active" id="mystakeContent">
+                        <NFTGrid nfts={NFTS} />
                     </div>
                 </div>
-                <div className="order-card">
-                    <div className="order-top">
-                        <div className="order-number">
-                            Order Number: <span>1922102924427812864</span>
-                        </div>
-                        <div className="order-status">Won</div>
-                    </div>
-                    <div className="order-date">Reservation Date: 2025-05-13 02:33:43</div>
-                    <div className="order-reserve">
-                        Reservation Amount{" "}
-                        <span style={{ color: "#47cc96" }}>🪙 50 - 1000</span>
-                    </div>
-                    <div className="nft-row">
-                        <img
-                            className="nft-img"
-                            src={Image2}
-                            alt="Noxious Audience"
-                            loading="lazy"
-                        />
-                        <div className="nft-details">
-                            <div className="nft-title">NoxiousAudience_12621</div>
-                            <div className="nft-price">
-                                Price <span className="nft-currency">🪙</span> 54.14
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div
-                className="tab-content"
-                style={{ display: activeTab === "reserve" ? "" : "none" }}
-                id="tab-reserve"
-            >
-                <p style={{ color: "#7b8591", fontSize: "1em", marginTop: 0 }}>
-                    You have no active reservations. Click the "+" button to start a new
-                    one.
-                </p>
-            </div>
-            <div
-                className="tab-content"
-                style={{ display: activeTab === "collection" ? "" : "none" }}
-                id="tab-collection"
-            >
-                <p style={{ color: "#7b8591", fontSize: "1em", marginTop: 0 }}>
-                    Your NFT collection will be shown here once available.
-                </p>
-            </div>
+            )}
+
         </div>
     );
 };
