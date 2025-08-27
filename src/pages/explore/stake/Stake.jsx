@@ -114,7 +114,7 @@ export default function Stake() {
 
           {/* MyStake Tab Content */}
           {currentTab === "mystake" && (
-            <div className="tab-content active" id="mystakeContent">
+            <div className="tab-content active" id="mystakeContent" style={{padding: '16px'}}>
               <NFTGrid nfts={NFTS} />
             </div>
           )}
