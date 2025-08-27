@@ -1,0 +1,129 @@
+/* Balance */
+.balance-section {
+    padding: 6px 16px 0 8px;
+}
+
+.balance-label {
+    font-size: 1.4em;
+    color: #4e4e4f;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.icon-card {
+    margin-right: 4px;
+}
+
+.balance-amount {
+    font-size: 2.6em;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #161949;
+}
+
+
+/* Cashback banner */
+.cashback-banner {
+    background: linear-gradient(to right, #ffdcdc, #ffeacf);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.cashback-banner .megaphone {
+    font-size: 22px;
+    margin-right: 12px;
+    color: #2d7efc;
+}
+
+.cashback-banner b {
+    font-size: 16px;
+    color: #111;
+}
+
+.cashback-banner p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+
+
+
+.card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(52, 60, 80, .08);
+    padding: 24px 16px 16px 16px;
+    margin-bottom: 28px;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.card-action {
+    background: #ebf2ff;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    padding: 6px 14px;
+    color: #397ffb;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.25s;
+}
+
+.card-action i {
+    font-style: normal;
+    margin-left: 7px;
+    font-size: 1.1em;
+}
+
+.section-icons {
+    display: flex;
+    justify-content: space-around;
+    gap: 14px;
+    margin-bottom: 10px;
+    margin: 10px 16px 10px 16px;
+}
+
+.section-icon span.icon {
+    font-size: 1.4em;
+}
+
+.section-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f7f8fa;
+    border-radius: 18px;
+    width: 72px;
+    padding: 13px 0 8px 0;
+    color: #437cff;
+    box-shadow: 0 2px 8px rgba(50, 50, 90, 0.04);
+}
+
+.section-icon span {
+    font-size: 12px;
+    font-weight: 500;
+    color: #333;
+    margin-top: 7px;
+}
