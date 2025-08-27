@@ -7,7 +7,7 @@ import { FaEllipsisV } from 'react-icons/fa';
 const HeaderV2 = () => {
   return (
     <div className="headerWhite">
-      <div className="logo">
+      <div className="logo" onClick={() => window.location.href = '/'}>
         <div className="logoIcon"></div>
         <div className="logoText">
           Trust<span style={{ color: "#46dbff" }}>AI</span>
