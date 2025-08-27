@@ -1,4 +1,5 @@
 import React from "react";
+import './Header.css';
 
 import Image1 from '../../assets/bids1.png';
 

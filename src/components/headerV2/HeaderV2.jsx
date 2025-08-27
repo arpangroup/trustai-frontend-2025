@@ -1,3 +1,5 @@
+import React from "react";
+
 import './HeaderV2.css';
 import { FaRegBell } from "react-icons/fa";
 import { FaEllipsisV } from 'react-icons/fa';
