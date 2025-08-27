@@ -18,7 +18,7 @@ import DefaultLayout from './layout/DefaultLayout';
 import Explore from './pages/explore/Explore';
 import ExploreDetails from './pages/exploreDetails/ExploreDetails';
 import Wallet from './pages/wallet/Wallet';
-import Profile from './pages/profile/Profile';
+import UserProfile from './pages/user/UserProfile';
 
 
 function App() {
@@ -45,7 +45,7 @@ function App() {
               <Route path="store" element={<Store />} />
               <Route path="wallet" element={<Wallet />} />
               <Route path="assets" element={<Store />} />
-              <Route path="profile" element={<Profile />} />
+              <Route path="profile" element={<UserProfile />} />
             </Route>
           </Route>
 

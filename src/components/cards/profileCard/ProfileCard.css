@@ -1,0 +1,96 @@
+.profile-card {
+  background-color: #ffffff;          /* Light background */
+  color: #111111;                     /* Dark text */
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 420px;
+  margin: auto;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Softer shadow */
+  margin-bottom: 20px;
+}
+
+/* Dark mode */
+body.dark .profile-card {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.top-row {
+  display: flex;
+  align-items: flex-start;
+}
+
+.profile-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;   /* Light gray border */
+  margin-right: 16px;
+}
+
+body.dark .profile-img {
+  border: 2px solid #444;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.username {
+  font-size: 18px;
+  margin: 0;
+  color: #111;               /* Dark text in light theme */
+}
+
+body.dark .username {
+  color: #fff;
+}
+
+.wallet-icon {
+  font-size: 20px;
+  color: #888;               /* Softer gray for light mode */
+}
+
+body.dark .wallet-icon {
+  color: #ccc;
+}
+
+.user-id {
+  font-size: 13px;
+  color: #666;               /* Lighter gray in light mode */
+  margin-top: 4px;
+  word-break: break-all;
+}
+
+body.dark .user-id {
+  color: #999;
+}
+
+.bottom-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.info-box {
+  border: 1px solid #e5e7eb;           /* Light border */
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #374151;                      /* Gray-700 text */
+  background-color: #f9fafb;           /* Subtle light bg */
+}
+
+body.dark .info-box {
+  border: 1px solid #555;
+  color: #ccc;
+  background-color: rgba(255, 255, 255, 0.05);
+}

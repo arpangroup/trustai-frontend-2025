@@ -15,10 +15,25 @@ export const API_ROUTES = {
     SUBSCRIBE_STAKE: `/api/v1/investments/subscribe`,
   },
 
+  RESERVATION_API : {
+    ALL_ORDERS: `/api/v1/orders`,
+    ACTIVE_ORDERS: "/api/v1/orders?activeOnly=true",
+    RESERVE_NOW: '/api/v1/orders/reserve',
+    SELL_RESERVED_STAKE: (orderId) => `/api/v1/orders/${orderId}/sell`,
+    ORDER_SUMMARY: "/api/v1/orders/summary",
+  },
+
   
   INVESTMENTS_API : {
     ELIGIBLE_SUMMARY: "/api/v1/reservations/eligibility"
   },
+
+
+  USER_INFO: "/api/v1/users/info",
+  INCOME_SUMMARY: "/api/v1/incomes/summary",
+  MEMBER_SUMMARY: "/api/v1/users/metrics/member-summary",
+
+
 };
 
 export const WEB_ROUTES = {
