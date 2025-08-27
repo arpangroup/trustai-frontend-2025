@@ -1,93 +1,129 @@
-/* MyStake Cards Start*/
-.nft-card {
-    background: #fff;
-    border-radius: 14px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
+.stake-card {
+  background-color: #fff;
+  color: #222;
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 360px;
+  margin: 16px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+
+
     display: flex;
     flex-direction: column;
-    transition: box-shadow 0.18s ease;
-}
-
-.nft-card:hover {
-    box-shadow: 0 6px 16px rgba(49, 106, 253, 0.15);
-}
-
-.nft-card img {
-    width: 100%;
-    height: 115px;
-    object-fit: cover;
-    border-radius: 14px 14px 0 0;
-}
-
-.nft-info {
-    padding: 10px 10px 14px 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.nft-title {
-    font-size: 1.06rem;
-    font-weight: 600;
-    color: #222;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.nft-price {
-    font-weight: 600;
-    color: #8b929b;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.usdt-icon {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    background: #36c381;
-    border-radius: 50%;
-    position: relative;
-}
-
-.usdt-icon::after {
-    content: '₮';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 1;
-}
-
-.price-trend {
-    font-size: 1rem;
-    color: #36c381;
-    margin-left: auto;
-}
-
-.buy-btn {
-    margin-top: 4px;
-    background-color: #316afd;
-    border: none;
+    border: 1px solid #e5e5e5;
     border-radius: 12px;
-    padding: 7px 0;
-    font-weight: 700;
-    font-size: 1rem;
-    color: #fff;
-    cursor: pointer;
-    user-select: none;
-    transition: background-color 0.3s ease;
+    padding: 12px;
+    background: #fff;
+    max-width: 400px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 12px;
+
 }
 
-.buy-btn:hover {
-    background-color: #234bbb;
+.stake-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
-/* MyStake Cards End  */
+.stake-card__top-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.stake-card__image {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid #ddd;
+}
+
+.stake-card__text-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.stake-card__stake-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #222;
+}
+
+.stake-card__label {
+  font-size: 14px;
+  color: #777;
+  font-weight: 400;
+}
+
+.stake-card__value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary-color, #2e7d32); /* green fallback */
+}
+
+.stake-card__divider {
+  border-top: 1px solid #eee;
+  margin: 8px 0;
+}
+
+.stake-card__bottom-row {
+  font-size: 15px;
+  font-weight: 600;
+  color: #444;
+}
+
+.stake-card__bottom-row span {
+  color: #555;
+}
+
+.stake-card__bottom-row .label {
+  color: #777;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.stake-card__bottom-row .value {
+  font-weight: 600;
+  color: var(--primary-color, #2e7d32);
+}
+
+.stake-card__bottom-row .value--reciprocal {
+  color: #222;
+  font-weight: 600;
+}
+
+.stake-card__button {
+  background-color: var(--primary-color, #1976d2);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  width: 100%;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.stake-card__button:hover {
+  background-color: #1565c0;
+  transform: translateY(-2px);
+}
+
+.stake-card__col2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

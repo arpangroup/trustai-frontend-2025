@@ -1,122 +1,126 @@
-
-.stake-card {
-    margin: 24px 16px 0 16px;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 2px 16px 0 #e1eefc;
-    padding: 19px 16px 16px 16px;
+.card-column {
+  float: left;
+  width: 20%;
 }
 
-.stake-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
+.bids-card {
+  background: #ffffff; /* White card background */
+  border-radius: 20px;
+  padding: 11px 12px 19px 11px;
+  margin-inline: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.08); /* Light shadow for depth */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.stake-title {
-    font-size: 1.18rem;
-    color: #5747a1;
-    font-weight: 500;
+.bids-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 6px 16px rgba(0,0,0,0.12);
 }
 
-.stake-level {
-    font-size: 0.92rem;
-    color: #36c381;
-    font-weight: 600;
+.bids-card img {
+  border-radius: 20px;
+  width: 100%;
 }
 
-.stake-card-img {
+.bids-card-top p {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  color: #333; /* Dark text */
+  margin-top: 15px;
+}
+
+.bids-card-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bids-card-bottom p {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  color: #555; /* Medium-dark text */
+}
+
+.bids-card-bottom p:last-child {
+  font-weight: normal;
+}
+
+.bids-card-bottom span {
+  font-weight: normal;
+  color: #888; /* Subtle text */
+}
+
+.load-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.load-more button {
+  background: #f9f9f9;
+  border: 1px solid var(--primary-color);
+  margin: 0 1rem;
+  color: var(--primary-color);
+  border-radius: 10px;
+  padding: 10px 100px;
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.load-more button:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+@media screen and (max-width: 1440px) {
+  .card-column {
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .card-column {
+    width: 33.33%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .card-column {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .section__padding {
+    padding: 2rem 14px !important;
+  }
+
+  .bids-card {
+    margin-bottom: 10px;
+    margin-inline: 5px;
+  }
+
+  .bids-card-top p {
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 5px;
+  }
+
+  .bids-card-bottom p {
+    font-size: 10px;
+    line-height: 15px;
+  }
+
+  .bids-container {
     width: 100%;
-    min-height: 66px;
-    background: linear-gradient(90deg, #60e4ff 0%, #ffe1e6 100%);
-    border-radius: 14px;
-    margin-bottom: 17px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  }
 }
-
-.img-placeholder {
-    font-size: 1.22rem;
-    color: #444;
-    font-weight: 600;
-    text-shadow: 1px 1px #fff, 0px 0px #000;
-    text-align: center;
-    white-space: pre-line;
-}
-
-.status {
-    display: inline-block;
-    background: #36c381;
-    color: #fff;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border-radius: 6px;
-    padding: 2px 12px;
-    margin-bottom: 15px;
-}
-
-.stake-info {
-    margin-bottom: 25px;
-}
-
-.stake-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 1rem;
-    margin-bottom: 9px;
-    color: #e87f23;
-    font-weight: 500;
-}
-
-.stake-row .label {
-    color: #e87f23;
-}
-
-.stake-row .value {
-    color: #222;
-    font-weight: 600;
-}
-
-.stake-row .usdt-icon {
-    display: inline-block;
-    width: 1.1rem;
-    height: 1.1rem;
-    background: #36c381;
-    border-radius: 50%;
-    margin-right: 4px;
-    position: relative;
-    vertical-align: middle;
-}
-
-.stake-row .usdt-icon:after {
-    content: '₮';
-    position: absolute;
-    left: 44%;
-    top: 33%;
-    color: #fff;
-    font-size: 0.9rem;
-    transform: translate(-50%, -50%);
-}
-
-.stake-btn {
-    display: block;
-    width: 100%;
-    padding: 13px 0;
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: #fff;
-    background: #316afd;
-    border: none;
-    border-radius: 9px;
-    cursor: pointer;
-    margin-top: 11px;
-    transition: background .18s;
-}
-
-.stake-btn:active {
-    background: #234bbb;
-}
-

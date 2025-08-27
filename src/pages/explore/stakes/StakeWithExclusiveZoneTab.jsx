@@ -2,8 +2,8 @@ import React, { useRef, useState } from "react";
 import './Stake.css';
 import Tabs from "../tabs/Tabs";
 import OptionsArea from "../optionsArea/OptionsArea";
-import StakeCard from "../../../components/cards/stakeCard/StakeCard";
-import NFTGrid from "../../../components/nftGrid/NFTGrid";
+import StakeGroupCard from "../../../components/cards/stakeGroupCard/StakeGroupCard";
+// import NFTGrid from "../../../components/nftGrid/NFTGrid";
 import NoData from "../../../components/NoData";
 
 import Image1 from '../../../assets/bids1.png';
@@ -19,7 +19,7 @@ import Image4 from '../../../assets/bids4.png';
     { id: 4, imgSrc: Image4, title: "NoxiousAudience#81...", price: "837.98" }
   ];
 
-export default function Stake() {
+export default function StakeWithExclusiveZoneTab() {
   const [currentTab, setCurrentTab] = useState("stake");
   const [showOptions, setShowOptions] = useState(true);
 
@@ -55,7 +55,7 @@ export default function Stake() {
               />
               {showOptions ? (
                 <div id="stakeCardBlock">
-                  <StakeCard
+                  <StakeGroupCard
                     title="Exclusive stake 1"
                     level="LV2 - LV6"
                     img={
@@ -90,7 +90,7 @@ export default function Stake() {
                 </div>
               ) : (
                 <div id="freeZoneBlock">
-                  <StakeCard
+                  <StakeGroupCard
                     title="Free Zone Info"
                     img={
                       <span className="img-placeholder">
@@ -115,7 +115,7 @@ export default function Stake() {
           {/* MyStake Tab Content */}
           {currentTab === "mystake" && (
             <div className="tab-content active" id="mystakeContent" style={{padding: '16px'}}>
-              <NFTGrid nfts={NFTS} />
+              {/* <NFTGrid nfts={NFTS} /> */}
             </div>
           )}
 

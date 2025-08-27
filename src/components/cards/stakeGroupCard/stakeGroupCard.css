@@ -1,0 +1,122 @@
+
+.stake-card {
+    margin: 24px 16px 0 16px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px 0 #e1eefc;
+    padding: 19px 16px 16px 16px;
+}
+
+.stake-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.stake-title {
+    font-size: 1.18rem;
+    color: #5747a1;
+    font-weight: 500;
+}
+
+.stake-level {
+    font-size: 0.92rem;
+    color: #36c381;
+    font-weight: 600;
+}
+
+.stake-card-img {
+    width: 100%;
+    min-height: 66px;
+    background: linear-gradient(90deg, #60e4ff 0%, #ffe1e6 100%);
+    border-radius: 14px;
+    margin-bottom: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-placeholder {
+    font-size: 1.22rem;
+    color: #444;
+    font-weight: 600;
+    text-shadow: 1px 1px #fff, 0px 0px #000;
+    text-align: center;
+    white-space: pre-line;
+}
+
+.status {
+    display: inline-block;
+    background: #36c381;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 2px 12px;
+    margin-bottom: 15px;
+}
+
+.stake-info {
+    margin-bottom: 25px;
+}
+
+.stake-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+    margin-bottom: 9px;
+    color: #e87f23;
+    font-weight: 500;
+}
+
+.stake-row .label {
+    color: #e87f23;
+}
+
+.stake-row .value {
+    color: #222;
+    font-weight: 600;
+}
+
+.stake-row .usdt-icon {
+    display: inline-block;
+    width: 1.1rem;
+    height: 1.1rem;
+    background: #36c381;
+    border-radius: 50%;
+    margin-right: 4px;
+    position: relative;
+    vertical-align: middle;
+}
+
+.stake-row .usdt-icon:after {
+    content: '₮';
+    position: absolute;
+    left: 44%;
+    top: 33%;
+    color: #fff;
+    font-size: 0.9rem;
+    transform: translate(-50%, -50%);
+}
+
+.stake-btn {
+    display: block;
+    width: 100%;
+    padding: 13px 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #fff;
+    background: #316afd;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    margin-top: 11px;
+    transition: background .18s;
+}
+
+.stake-btn:active {
+    background: #234bbb;
+}
+

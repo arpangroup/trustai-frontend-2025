@@ -3,7 +3,7 @@ import { getConfigValue } from '../utils/configHelper';
 
 // BASE_URL from localStorage or fallback
 // export const BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
-export const BASE_URL = getConfigValue("BASE_URL", process.env.REACT_APP_API_BASE_URL || 'https://trustai.co.in/');
+export const BASE_URL = 'http://trustai.co.in';
 export const API_VERSION = '/api/v1';
 export const USER_ID = getConfigValue("USER_ID", 1);
 

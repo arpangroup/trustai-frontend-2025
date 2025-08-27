@@ -1,19 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 import './Explore.css';
 import HeaderMenu  from "./headerMenu/HeaderMenu";
-import Stake from "./stake/Stake";
+import Stakes from "./stakes/Stakes";
 import NoData from "../../components/NoData";
+import { useLocation } from "react-router-dom";
 
-export default function Explore() {
-  // Menus and Tabs Config
   const MENUS = [
     { key: "stake", label: "Stake" },
     { key: "art", label: "Art" },
     { key: "collectibles", label: "Collectibles" }
   ];
 
-
-  // State
+export default function Explore() {
+  const location = useLocation();
+  const initialTab = location.state?.activeTab || "stake";
   const [currentMenu, setCurrentMenu] = useState("stake");
   const [currentTab, setCurrentTab] = useState("stake");
   const [showOptions, setShowOptions] = useState(true);
@@ -32,23 +32,6 @@ export default function Explore() {
     }
   }, [currentMenu]);
 
-  // Move tab highlight
-  useEffect(() => {
-    const tabId =
-      currentTab === "mystake"
-        ? "tabMyStake"
-        : currentTab === "stake"
-        ? "tabStake"
-        : "tabCollection";
-    const activeTab = document.getElementById(tabId);
-    if (activeTab && tabHighlightRef.current) {
-      tabHighlightRef.current.style.width = activeTab.offsetWidth + "px";
-      tabHighlightRef.current.style.left = activeTab.offsetLeft + "px";
-    }
-  }, [currentTab]);
-
-
-
   return (
     <div style={{background: "#f3f8fa"}}>
       <HeaderMenu
@@ -62,7 +45,7 @@ export default function Explore() {
       <div id="headerContentArea" style={{marginTop: "40px", alignItems: 'center', minHeight: '600px'}}>
         {/* PolygonNFT Content */}
         {currentMenu === "stake" && (
-          <Stake/>
+          <Stakes initialTab={initialTab}/>
         )}
 
          {(currentMenu === "polygonNFT" || currentMenu === "art" || currentMenu === "collectibles") && (

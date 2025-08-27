@@ -6,7 +6,7 @@ import PanelMid from "../../components/panel/PanelMid";
 import Tabs from "./tabs/Tabs";
 import OrderCard from "../../components/cards/orderCard/OrderCard";
 import ReserveStake from "./reserve/ReserveStake";
-import NFTGrid from "../../components/nftGrid/NFTGrid";
+import NFTGrid from "../../components/grid/nftGrid/NFTGrid";
 
 
 import Image1 from '../../assets/bids1.png';

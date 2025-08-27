@@ -1,0 +1,29 @@
+.key-value-pair {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.key-value-pair .label {
+  font-weight: 600;
+  color: #aaa;
+}
+
+.key-value-pair .value {
+  text-align: right;
+  color: var(--primary-color, #2e7d32);
+  min-width: 100px;
+}
+
+
+.label {
+  font-size: 14px;
+  color: #999;
+  font-weight: 400;
+}
+
+.value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #90ee90; /* light green */
+}
