@@ -13,7 +13,6 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
         // Optionally rewrite the path
-        // rewrite: (path) => path.replace(/^\/api/, '')
         // rewrite: (path) => path.replace(/^\/api/, ''),  // remove /api prefix when proxying
       },
     },
