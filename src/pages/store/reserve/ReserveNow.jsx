@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './ReserveStake.css';
+import './ReserveNow.css';
 
 import { useLocation, useNavigate } from 'react-router';
 import apiClient from '../../../api/apiClient';
@@ -8,6 +8,7 @@ import { API_ROUTES } from '../../../api/apiRoutes';
 import CustomDropdown from '../../../components/input/dropdown/CustomDropdown';
 import Countdown from '../../../components/countdown/Countdown';
 import AlertModal from '../../../components/modal/success/AlertModal';
+import { RANK_LABEL_MAP } from '../../../constants/config';
 
 
 function formatAmount(value) {
@@ -16,7 +17,7 @@ function formatAmount(value) {
 }
 
 
-const ReserveStake = ({reservedStakes = [], onReservedSuccess}) => {
+const ReserveNow = ({reservedStakes = [], onReservedSuccess}) => {
     
   const navigate = useNavigate();
   const [investmentOptions, setInvestmentOptions] = useState([]); // original full data
@@ -119,7 +120,6 @@ const ReserveStake = ({reservedStakes = [], onReservedSuccess}) => {
 
     try {
       const payload = {
-        userId: USER_ID,
         rankCode: selectedRank.rankCode,
         investmentRange: selectedInvestmentRange,
       };
@@ -212,4 +212,4 @@ const ReserveStake = ({reservedStakes = [], onReservedSuccess}) => {
     );
 };
 
-export default ReserveStake;
+export default ReserveNow;

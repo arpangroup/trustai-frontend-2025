@@ -11,6 +11,7 @@ const DefaultLayout = () => {
   // Paths that should show BackToolbar with their titles
   const toolbarConfig = [
     { path: '/exploreDetails', title: 'Explore Details' },
+    { path: '/notifications', title: 'Notifications' },
     { path: '/stakeDetails', title: 'Stake Details' },
     // Add more as needed
   ];

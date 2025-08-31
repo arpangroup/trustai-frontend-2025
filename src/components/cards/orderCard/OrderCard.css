@@ -68,6 +68,10 @@
   font-weight: 600;
   color: #2952a9;
   margin-bottom: 3px;
+
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .order-card .nft-row .nft-price {

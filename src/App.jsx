@@ -19,6 +19,7 @@ import Explore from './pages/explore/Explore';
 import ExploreDetails from './pages/exploreDetails/ExploreDetails';
 import Wallet from './pages/wallet/Wallet';
 import UserProfile from './pages/user/UserProfile';
+import NotificationList from './pages/notifications/NotificationList';
 
 
 function App() {
@@ -46,6 +47,9 @@ function App() {
               <Route path="wallet" element={<Wallet />} />
               <Route path="assets" element={<Store />} />
               <Route path="profile" element={<UserProfile />} />
+
+              
+              <Route path="notifications" element={<NotificationList />} />
             </Route>
           </Route>
 

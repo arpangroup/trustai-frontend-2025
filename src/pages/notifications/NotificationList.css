@@ -1,0 +1,12 @@
+.notification-wrapper {
+  padding: 1rem;
+  max-width: 600px;
+  margin: auto;
+}
+
+.heading {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+  text-align: center;
+}

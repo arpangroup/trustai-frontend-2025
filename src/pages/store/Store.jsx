@@ -1,11 +1,11 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './Store.css'
 import Panel from "../../components/panel/Panel";
 import PanelMid from "../../components/panel/PanelMid";
 import Tabs from "./tabs/Tabs";
 import OrderCard from "../../components/cards/orderCard/OrderCard";
-import ReserveStake from "./reserve/ReserveStake";
+import ReserveNow from "./reserve/ReserveNow";
 import NFTGrid from "../../components/grid/nftGrid/NFTGrid";
 
 
@@ -13,6 +13,13 @@ import Image1 from '../../assets/bids1.png';
 import Image2 from '../../assets/bids2.png';
 import Image3 from '../../assets/bids3.png';
 import Image4 from '../../assets/bids4.png';
+import { useLocation } from "react-router-dom";
+import apiClient from "../../api/apiClient";
+import { API_ROUTES } from "../../api/apiRoutes";
+import { CURRENCY_UNIT } from "../../constants/config";
+
+
+const todayDate = new Date().toISOString().split('T')[0];
 
 const orders = [
     {
@@ -35,24 +42,103 @@ const orders = [
     },
 ];
 
-  const NFTS = [
+const defaultStats = [
+  { title: 'Today Earnings', value: '-0.16', color: 'blue' },
+  { title: 'Cumulative Income', value: '-105.37', color: 'green' },
+  { title: 'Team Benefits', value: '-9.03', color: 'gray' },
+  { title: 'Reservation Range', value: '1 ~ 5,000', color: 'orange' },
+  { title: 'Wallet Balance', value: '-0.77', color: 'cyan' },
+  { title: 'Balance for Reservation', value: '-0.77', color: 'darkblue' },
+];
+
+const defaultOrders = [{
+  investmentId: 1,
+  drawDate: '2025/08/01 03:03:40',
+  status: 'Won',
+  orderNo: 'R3AE9995033223',
+  reservationDate: '(GMT+05:30) 2025/08/01 03:03:28',
+  estimatedAmount: '50 ~ 1000',
+  itemName: 'GiffgaffApeClub_0021549',
+  itemPrice: '177.26',
+  imageUrl: 'https://prodimage-dan.treasurefun.xyz/GiffgaffApeClub/GiffgaffApeClub_1470_compre.png'
+}];
+
+const formatOrderNo = (reservedAt, reservationId) => {
+  const date = new Date(reservedAt);
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const dd = String(date.getDate()).padStart(2, '0');
+  const paddedId = String(reservationId).padStart(4, '0');
+  return `TRST${yyyy}${mm}${dd}${paddedId}`;
+};
+
+const tabs = [
+    { key: "orders", label: "Orders" },
+    { key: "reserve", label: "Reserve Stake" },
+    { key: "sell", label: "Sell Stake" },
+];
+
+const NFTS = [
     { id: 1, imgSrc: Image1, title: "NoxiousAudience#01...", price: "873.03" },
     { id: 2, imgSrc: Image2, title: "NoxiousAudience#03...", price: "962.39" },
     { id: 3, imgSrc: Image3, title: "NoxiousAudience#04...", price: "857.38" },
     { id: 4, imgSrc: Image4, title: "NoxiousAudience#81...", price: "837.98" }
-  ];
+];
+
 
 const Store = () => {
     const [activeTab, setActiveTab] = useState("orders");
+    
+    const [stats, setStats] = useState({});
+    const [orders, setOrders] = useState([]);
 
-    const tabs = [
-        { key: "orders", label: "Orders" },
-        { key: "reserve", label: "Reserve Stake" },
-        { key: "sell", label: "Sell Stake" },
-    ];
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const location = useLocation();
+
+    const todayOrders = orders.filter(item => {
+        const reservedAtDate = new Date(item.reservedAt).toISOString().split('T')[0];
+        return reservedAtDate === todayDate;
+    });
+
 
     const showTab = (tab) => {
         setActiveTab(tab);
+    };
+
+
+    useEffect(() => {
+        fetchOrderSummary(setStats);
+        fetchReservedStakes();
+    }, []);
+
+    const fetchOrderSummary = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+        const res = await apiClient.get(API_ROUTES.RESERVATION_API.ORDER_SUMMARY);
+        // console.log("RESRVATION: ", res.data);
+        setStats(res.data || []);
+        } catch (err) {
+        console.error('Failed to fetch stake items:', err);
+        const message = err?.message || 'Failed to load stake items.';
+        setError(message);
+        } finally {
+        setLoading(false);
+        }
+    };
+
+    const fetchReservedStakes = async () => {
+        try {
+            const response = await apiClient.get(API_ROUTES.RESERVATION_API.ACTIVE_ORDERS);
+            //console.log("ORDERS: ", response);
+            setOrders(response.data || []);
+        } catch (err) {
+            console.error('Failed to fetch stake items:', err);
+            setError('Failed to load stake items.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -61,14 +147,20 @@ const Store = () => {
 
             {/* Top Panels */}
             <div className="panel-row">
-                <Panel title="Today's Earnings" value="0" type="earnings" />
-                <Panel title="Cumulative Income" value="34.71332532" type="income" />
+                <Panel title="Today's Earnings" value={loading ? 'NaN' : stats.todayEarning?.toLocaleString() ?? 0} type="earnings" />
+                <Panel title="Cumulative Income" value={loading ? 'NaN' : stats.cumulativeIncome?.toLocaleString() ?? 0} type="income" />
             </div>
 
             <div className="panel-row">
-                <PanelMid label="Reservation Range" value="50 - 2,000" color="#4cb18d" />
-                <PanelMid label="Wallet Balance" value="0" color="#ecb424" />
-                <PanelMid label="Balance for Reservation" value="0" color="#eb5555" />
+                <PanelMid label="Reservation Range" 
+                    value={
+                    loading
+                        ? 'NaN'
+                        : `${stats?.reservationRange?.startPrice?.toLocaleString() ?? 1} ~ ${stats?.reservationRange?.endPrice?.toLocaleString() ?? 5000}`
+                    }
+                    color="#4cb18d" />
+                <PanelMid label="Wallet Balance" value={loading ? 'NaN' : stats.walletBalance?.toLocaleString() ?? 0} color="#ecb424" />
+                <PanelMid label="Balance for Reservation" value={loading ? 'NaN' : stats.walletBalance?.toLocaleString() ?? 0} color="#eb5555" />
             </div>
 
             {/* Tabs */}
@@ -78,15 +170,15 @@ const Store = () => {
             {/* Tab Contents */}
             {activeTab === "orders" && (
                 <div className="tab-content" id="tab-today">
-                    {orders.map((order, index) => (
-                        <OrderCard key={index} order={order} />
+                    {todayOrders.map((order, index) => (
+                        <OrderCard key={index} order={order} currency={order.currencyCode || CURRENCY_UNIT}/>
                     ))}
                 </div>
             )}
 
             {activeTab === "reserve" && (
                 <div className="tab-content" id="tab-reserve">
-                    <ReserveStake/>
+                    <ReserveNow />
                 </div>
             )}
 
