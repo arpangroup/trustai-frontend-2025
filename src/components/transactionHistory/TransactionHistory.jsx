@@ -8,7 +8,7 @@ const TransactionHistory = () => {
                 <span className="card-title">History Record</span>
                 <span className="chevron">
                     {/* Inline right-chevron SVG */}
-                    <svg width="18" height="18" fill="none" stroke="#a7b7c6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="18" height="18" fill="none" stroke="#a7b7c6" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round">
                         <polyline points="6 3 12 9 6 15" />
                     </svg>
                 </span>

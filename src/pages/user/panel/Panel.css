@@ -39,6 +39,17 @@
   margin-left: 6px;
 }
 
+.aj-panel a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 14px; 
+}
+
+.aj-panel a:hover {
+  text-decoration: none; /* still no underline on hover */
+  color: inherit; /* or a specific color if you want to indicate interaction */
+}
+
 .aj-panel__action {
   font-size: 14px;
   font-weight: 500;

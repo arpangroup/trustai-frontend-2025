@@ -6,7 +6,6 @@ import PanelMid from "../../components/panel/PanelMid";
 import Tabs from "./tabs/Tabs";
 import OrderCard from "../../components/cards/orderCard/OrderCard";
 import ReserveNow from "./reserve/ReserveNow";
-import NFTGrid from "../../components/grid/nftGrid/NFTGrid";
 
 
 import Image1 from '../../assets/bids1.png';
@@ -17,6 +16,9 @@ import { useLocation } from "react-router-dom";
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from "../../api/apiRoutes";
 import { CURRENCY_UNIT } from "../../constants/config";
+import SoldStakeCard from "../../components/cards/soldStakeCard/SoldStakeCard";
+import AlertModal from "../../components/modal/success/AlertModal";
+import SellNFTModal from "../../components/modal/sellNft/SellNFTModal";
 
 
 const todayDate = new Date().toISOString().split('T')[0];
@@ -95,6 +97,10 @@ const Store = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const location = useLocation();
+    
+    const [isSelling, setIsSelling] = useState(false);
+    const [sellData, setSellData] = useState(null); // For passing NFT info to SellNFT Modal
+    const [errorModalVisible, setErrorModalVisible] = useState(false);
 
     const todayOrders = orders.filter(item => {
         const reservedAtDate = new Date(item.reservedAt).toISOString().split('T')[0];
@@ -111,6 +117,35 @@ const Store = () => {
         fetchOrderSummary(setStats);
         fetchReservedStakes();
     }, []);
+
+    const handleSellClick = (item) => {
+        setSellData(item);
+        setIsSelling(true);
+    };
+
+    const handleSellStake = async () => {
+        const reservationId = sellData?.reservationId;
+
+        try {
+            const payload = {
+                reservationId,
+            };
+
+            const response = await apiClient.post(
+                API_ROUTES.RESERVATION_API.SELL_RESERVED_STAKE(reservationId),
+                payload
+            );
+            setIsSelling(false);
+            window.location.reload();
+            // Optionally: refresh the list or remove sold item from state
+        } catch (error) {
+            console.error('Error selling stake:', error);
+            setErrorMessage(error?.message || 'Failed to sell the stake. Please try again.');
+            setErrorModalVisible(true);
+        }
+
+    };
+
 
     const fetchOrderSummary = async () => {
         setLoading(true);
@@ -130,7 +165,8 @@ const Store = () => {
 
     const fetchReservedStakes = async () => {
         try {
-            const response = await apiClient.get(API_ROUTES.RESERVATION_API.ACTIVE_ORDERS);
+            //const response = await apiClient.get(API_ROUTES.RESERVATION_API.ACTIVE_ORDERS);
+            const response = await apiClient.get(API_ROUTES.RESERVATION_API.ALL_ORDERS);
             //console.log("ORDERS: ", response);
             setOrders(response.data || []);
         } catch (err) {
@@ -178,16 +214,58 @@ const Store = () => {
 
             {activeTab === "reserve" && (
                 <div className="tab-content" id="tab-reserve">
-                    <ReserveNow />
+                    <ReserveNow                    
+                        reservedStakes={orders}
+                        onReservedSuccess = {() => fetchReservedStakes()}
+                    />
                 </div>
             )}
 
             {activeTab === "sell" && (
                 <div className="tab-content" id="tab-collection">
                     <div className="tab-content active" id="mystakeContent">
-                        <NFTGrid nfts={NFTS} />
+                        <div className="nft-grid">
+                            {orders.filter(item => !item.sold).map((nft, index) => (
+                                <SoldStakeCard 
+                                    key={index} 
+                                    order={nft}
+                                    onSell={() => handleSellClick(nft)} 
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
+            )}
+
+            {isSelling && sellData && (
+                <SellNFTModal
+                item={sellData}
+                itemName = {sellData.schemaTitle}
+                imageUrl = {sellData.imageUrl}
+                price = {sellData.reservedAmount + sellData.valuationDelta}
+                currency = {CURRENCY_UNIT}
+                handlingFee = {sellData.handlingFee}
+                royalty = {sellData.returnRate}
+                onSell = {handleSellStake}
+                onClose={() => setIsSelling(false)}
+                />
+            )}
+
+            {errorModalVisible && (
+                <AlertModal
+                    type="warning"
+                    title="Sell Failed"
+                    onClose={() => setErrorModalVisible(false)}
+                    footerButtons={[
+                        {
+                        label: 'Close',
+                        onClick: () => setErrorModalVisible(false),
+                        className: 'btn btn-primary',
+                        }
+                    ]}
+                    >
+                    <p>{errorMessage}</p>
+                </AlertModal>
             )}
 
         </div>

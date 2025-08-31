@@ -4,11 +4,17 @@ import './ReserveNow.css';
 import { useLocation, useNavigate } from 'react-router';
 import apiClient from '../../../api/apiClient';
 import { API_ROUTES } from '../../../api/apiRoutes';
+import { RANK_LABEL_MAP } from '../../../constants/config';
 
 import CustomDropdown from '../../../components/input/dropdown/CustomDropdown';
 import Countdown from '../../../components/countdown/Countdown';
+
+
+import SuccessIcon from '../../../assets/icons/success.png';
+import WarningIcon from '../../../assets/icons/warming.png';
 import AlertModal from '../../../components/modal/success/AlertModal';
-import { RANK_LABEL_MAP } from '../../../constants/config';
+
+
 
 
 function formatAmount(value) {

@@ -1,7 +1,11 @@
 import React from 'react';
 import './SoldStakeCard.css';
 
-export default function SoldStakeCard({ imgSrc, title, price, onBuy }) {
+const SoldStakeCard = ({ order, onSell }) => {
+  const { imageUrl: imgSrc, schemaTitle: title, reservedAmount, valuationDelta, handlingFee, returnRate} = order;
+  //const price = (Number(reservedAmount) + Number(valuationDelta)).toFixed(2);
+  const price = reservedAmount;
+
   return (
     <div className="nft-card">
       <img src={imgSrc} alt={title} />
@@ -12,8 +16,11 @@ export default function SoldStakeCard({ imgSrc, title, price, onBuy }) {
           {price} USDT
           <span className="price-trend">↗</span>
         </div>
-        <button className="buy-btn" onClick={onBuy}>Sell</button>
+        <button className="buy-btn" onClick={onSell}>Sell</button>
       </div>
     </div>
   );
 }
+
+
+export default SoldStakeCard;

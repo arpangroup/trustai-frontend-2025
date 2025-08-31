@@ -6,8 +6,8 @@ import SoldStakeCard from "../../cards/soldStakeCard/SoldStakeCard";
 export default function NFTGrid({ nfts }) {
   return (
     <div className="nft-grid">
-      {nfts.map(nft => (
-        <SoldStakeCard key={nft.id} {...nft} />
+      {nfts.map((nft, index) => (
+        <SoldStakeCard key={index} {...nft} />
       ))}
     </div>
   );
