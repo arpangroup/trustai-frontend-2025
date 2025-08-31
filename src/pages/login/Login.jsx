@@ -39,7 +39,7 @@ const Login = () => {
       refreshTokenExpiry
     } = res.data;
       // Store tokens in AuthContext
-      login(accessToken, refreshToken, accessTokenExpiry, refreshTokenExpiry);
+      login(accessToken, refreshToken, accessTokenExpiry, refreshTokenExpiry, username);
 
       // Navigate to previous or default route
       navigate(from, { replace: true });

@@ -22,6 +22,7 @@
 .headerWhite .logo {
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .headerWhite .logoIcon {
@@ -74,4 +75,76 @@
 
 .headerWhite .headerIcon:hover {
   opacity: 1;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  right: -6px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  padding: 1px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  min-width: 16px;
+  text-align: center;
+}
+
+
+/* ---------- Menu Dialog ---------- */
+.menu-trigger {
+  cursor: pointer;
+}
+
+.menu-dialog {
+  position: absolute;
+  top: 40px; /* push it below the icon */
+  right: 0px;
+  width: 180px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 99;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.menu-dialog.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 0.95em;
+}
+.menu-item:hover {
+  background: #f4f8ff;
+}
+.menu-item span {
+  margin-left: 10px;
+  font-weight: 500;
+  color: #333;
+}
+.menu-item i {
+  font-size: 1.1em;
+  width: 20px;
+  text-align: center;
+}
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-10px);}
+  to {opacity: 1; transform: translateY(0);}
 }
