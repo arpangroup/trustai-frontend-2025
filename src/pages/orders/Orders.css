@@ -1,8 +1,30 @@
-/* Mobile-first dark theme */
-.date-filter-container {
+/* Dark theme */
+.order-container {
   background-color: #121212;
-  color: #fff;
+  color: #ffffff;
   padding: 1rem;
   min-height: 100vh;
   font-family: Arial, sans-serif;
 }
+
+
+/* Light theme */
+.light-theme .order-container {
+  background-color: #f9f9f9; /* Light background */
+  color: #1c1c1c; /* Dark text */
+}
+
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 60vh; /* Adjust based on your layout */
+  width: 100%;
+  margin: 0 auto;
+  color: #aaa;
+}
+
+
+

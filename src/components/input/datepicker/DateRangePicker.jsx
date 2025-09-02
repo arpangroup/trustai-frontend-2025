@@ -22,19 +22,21 @@ export default function DateRangePicker({ value, onChange }) {
 
   return (
     <div className="date-picker-container">
-      <input
-        type="text"
-        readOnly
-        className="date-input"
-        value={start && end ? `${start} → ${end}` : "Select Date Range"}
-        onClick={() => setShowPicker(!showPicker)}
-      />
-      <span
-        className="datepicker-icon"
-        onClick={() => setShowPicker(!showPicker)}
-      >
-        📅
-      </span>
+      <div className="input-wrapper">
+        <input
+          type="text"
+          readOnly
+          className="date-input"
+          value={start && end ? `${start} → ${end}` : "Select Date Range"}
+          onClick={() => setShowPicker(!showPicker)}
+        />
+        <span
+          className="datepicker-icon"
+          onClick={() => setShowPicker(!showPicker)}
+        >
+          📅
+        </span>
+      </div>
 
       {showPicker && (
         <div className="date-picker-popup">

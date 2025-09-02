@@ -6,6 +6,7 @@ export default defineConfig({
   base: '/', // 👈 Important!
   plugins: [react()],
   server: {
+    port: 3000,
     proxy: {
       // This proxies any request starting with /api to your backend server
       '/api': {

@@ -5,6 +5,7 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { NotificationProvider } from './context/NotificationContext.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
+import { SkeletonTheme } from 'react-loading-skeleton'
 
 createRoot(document.getElementById('root')).render(
   // <StrictMode>
@@ -20,6 +21,8 @@ createRoot(document.getElementById('root')).render(
   // </BrowserRouter>
 
   // <React.StrictMode>
+
+    <SkeletonTheme baseColor="#e2e5e7" highlightColor="#f5f5f5">
     <BrowserRouter>
       <AuthProvider>
         <NotificationProvider>
@@ -27,5 +30,6 @@ createRoot(document.getElementById('root')).render(
         </NotificationProvider>
       </AuthProvider>
     </BrowserRouter>
+    </SkeletonTheme>
   // </React.StrictMode>
 )

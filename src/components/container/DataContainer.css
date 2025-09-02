@@ -1,0 +1,13 @@
+.data-fetcher {
+  margin-top: 1rem;
+}
+
+.data-fetcher-loading,
+.data-fetcher-error {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.data-fetcher-error {
+  color: red;
+}
