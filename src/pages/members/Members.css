@@ -1,0 +1,18 @@
+/* Base style */
+.date-filter-container {
+  padding: 1rem;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+
+  /* Dark theme default */
+  background-color: #121212;
+  color: #ffffff;
+
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light theme override */
+.light-theme .date-filter-container {
+  background-color: #f9f9f9; /* soft light background */
+  color: #1a1a1a;
+}

@@ -1,0 +1,62 @@
+.date-picker-container {
+  position: relative;
+}
+
+.date-input {
+  width: 100%;
+  padding: 0.8rem 2.5rem 0.8rem 0.8rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #1e1e1e;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.datepicker-icon {
+  position: absolute;
+  right: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.date-picker-popup {
+  background-color: #1e1e1e;
+  padding: 0.8rem;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.date-picker-popup label {
+  font-size: 0.85rem;
+  margin-bottom: 0.2rem;
+}
+
+.date-picker-popup input {
+  background-color: #2b2b2b;
+  color: #fff;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+/* 🌞 Light theme override */
+.light-theme .date-input {
+  background-color: #fff;
+  color: #1a1a1a;
+  border: 1px solid #ccc;
+}
+
+.light-theme .date-picker-popup {
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.light-theme .date-picker-popup input {
+  background-color: #f1f1f1;
+  color: #1a1a1a;
+  border: 1px solid #ccc;
+}

@@ -1,0 +1,47 @@
+.panel {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #1c1c1c; /* Dark background */
+  padding: 16px;
+  border-radius: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.panel-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 10px;
+  min-width: 100px;
+}
+
+.panel-header {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.panel-subtext {
+  font-size: 0.85rem;
+  color: #bbbbbb;
+  margin-top: 4px;
+}
+
+/* Light theme override */
+.light-theme .panel {
+  background-color: #ffffff; /* White card */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08); /* subtle shadow */
+}
+
+.light-theme .panel-header {
+  color: #222; /* strong dark text */
+}
+
+.light-theme .panel-subtext {
+  color: #666; /* softer text */
+}

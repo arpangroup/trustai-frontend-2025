@@ -12,7 +12,14 @@ const DefaultLayout = () => {
   const toolbarConfig = [
     { path: '/exploreDetails', title: 'Explore Details' },
     { path: '/notifications', title: 'Notifications' },
-    { path: '/stakeDetails', title: 'Stake Details' },
+    { path: '/members', title: 'Members' },
+    { path: '/contributions', title: 'Contributions' },
+    { path: '/orders', title: 'Orders' },
+    { path: '/referral', title: 'Referral' },
+    { path: '/withdraw', title: 'Withdraw' },
+    { path: '/deposit', title: 'Deposit' },
+    { path: '/level', title: 'Level' },
+    { path: '/tree', title: 'User Tree' },
     // Add more as needed
   ];
 

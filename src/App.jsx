@@ -20,6 +20,13 @@ import ExploreDetails from './pages/exploreDetails/ExploreDetails';
 import Wallet from './pages/wallet/Wallet';
 import UserProfile from './pages/user/UserProfile';
 import NotificationList from './pages/notifications/NotificationList';
+import Members from './pages/members/Members';
+import MemberContribution from './pages/contributors/MemberContribution';
+import Orders from './pages/orders/Orders';
+import ReferralScreen from './pages/referral/ReferralScreen';
+import DepositPage from './pages/deposit/DepositPage';
+import WithdrawRequest from './pages/withdraw/WithdrawRequest';
+import Level from './pages/level/Level';
 
 
 function App() {
@@ -47,6 +54,17 @@ function App() {
               <Route path="wallet" element={<Wallet />} />
               <Route path="assets" element={<Store />} />
               <Route path="profile" element={<UserProfile />} />
+
+              
+              <Route path="/members" element={<Members />} />
+              <Route path="/contributions" element={<MemberContribution />} /> 
+              <Route path="/orders" element={<Orders />} />
+
+              <Route path="/referral" element={<ReferralScreen />} />
+              <Route path="/deposit" element={<DepositPage />} />
+              <Route path="/withdraw" element={<WithdrawRequest />} />
+              <Route path="/level" element={<Level />} />
+              {/* <Route path="/tree" element={<MLMTree />} /> */}
 
               
               <Route path="notifications" element={<NotificationList />} />

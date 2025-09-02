@@ -1,0 +1,37 @@
+/* Mobile-first dark theme */
+.date-filter-container {
+  background-color: #121212;
+  color: #fff;
+  padding: 1rem;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.member-list {
+  background-color: transparent; /* Let the dark theme background show */
+  border-radius: 8px;
+  overflow: hidden; /* Ensure separators align perfectly */
+}
+
+.member-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  font-size: 15px;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* subtle separator */
+}
+
+.member-row:last-child {
+  border-bottom: none; /* Remove last separator */
+}
+
+.member-name {
+  font-weight: 500;
+}
+
+.member-share {
+  font-weight: bold;
+  color: #4cafef;
+}

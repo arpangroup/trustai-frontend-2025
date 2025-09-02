@@ -1,0 +1,8 @@
+/* Mobile-first dark theme */
+.date-filter-container {
+  background-color: #121212;
+  color: #fff;
+  padding: 1rem;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
