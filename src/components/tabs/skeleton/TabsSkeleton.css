@@ -1,0 +1,71 @@
+.tabs-skeleton-wrapper {
+  margin: 20px 0;
+}
+
+/* Tabs row skeleton */
+.tabs-skeleton {
+  display: flex;
+  background: #f6f8fb;
+  border-bottom: 1.5px solid #dde5ea;
+  padding: 10px 0;
+}
+
+.tab-skeleton {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+/* Content area skeleton */
+.tab-content-skeleton {
+  background: #f6f8fb;
+  padding: 16px 0px 16px 0px;
+}
+
+.card-skeleton {
+  background: #fff;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* Dark Theme Support */
+.dark-theme .tabs-skeleton {
+  background: #1e1e1e;
+  border-bottom: 1.5px solid #333;
+}
+
+.dark-theme .tab-content-skeleton {
+  background: #1e1e1e;
+}
+
+.dark-theme .card-skeleton {
+  background: #2b2b2b;
+  box-shadow: none;
+}
+
+.dark-theme .react-loading-skeleton {
+  --base-color: #2b2b2b;
+  --highlight-color: #3c3c3c;
+}
+
+/* Light Theme Override */
+.light-theme .tabs-skeleton {
+  background: #ffffff;
+  border-bottom: 1.5px solid #dde5ea;
+}
+
+.light-theme .tab-content-skeleton {
+  background: #f6f8fb;
+}
+
+.light-theme .card-skeleton {
+  background: #ffffff;
+}
+
+.light-theme .react-loading-skeleton {
+  --base-color: #e2e5e7;
+  --highlight-color: #f5f5f5;
+}

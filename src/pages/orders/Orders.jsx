@@ -20,7 +20,7 @@ export default function Orders() {
     if (dateRange.start) params.start = dateRange.start;
     if (dateRange.end) params.end = dateRange.end;
 
-    await delay(1000 * 10);
+    // await delay(1000 * 3);
 
     const response = await apiClient.get(API_ROUTES.RESERVATION_API.ALL_ORDERS, {
       params,
@@ -30,10 +30,9 @@ export default function Orders() {
   };
 
   return (
-    <div className="order-container">
+    <div className="order-container" style={{padding: '1rem', minHeight: '100vh'}}>
 
-      {/* ✅ Reusable Date Filter */}
-      <DateFilter onDateChange={(range) => setDateRange(range)} />   
+      <DateFilter onDateChange={(range) => setDateRange(range)} />
            
 
       <DataContainer

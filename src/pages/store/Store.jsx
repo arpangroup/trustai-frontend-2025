@@ -19,9 +19,14 @@ import { CURRENCY_UNIT } from "../../constants/config";
 import SoldStakeCard from "../../components/cards/soldStakeCard/SoldStakeCard";
 import AlertModal from "../../components/modal/success/AlertModal";
 import SellNFTModal from "../../components/modal/sellNft/SellNFTModal";
+import StorePageSkeleton from "./skeleton/StorePageSkeleton";
+import NoData from "../../components/NoData";
 
 
 const todayDate = new Date().toISOString().split('T')[0];
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 
 const orders = [
     {
@@ -90,6 +95,7 @@ const NFTS = [
 
 const Store = () => {
     const [activeTab, setActiveTab] = useState("orders");
+    const isTest = true;
     
     const [stats, setStats] = useState({});
     const [orders, setOrders] = useState([]);
@@ -151,20 +157,23 @@ const Store = () => {
         setLoading(true);
         setError(null);
         try {
-        const res = await apiClient.get(API_ROUTES.RESERVATION_API.ORDER_SUMMARY);
-        // console.log("RESRVATION: ", res.data);
-        setStats(res.data || []);
+            //await delay(1000 * 10);
+            const res = await apiClient.get(API_ROUTES.RESERVATION_API.ORDER_SUMMARY);
+            // console.log("RESRVATION: ", res.data);
+            setStats(res.data || []);
         } catch (err) {
-        console.error('Failed to fetch stake items:', err);
-        const message = err?.message || 'Failed to load stake items.';
-        setError(message);
+            console.error('Failed to fetch stake items:', err);
+            const message = err?.message || 'Failed to load stake items.';
+            setError(message);
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     };
 
     const fetchReservedStakes = async () => {
+        setLoading(true);
         try {
+            //await delay(1000 * 10);
             //const response = await apiClient.get(API_ROUTES.RESERVATION_API.ACTIVE_ORDERS);
             const response = await apiClient.get(API_ROUTES.RESERVATION_API.ALL_ORDERS);
             //console.log("ORDERS: ", response);
@@ -177,97 +186,118 @@ const Store = () => {
         }
     };
 
+
     return (
 
         <div className="dashboard">
-
-            {/* Top Panels */}
-            <div className="panel-row">
-                <Panel title="Today's Earnings" value={loading ? 'NaN' : stats.todayEarning?.toLocaleString() ?? 0} type="earnings" />
-                <Panel title="Cumulative Income" value={loading ? 'NaN' : stats.cumulativeIncome?.toLocaleString() ?? 0} type="income" />
-            </div>
-
-            <div className="panel-row">
-                <PanelMid label="Reservation Range" 
-                    value={
-                    loading
-                        ? 'NaN'
-                        : `${stats?.reservationRange?.startPrice?.toLocaleString() ?? 1} ~ ${stats?.reservationRange?.endPrice?.toLocaleString() ?? 5000}`
-                    }
-                    color="#4cb18d" />
-                <PanelMid label="Wallet Balance" value={loading ? 'NaN' : stats.walletBalance?.toLocaleString() ?? 0} color="#ecb424" />
-                <PanelMid label="Balance for Reservation" value={loading ? 'NaN' : stats.walletBalance?.toLocaleString() ?? 0} color="#eb5555" />
-            </div>
-
-            {/* Tabs */}
-            <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
-
-
-            {/* Tab Contents */}
-            {activeTab === "orders" && (
-                <div className="tab-content" id="tab-today">
-                    {todayOrders.map((order, index) => (
-                        <OrderCard key={index} order={order} currency={order.currencyCode || CURRENCY_UNIT}/>
-                    ))}
+            {loading ? (
+                <StorePageSkeleton />
+            ) : (
+            <>
+                {/* Top Panels */}
+                <div className="panel-row">
+                    <Panel title="Today's Earnings" value={loading ? 'NaN' : stats.todayEarning?.toLocaleString() ?? 0} type="earnings" />
+                    <Panel title="Cumulative Income" value={loading ? 'NaN' : stats.cumulativeIncome?.toLocaleString() ?? 0} type="income" />
                 </div>
-            )}
 
-            {activeTab === "reserve" && (
-                <div className="tab-content" id="tab-reserve">
-                    <ReserveNow                    
-                        reservedStakes={orders}
-                        onReservedSuccess = {() => fetchReservedStakes()}
-                    />
+                <div className="panel-row">
+                    <PanelMid label="Reservation Range" 
+                        value={
+                        loading
+                            ? 'NaN'
+                            : `${stats?.reservationRange?.startPrice?.toLocaleString() ?? 1} ~ ${stats?.reservationRange?.endPrice?.toLocaleString() ?? 5000}`
+                        }
+                        color="#4cb18d" />
+                    <PanelMid label="Wallet Balance" value={loading ? 'NaN' : stats.walletBalance?.toLocaleString() ?? 0} color="#ecb424" />
+                    <PanelMid label="Balance for Reservation" value={loading ? 'NaN' : stats.walletBalance?.toLocaleString() ?? 0} color="#eb5555" />
                 </div>
-            )}
 
-            {activeTab === "sell" && (
-                <div className="tab-content" id="tab-collection">
-                    <div className="tab-content active" id="mystakeContent">
-                        <div className="nft-grid">
-                            {orders.filter(item => !item.sold).map((nft, index) => (
-                                <SoldStakeCard 
-                                    key={index} 
-                                    order={nft}
-                                    onSell={() => handleSellClick(nft)} 
-                                />
-                            ))}
+                {/* Tabs */}
+                <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+
+
+                {/* Tab Contents */}
+                {activeTab === "orders" && (
+                    <div className="tab-content" id="tab-today">
+                        {!loading && !error && todayOrders?.length === 0 && (
+                            <NoData message="No orders found for today." />
+                        )}
+
+                        {todayOrders.map((order, index) => (
+                            <OrderCard key={index} order={order} currency={order.currencyCode || CURRENCY_UNIT}/>
+                        ))}
+                    </div>
+                )}
+
+                {activeTab === "reserve" && (
+                    <div className="tab-content" id="tab-reserve">
+                        <ReserveNow                    
+                            reservedStakes={orders}
+                            onReservedSuccess = {() => fetchReservedStakes()}
+                        />
+                    </div>
+                )}
+
+                {activeTab === "sell" && (
+                    <div className="tab-content" id="tab-collection">
+                        <div className="tab-content active" id="mystakeContent">
+                            {(() => {
+                                const unsoldOrders = orders.filter(item => !item.sold);
+
+                                if (unsoldOrders.length === 0) {
+                                return <NoData message="No items available for sale." />;
+                                }
+
+                                return (
+                                <div className="nft-grid">
+                                    {unsoldOrders.map((nft, index) => (
+                                    <SoldStakeCard 
+                                        key={index} 
+                                        order={nft}
+                                        onSell={() => handleSellClick(nft)} 
+                                    />
+                                    ))}
+                                </div>
+                                );
+                            })()}
+
                         </div>
                     </div>
-                </div>
-            )}
+                )}
 
-            {isSelling && sellData && (
-                <SellNFTModal
-                item={sellData}
-                itemName = {sellData.schemaTitle}
-                imageUrl = {sellData.imageUrl}
-                price = {sellData.reservedAmount + sellData.valuationDelta}
-                currency = {CURRENCY_UNIT}
-                handlingFee = {sellData.handlingFee}
-                royalty = {sellData.returnRate}
-                onSell = {handleSellStake}
-                onClose={() => setIsSelling(false)}
-                />
-            )}
+                {isSelling && sellData && (
+                    <SellNFTModal
+                    item={sellData}
+                    itemName = {sellData.schemaTitle}
+                    imageUrl = {sellData.imageUrl}
+                    price = {sellData.reservedAmount + sellData.valuationDelta}
+                    currency = {CURRENCY_UNIT}
+                    handlingFee = {sellData.handlingFee}
+                    royalty = {sellData.returnRate}
+                    onSell = {handleSellStake}
+                    onClose={() => setIsSelling(false)}
+                    />
+                )}
 
-            {errorModalVisible && (
-                <AlertModal
-                    type="warning"
-                    title="Sell Failed"
-                    onClose={() => setErrorModalVisible(false)}
-                    footerButtons={[
-                        {
-                        label: 'Close',
-                        onClick: () => setErrorModalVisible(false),
-                        className: 'btn btn-primary',
-                        }
-                    ]}
-                    >
-                    <p>{errorMessage}</p>
-                </AlertModal>
-            )}
-
+                {errorModalVisible && (
+                    <AlertModal
+                        type="warning"
+                        title="Sell Failed"
+                        onClose={() => setErrorModalVisible(false)}
+                        footerButtons={[
+                            {
+                            label: 'Close',
+                            onClick: () => setErrorModalVisible(false),
+                            className: 'btn btn-primary',
+                            }
+                        ]}
+                        >
+                        <p>{errorMessage}</p>
+                    </AlertModal>
+                )}
+            </>
+        )}
+    
         </div>
     );
 };

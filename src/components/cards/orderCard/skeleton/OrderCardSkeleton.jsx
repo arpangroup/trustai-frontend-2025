@@ -1,11 +1,13 @@
 import React from "react";
+import "./OrderCardSkeleton.css";
+
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "./OrderCardSkeleton.css";
 
 export default function OrderCardSkeleton({ cards = 8 }) {
   return (
-    <SkeletonTheme baseColor="#e2e5e7" highlightColor="#f5f5f5">
+    <>
       {Array(cards)
         .fill(0)
         .map((_, i) => (
@@ -34,6 +36,6 @@ export default function OrderCardSkeleton({ cards = 8 }) {
             </div>
           </div>
         ))}
-    </SkeletonTheme>
+    </>
   );
 }

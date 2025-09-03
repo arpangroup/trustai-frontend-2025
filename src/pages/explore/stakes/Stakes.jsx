@@ -23,10 +23,9 @@ const NFTS = [
     { id: 4, imgSrc: Image4, title: "NoxiousAudience#81...", price: "837.98" }
 ];
 
-export default function Stakes({ initialTab = "stake" }) {
+export default function Stakes({ stakes, initialTab = "stake" }) {
     const [currentTab, setCurrentTab] = useState(initialTab);
     const [showOptions, setShowOptions] = useState(true);
-    const [stakes, setStakes] = useState([]);
     const [myStakes, setMyStakes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isMyStakeDetailsBottomSheetOpen, setIsMyStakeDetailsBottomSheetOpen] = useState(false);
@@ -36,35 +35,18 @@ export default function Stakes({ initialTab = "stake" }) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetchStakes();
-        fetchSMytakes();
+        fetchMytakes();
     }, []);
 
-    const fetchStakes = async () => {
-        setLoading(true);
-        setError(null);
+      const fetchMytakes = async () => {
         try {
-            const res = await apiClient.get(API_ROUTES.EXPLORE.STAKE_LIST);
-            // const response = stakes;
-            //console.log("RESPONSE: ", response);
-            setStakes(res.data?.content || []);
+            const res = await apiClient.get(API_ROUTES.EXPLORE.MY_STAKE);
+            setMyStakes(res.data?.content || []);
         } catch (err) {
             console.error('Failed to fetch stake items:', err);
             setError('Failed to load stake items.');
         } finally {
             setLoading(false);
-        }
-    };
-
-      const fetchSMytakes = async () => {
-        try {
-        const res = await apiClient.get(API_ROUTES.EXPLORE.MY_STAKE);
-        setMyStakes(res.data?.content || []);
-        } catch (err) {
-        console.error('Failed to fetch stake items:', err);
-        setError('Failed to load stake items.');
-        } finally {
-        setLoading(false);
         }
     };
 
@@ -132,7 +114,12 @@ export default function Stakes({ initialTab = "stake" }) {
                     {currentTab === "mystake" && (
                         <div className="tab-content active" id="mystakeContent" style={{ padding: '8px 16px 16px 16px' }}>
                             <div className='mystake-list'>
-                                {!loading && !error && myStakes.map((item, index) => (
+                                {/* ✅ Show No Data */}
+                                {!loading && !error && myStakes?.length === 0 && (
+                                    <NoData message="No stakes found." />
+                                )}
+                                
+                                {!loading && !error && myStakes?.length > 0 && myStakes.map((item, index) => (
                                 <MyStakeCard
                                     key={item.investmentId || index}
                                     {...item}
