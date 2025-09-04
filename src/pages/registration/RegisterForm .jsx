@@ -37,7 +37,7 @@ const RegisterForm = () => {
     countryCode: "+91",
     mobile: "",
     email: "john@doe.com",
-    referralCode: "123",
+    referralCode: "REF2",
     otp: "",
   });
 
@@ -280,7 +280,7 @@ const RegisterForm = () => {
         onClose={() => setShowOtpPanel(false)}
         title="Verify OTP"
       >
-        {registrationResponse && registrationResponse?.sessionId (
+        {registrationResponse && registrationResponse.sessionId && (
         <OTPVerification
           sessionId={registrationResponse.sessionId}
           username={registrationResponse.username || formData.username}
