@@ -8,6 +8,7 @@ import { API_ROUTES } from '../../api/apiRoutes';
 import { BsCurrencyDollar } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { CURRENCY_SYMBOL } from '../../constants/config';
+import WalletPageSkeleton from './skeleton/WalletPageSkeleton';
 
 // Section icons data
 const sectionIconsData = [
@@ -32,25 +33,32 @@ const Wallet = () => {
     const [toastMessage, setToastMessage] = useState('');
     const [showToast, setShowToast] = useState(false);
     const [wallet, setWallet] = useState({});
+    const [loading, setLoading] = useState(true);
     
     useEffect(() => {
         fetchWalletBalance();
     }, []);
 
     const fetchWalletBalance = async () => {
-        await delay(1000 * 3);
-        const response = await apiClient.get(API_ROUTES.WALLET.WALLET_BALANCE);
-        //console.log("API Response: ", response.data);        
-        setWallet(response.data);
+        try {
+            //await delay(1000 * 3);
+            const response = await apiClient.get(API_ROUTES.WALLET.WALLET_BALANCE);
+            setWallet(response.data);
+        } finally {
+            setLoading(false); 
+        }
     };    
 
     const handleIconClick = (message) => {
         // setToastMessage(message);
         setToastMessage("Coming soon. Stay tuned!");
         setShowToast(true);
-        // Auto hide after 3 seconds
         setTimeout(() => setShowToast(false), 3000);
     };
+
+    if (loading) {
+        return <WalletPageSkeleton />;
+    }
     
     return (
         <div style={{ padding: '16px' }}>

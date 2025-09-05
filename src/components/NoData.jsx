@@ -2,8 +2,8 @@ import React from 'react';
 
 import NoDataIcon from '../assets/icons/icon_no_data.svg';
 
-const NoData = ({ currentTime, message = "No Data Available" }) => (
-  <div className="no-data" style={{marginTop: '50px'}}>
+const NoData = ({ currentTime, message = "No Data Available", style = {} }) => (
+  <div className="no-data" style={{ marginTop: '50px', ...style }}>
     <img
       className="no-data__img"
       src={NoDataIcon}

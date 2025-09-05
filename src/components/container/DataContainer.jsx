@@ -13,6 +13,7 @@ const DataContainer = ({
   fetchData,            // async function to fetch data
   renderData,           // render prop to render data
   noDataMessage = "No data available.",
+  noDataStyle = {},
   dependencies = [],    // optional dependencies for useEffect
   wrapperClass = "",    // optional styling class
   loadingComponent = null, // optional skeleton or spinner
@@ -48,7 +49,7 @@ const DataContainer = ({
 
       {/* {!loading && !error && data.length === 0 && ( */}
       {!loading && !error && isEmptyData(data) &&  (
-        <NoData message={noDataMessage} />
+        <NoData message={noDataMessage} style={noDataStyle} />
       )}
       
       {/* {!loading && !error && data.length > 0 && renderData(data)} */}

@@ -4,6 +4,7 @@ import apiClient from '../../api/apiClient';
 import { API_ROUTES } from '../../api/apiRoutes';
 import DataContainer from '../container/DataContainer';
 import { formatTimestampTo_YY_MM_DD_HH_MM_SS } from '../../constants/dateFormatter';
+import TransactionHistorySkeleton from './skeleton/TransactionHistorySkeleton';
 
 const historyData = [
   {
@@ -40,7 +41,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const TransactionHistory = () => {
 
   const fetchRecentTransactions = async () => {
-    // await delay(1000 * 3);
+    // await delay(1000 * 100);
 
     const response = await apiClient.get(API_ROUTES.TRANSACTIONS.TRANSACTION_HISTORY);
     console.log("Transactions Response: ", response.data);
@@ -73,8 +74,9 @@ const TransactionHistory = () => {
         <DataContainer
           fetchData={fetchRecentTransactions}
           dependencies={[]}
-          noDataMessage="No pending transactions found."
-          // loadingComponent={<OrderCardSkeleton cards={8} />}
+          noDataMessage="No transactions found."
+          noDataStyle={{height: '30vh'}}
+          loadingComponent={<TransactionHistorySkeleton cards={8} />}
           renderData={(transactions) => (
             <>
               {transactions.map((item, index) => (

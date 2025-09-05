@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from "../../api/apiRoutes";
 import DataContainer from "../container/DataContainer";
+import PendingTransactionsSkeleton from "./skeleton/PendingTransactionsSkeleton";
 
 const recentTransactions = [
   {
@@ -67,7 +68,7 @@ export default function PendingTransactions() { // Pending Deposit or Pending Wi
     const [totalPending, setTotalPending] = useState(0);
     
     const fetchPendingDeposits = async () => {
-        await delay(1000 * 3);
+        // await delay(1000 * 3);
         
         const response = await apiClient.get(API_ROUTES.DEPOSIT.DEPOSIT_HISTORY, {
             params: { status: 'PENDING' }
@@ -103,8 +104,9 @@ export default function PendingTransactions() { // Pending Deposit or Pending Wi
                         <DataContainer
                             fetchData={fetchPendingDeposits}
                             dependencies={[]}
-                            noDataMessage="No pending transactions found."
-                            // loadingComponent={<OrderCardSkeleton cards={8} />}
+                            noDataMessage="No pending records found."
+                            noDataStyle={{height: '30vh'}}
+                            loadingComponent={<PendingTransactionsSkeleton cards={8} />}
                             renderData={(transactions) => (
                             <>
                                 {transactions.map((item, index) => (
