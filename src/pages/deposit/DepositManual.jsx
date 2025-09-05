@@ -3,47 +3,77 @@ import './DepositManual.css';
 import FileUpload from './components/FileUpload';
 import apiClient from '../../api/apiClient'; 
 import { API_ROUTES } from '../../api/apiRoutes';
+import Toast from '../../components/toast/Toast';
 
-const DepositManual = ({ onClose }) => {
+const DepositManual = ({ onClose, onSuccess }) => {
     const [screenshotFile, setScreenshotFile] = useState(null);
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
+    const [toast, setToast] = useState(null);
 
     const handleScreenshotChange = (file) => {
         setScreenshotFile(file);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const showToast = (message, type = "error") => {
+        setToast({ message, type });
+    };
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();        
 
         const paymentMethod = e.target.payment_method.value;
         const amount = e.target.amount.value;
         const transactionId = e.target.transaction_id.value;
 
+
         // Validation
         if (!paymentMethod || paymentMethod === 'null') {
             setMessage('Please select a payment method.');
+            showToast("Please select a payment method.");
             return;
         }
         if (!amount || parseFloat(amount) <= 0) {
             setMessage('Please enter a valid amount.');
+            showToast("Please enter a valid amount.");
             return;
         }
         if (!transactionId.trim()) {
             setMessage('Please enter a transaction ID.');
+            showToast('Please enter a transaction ID.');
             return;
         }
         if (!screenshotFile) {
             setMessage('Please upload a screenshot before submitting.');
+            showToast('Please upload a screenshot before submitting.');
             return;
         }
+        
+        setLoading(true);
+        setMessage('Uploading...');
 
         try {
-            setLoading(true);
-            setMessage('Uploading...');
+            const formData = new FormData();
+            formData.append('paymentGateway', paymentMethod);
+            formData.append('amount', amount);
+            formData.append('txnId', transactionId);
+            formData.append('screenshot', screenshotFile);
+
+            console.log("Submit Deposit Request......");
+            const response = await apiClient.post(API_ROUTES.DEPOSIT.DEPOSIT_REQUEST, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            
+            console.log("DEPOSIT_RESPONSE: ", response);
+            showToast('Deposit submitted successfully!', "success");
+            onSuccess(true)
+            
 
             // Simulate file upload as base64 or filename (backend dependent)
-            const reader = new FileReader();
+            /*const reader = new FileReader();
             reader.onloadend = async () => {
                 const base64File = reader.result;
 
@@ -55,7 +85,7 @@ const DepositManual = ({ onClose }) => {
                 };
 
                 try {
-                    const response = await apiClient.post(API_ROUTES.DEPOSIT_REQUEST, payload);
+                    const response = await apiClient.post(API_ROUTES.DEPOSIT.DEPOSIT_REQUEST, payload);
                     setMessage('Deposit submitted successfully!');
                 } catch (error) {
                     setMessage(error.message || 'Something went wrong.');
@@ -63,9 +93,10 @@ const DepositManual = ({ onClose }) => {
                     setLoading(false);
                 }
             };
-            reader.readAsDataURL(screenshotFile);
+            reader.readAsDataURL(screenshotFile);*/
         } catch (err) {
-            setMessage('Error reading file.');
+            setMessage(err.message || 'Something went wrong.');
+        } finally {
             setLoading(false);
         }
     };
@@ -84,10 +115,10 @@ const DepositManual = ({ onClose }) => {
                      <form className="deposit-form" onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="payment_method">Payment Method</label>
-                            <select id="payment_method" name="payment_method">
-                                <option disabled value={''}>--Select Gateway--</option>
-                                <option value="BINANCE" selected>Binance</option>
-                                <option value="COINBASE" disabled>Coinbase</option>
+                            <select id="payment_method" name="payment_method" defaultValue="BINANCE">
+                                <option disabled value="">--Select Gateway--</option>
+                                <option value="BINANCE">Binance</option>
+                                <option value="COINBASE" disabled={true}>Coinbase</option>
                             </select>
                         </div>
 
@@ -115,6 +146,15 @@ const DepositManual = ({ onClose }) => {
                     </form>
                 </div>
             </div>
+            {/* Toast */}
+
+            {toast && (
+            <Toast
+                message={toast.message}
+                type={toast.type}
+                onClose={() => setToast(null)}
+            />
+            )}
         </div>
     );
 };

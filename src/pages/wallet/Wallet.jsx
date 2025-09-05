@@ -1,9 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Wallet.css';
-import Transaction from '../../components/transaction/Transaction';
+import PendingTransactions from '../../components/transaction/PendingTransactions';
 import TransactionHistory from '../../components/transactionHistory/TransactionHistory';
+import Toast from '../../components/toast/Toast';
+import apiClient from '../../api/apiClient';
+import { API_ROUTES } from '../../api/apiRoutes';
+import { BsCurrencyDollar } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
+import { CURRENCY_SYMBOL } from '../../constants/config';
 
-const Wallet = () => {
+// Section icons data
+const sectionIconsData = [
+    [
+        { icon: '📱', label: 'Recharge', message: 'Recharge your mobile or DTH' },
+        { icon: '🎒', label: 'Travelling', message: 'Book your travel tickets' },
+        { icon: '🏨', label: 'Hotel', message: 'Find and book hotels' },
+        { icon: '📶', label: 'Wifi', message: 'Recharge your internet plan' }
+    ],
+    [
+        { icon: '💡', label: 'Electricity', message: 'Pay your electricity bills' },
+        { icon: '🎬', label: 'Movie', message: 'Book your movie tickets' },
+        { icon: '🏪', label: 'Store', message: 'Shop at nearby stores' },
+        { icon: '…', label: 'More', message: 'Explore more services' }
+    ]
+];
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const Wallet = () => {    
+    const navigate = useNavigate();
+    const [toastMessage, setToastMessage] = useState('');
+    const [showToast, setShowToast] = useState(false);
+    const [wallet, setWallet] = useState({});
+    
+    useEffect(() => {
+        fetchWalletBalance();
+    }, []);
+
+    const fetchWalletBalance = async () => {
+        await delay(1000 * 3);
+        const response = await apiClient.get(API_ROUTES.WALLET.WALLET_BALANCE);
+        //console.log("API Response: ", response.data);        
+        setWallet(response.data);
+    };    
+
+    const handleIconClick = (message) => {
+        // setToastMessage(message);
+        setToastMessage("Coming soon. Stay tuned!");
+        setShowToast(true);
+        // Auto hide after 3 seconds
+        setTimeout(() => setShowToast(false), 3000);
+    };
+    
     return (
         <div style={{ padding: '16px' }}>
 
@@ -12,69 +60,50 @@ const Wallet = () => {
                 <div className="balance-label">
                     Wallet Balance
                 </div>
-                <div className="balance-amount">$16,003.00</div>
+                <div className="balance-amount">{wallet.currency || CURRENCY_SYMBOL} {new Intl.NumberFormat().format(wallet.walletBalance)}</div>
             </section>
 
             {/* Cashback Banner */}
             <div className="cashback-banner">
                 <div className="megaphone">📢</div>
-                <div>
+                <div onClick={() => navigate("/referral")}>
                     <b>Cashback 100%</b><br />
                     <p>Invite your friends and get Cashback</p>
                 </div>
             </div>
 
 
-            {/* Services Card Example */}
+            {/* Services Card */}
             <div className="card">
                 <div className="card-header">
                     <div className="card-title">Popular Services</div>
                     <button className="card-action">See More <i>›</i></button>
                 </div>
-                <div className="section-icons">
-                    <div className="section-icon">
-                        <span className='icon'>📱</span>
-                        <span>Recharge</span>
+
+                {/* Render section icons dynamically */}
+                {sectionIconsData.map((row, rowIndex) => (
+                    <div className="section-icons" key={rowIndex}>
+                        {row.map((item, itemIndex) => (
+                            <div 
+                                className="section-icon" 
+                                key={itemIndex}
+                                onClick={() => handleIconClick(item.message)}
+                            >
+                                <span className="icon">{item.icon}</span>
+                                <span>{item.label}</span>
+                            </div>
+                        ))}
                     </div>
-                    <div className="section-icon">
-                        <span className='icon'>🎒</span>
-                        <span>Travelling</span>
-                    </div>
-                    <div className="section-icon">
-                        <span className='icon'>🏨</span>
-                        <span>Hotel</span>
-                    </div>
-                    <div className="section-icon">
-                        <span className='icon'>📶</span>
-                        <span>Wifi</span>
-                    </div>
-                </div>
-                <div className="section-icons">
-                    <div className="section-icon">
-                        <span className='icon'>💡</span>
-                        <span>Electricity</span>
-                    </div>
-                    <div className="section-icon">
-                        <span className='icon'>🎬</span>
-                        <span>Movie</span>
-                    </div>
-                    <div className="section-icon">
-                        <span className='icon'>🏪</span>
-                        <span>Store</span>
-                    </div>
-                    <div className="section-icon">
-                        <span className='icon'>…</span>
-                        <span>More</span>
-                    </div>
-                </div>
+                ))}
             </div>
 
             <TransactionHistory />
 
             {/* Recent Transactions Component */}
-            <Transaction/>
+            {/* Pending Deposit or Pending Withdraw Requests */}
+            <PendingTransactions/>
 
-
+            {showToast && <Toast message={toastMessage} />}
 
         </div>
     );

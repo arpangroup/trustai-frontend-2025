@@ -39,6 +39,19 @@ export const API_ROUTES = {
     DELETE: (id) => `/api/v1/notifications/${id}`,
   },
 
+  TRANSACTIONS: {
+    TRANSACTION_HISTORY: '/api/v1/transactions',
+  },
+
+  DEPOSIT: {
+    DEPOSIT_REQUEST: `/api/v1/deposits/manual`,
+    DEPOSIT_HISTORY: `/api/v1/deposits`,
+  },
+
+  WALLET: {
+    WALLET_BALANCE: '/api/v1/wallet/balance'
+  }
+
 
 };
 

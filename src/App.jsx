@@ -38,7 +38,7 @@ function App() {
     <>
       <Routes>
         <Route path="login" element={<Login />} />
-        <Route path="signup" element={<RegisterForm />} />
+        <Route path="register" element={<RegisterForm />} />
         {/* <Route path="/forgot" element={<Forgot />} /> */}
 
         <Route path="/" element={<MobileLayout />}>

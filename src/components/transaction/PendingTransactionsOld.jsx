@@ -56,14 +56,14 @@ const recentTransactions = [
   },
 ];
 
-export default function Transaction() {
+export default function Transaction({ transactions}) {
     return (
         <>
             {/* Recent Transactions Card */}
             <div className="recent-transactions-container">
                 <div className="recent-transactions-card">
                     <div className="recent-header">
-                        <p className="recent-title">Recent Transactions</p>
+                        <p className="recent-title">Pending Transactions</p>
                     </div>
                     <div className="recent-list">
                         {recentTransactions.map((item) => (

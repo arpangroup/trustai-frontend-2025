@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './FileUpload.css'; // optional if you're separating styles
 
+import UploadIcon from '../../../assets/icons/upload.svg';
+
 function FileUpload({ label = "Screenshot", name = "screenshot", accept = ".jpg,.jpeg,.png", onFileChange }) {
   const [previewUrl, setPreviewUrl] = useState(null);
   const [file, setFile] = useState(null);
@@ -38,17 +40,16 @@ function FileUpload({ label = "Screenshot", name = "screenshot", accept = ".jpg,
             backgroundImage: previewUrl ? `url(${previewUrl})` : "none",
           }}
         >
-          {!previewUrl && (
+          <div className="upload-content">
+          {!previewUrl ? (
             <>
-              <img
-                className="upload-icon"
-                src="https://81habibi.com/assets/global/materials/upload.svg"
-                alt="upload"
-              />
+              <img className="upload-icon" src={UploadIcon} alt="upload" />
               <span>Select Screenshot (Required)</span>
             </>
+          ) : (
+            <span>{file.name}</span>
           )}
-          {previewUrl && <span>{file.name}</span>}
+        </div>
         </label>
       </div>
     </div>

@@ -26,6 +26,8 @@ body.dark .recent-transactions-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  border-bottom: 1px solid #EEF3F6;
 }
 
 .recent-title {
@@ -41,7 +43,7 @@ body.dark .recent-title {
 }
 
 .recent-list {
-  margin-top: 24px;
+  /* margin-top: 24px; */
 }
 
 .recent-item {

@@ -3,17 +3,17 @@
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 8px 20px;
+  padding: 16px;
   border-radius: 12px;
   font-size: 0.95rem;
   color: #fff;
   z-index: 1000;
-  opacity: 0;
-  animation: fadeInOut 2s ease-in-out forwards;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  /* min-width: 150px; */
-  min-width: 90%;
+  /* width: 90%; */
+  max-width: 360px;
   text-align: center;
+  box-sizing: border-box;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 /* Toast types */
@@ -29,14 +29,16 @@
   background-color: #333;
 }
 
-/* Fade in/out animation */
-@keyframes fadeInOut {
-  0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-  10% { opacity: 0.95; transform: translateX(-50%) translateY(0); }
-  90% { opacity: 0.95; transform: translateX(-50%) translateY(0); }
-  100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+/* Fade in/out controlled by JS class toggle */
+.fade-in {
+  opacity: 0.95;
+  transform: translateX(-50%) translateY(0);
 }
 
+.fade-out {
+  opacity: 0;
+  transform: translateX(-50%) translateY(20px);
+}
 
 /* .toast {
   position: fixed;

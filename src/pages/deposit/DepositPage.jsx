@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './DepositPage.css';
 import { useNavigate } from 'react-router-dom';
 import { QRCodeCanvas } from 'qrcode.react';
 import DepositManual from './DepositManual';
 import { DEPOSIT_ADDRESS } from '../../constants/config';
+import Toast from '../../components/toast/Toast';
+import apiClient from '../../api/apiClient';
+import { API_ROUTES } from '../../api/apiRoutes';
 
 
 const DepositPage = () => {
     const navigate = useNavigate();
     const [panelOpen, setPanelOpen] = React.useState(false);
-
     const downloadQRCode = () => {
       const canvas = document.querySelector("canvas");
       const pngUrl = canvas
@@ -28,7 +30,7 @@ const DepositPage = () => {
     <div className="deposit-container">
       {/* <button className="panel-toggle-btn" onClick={() => setPanelOpen(true)}>&lt; <span>Manual</span></button> */}
       <button className="panel-toggle-btn" onClick={() => setPanelOpen(true)}>
-        &lt;<span>Manual</span>
+        &lt;<span>Submit Proof</span>
       </button>
 
       {/* <div className="deposit-header">
@@ -93,8 +95,10 @@ const DepositPage = () => {
     {panelOpen && (
       <DepositManual
         onClose={() => setPanelOpen(false)}
+        onSuccess={() => navigate("/wallet")}
       />
-    )}
+    )}  
+
     </>
   );
 };
