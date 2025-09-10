@@ -16,7 +16,13 @@ export const CURRENCY_UNIT_DEFAULT = getConfigValue("CURRENCY_UNIT_DEFAULT", "IN
 export const CURRENCY_SYMBOL = getConfigValue("CURRENCY_SYMBOL", "$");
 export const CURRENCY_SYMBOL_DEFAULT = getConfigValue("CURRENCY_SYMBOL_DEFAULT", "₹");
 
+// Deposit:
 export const DEPOSIT_ADDRESS = getConfigValue("DEPOSIT_ADDRESS", "0x5987d451a2d9f7db04d8e539e4d3d6f8aede71bb");
+
+// Withdraw:
+export const WITHDRAW_ADDRESS = getConfigValue("WITHDRAW_ADDRESS", "0xABCD1234EFGH5678IJKL");
+export const MINIMUM_WITHDRAW = getConfigValue("MINIMUM_WITHDRAW", "50");
+export const SERVICE_CHARGE   = getConfigValue("SERVICE_CHARGE", "5");
 
 export const SCHEDULE_OPTIONS = [
   { label: "Hourly", value: 1, disabled: true,},

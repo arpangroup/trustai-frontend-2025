@@ -44,8 +44,13 @@ export const API_ROUTES = {
   },
 
   DEPOSIT: {
-    DEPOSIT_REQUEST: `/api/v1/deposits/manual`,
     DEPOSIT_HISTORY: `/api/v1/deposits`,
+    DEPOSIT_REQUEST: `/api/v1/deposits/manual`,
+  },
+
+  WITHDRAWAL: {
+    WITHDRAWAL_HISTORY: "/api/v1/withdraws",
+    WITHDRAW_REQUEST: "/api/v1/withdraws/request",
   },
 
   WALLET: {
