@@ -67,7 +67,7 @@ const ExploreDetails = () => {
       const payload = {
         schemaId: schema.id,
         userId: 1, // Replace with dynamic user ID if available
-        amount: schema.price
+        amount: schema.stakePrice
       };
 
       const response = await apiClient.post(API_ROUTES.EXPLORE.SUBSCRIBE_STAKE, payload);
@@ -188,7 +188,7 @@ const ExploreDetails = () => {
             </p>
             <p><strong>Contact Address:</strong> <a href='#'>trustai</a></p>
             <p><strong>Owner:</strong>{schema.createdBy}<span></span></p>
-            <p><strong>Price:</strong> <span>{schema.minimumInvestmentAmount} {schema.currency || CURRENCY_UNIT}</span></p>
+            <p><strong>Price:</strong> <span>{schema.stakePrice} {schema.currency || CURRENCY_UNIT}</span></p>
             </div>
             <div className="item-content-creator">
               <div><p>Creater</p></div>
@@ -205,7 +205,7 @@ const ExploreDetails = () => {
                 className="primary-btn"
                 onClick={handleBuyClick}
                 >
-                Buy For {schema.price} {schema.currency || CURRENCY_UNIT}                
+                Buy For {schema.stakePrice} {schema.currency || CURRENCY_UNIT}
                 </button>
               {/* <button className="secondary-btn">Make Offer</button> */}
 

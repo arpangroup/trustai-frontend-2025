@@ -98,7 +98,7 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
                                             key={item.id || index}
                                             image={item.imageUrl}
                                             title={item.title}
-                                            price={item.price}
+                                            price={item.stakePrice}
                                             currency={CURRENCY_UNIT}
                                             likes={item.totalReturnPeriods} // or any other available metric
                                             onClick={() => navigate(`${WEB_ROUTES.STAKE_DETAILS}/${item.id}`)}
