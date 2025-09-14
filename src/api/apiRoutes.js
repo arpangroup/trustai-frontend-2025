@@ -5,7 +5,9 @@ export const API_ROUTES = {
     REFRESH_TOKEN: "/api/auth/refresh",
     REGISTRATION: "/api/register",
     VERIFY_REGISTRATION_OTP: "/api/register/verify",
-    RESEND_REGISTRATION_OTP: "/api/register/resendOTP",
+    RESEND_REGISTRATION_OTP: "/api/register/resend-otp",
+    VERIFY_FORGOT_PASSWORDP: "/api/password/forgot",
+    RESET_PASSWORD: "/api/password/reset",
   },
 
   EXPLORE: {

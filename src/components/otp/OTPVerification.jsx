@@ -7,7 +7,7 @@ import apiClient from '../../api/apiClient';
 import { API_ROUTES } from '../../api/apiRoutes';
 
 const inputLength = 6;
-const OTP_RESEND_DELAY_SECONDS = 120;
+const OTP_RESEND_DELAY_SECONDS = 30;
 
 function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVerified, onClose }) {
   const navigate = useNavigate();
@@ -16,8 +16,8 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [isResendDisabled, setIsResendDisabled] = useState(false);
-  const [countdown, setCountdown] = useState(60);
+  const [isResendDisabled, setIsResendDisabled] = useState(true);
+  const [countdown, setCountdown] = useState(OTP_RESEND_DELAY_SECONDS);
   const [toast, setToast] = useState(null);
 
 
@@ -30,7 +30,7 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
         if (prev === 1) {
           clearInterval(timerInterval);
           setIsResendDisabled(false);
-          return 60; // reset for next resend
+          return OTP_RESEND_DELAY_SECONDS; // reset for next resend
         }
         return prev - 1;
       });
@@ -51,6 +51,12 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
       if (idx < inputLength - 1) {
         inputs.current[idx + 1].focus();
       }
+    } else if (e.key >= '0' && e.key <= '9') {
+      setOtp(prev => {
+        const next = [...prev];
+        next[idx] = '';
+        return next;
+      });
     }
   };
 
@@ -88,6 +94,7 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
   
   const showToast = (message, type = "success") => {
     setToast({ message, type });
+    // showToast(err.response?.data?.message || err.message || 'Verification failed.', "error");
   };
 
   const handleSubmit = async (e) => {
@@ -123,7 +130,8 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
     } catch (err) {
       //console.error('❌ Verification failed:', err);
       //setError(err.message || 'Verification failed.');
-      showToast(err.message || 'Verification failed.');
+      // showToast(err.message || 'Verification failed.');
+      showToast(err.response?.data?.message || err.message || "Failed to resend OTP", "error");
     } finally {
       setLoading(false);
     }
@@ -185,13 +193,13 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
               Didn't receive the code? {' '}
               {(isResendDisabled || loading) ? (
                 <span className="specialText disabledText">
-                  {countdown}s
+                  Resend Code in {countdown}s
                 </span>
               ) : (
                 <span
-                  className="specialText"
+                  className="resend"
                   onClick={handleResendOTP}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: 'pointer', color:'#1046c7 !important' }}
                 >
                   Resend Code
                 </span>

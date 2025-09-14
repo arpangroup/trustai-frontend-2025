@@ -10,6 +10,8 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import Home from './pages/home/Home'
 import Login from './pages/login/Login';
 import RegisterForm from './pages/registration/RegisterForm ';
+import ForgotPassword from './pages/forgotPassword/ForgotPassword';
+
 import ProtectedRoute from './utils/ProtectedRoute';
 
 import Store from './pages/store/Store';
@@ -39,7 +41,7 @@ function App() {
       <Routes>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<RegisterForm />} />
-        {/* <Route path="/forgot" element={<Forgot />} /> */}
+        <Route path="/forgot" element={<ForgotPassword />} />
 
         <Route path="/" element={<MobileLayout />}>
           <Route path="" element={<Home />} />
