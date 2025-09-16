@@ -157,7 +157,7 @@ export default function UserProfile() {
                 { label: orderSummary.boughtOrders, value: "Bought" },
                 { label: orderSummary.soldOrders, value: "Sold" },
 
-                { label: <FaGavel />, value: "My Bid", link: "/" },
+                { label: <FaGavel />, value: "Settings", link: "/settings" },
                 { label: <FaInfoCircle />, value: "Details", link: "/contributions" },
                 { label: <FaArrowDown />, value: "Deposit", link: "/deposit" },
                 { label: <FaArrowUp />, value: "Withdraw", link: "/withdraw" },
