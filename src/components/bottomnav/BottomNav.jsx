@@ -9,7 +9,7 @@ import { FaFileAlt, FaUser } from "react-icons/fa";
 
 const bottomNavItems = [
   { icon: <MdHome />, label: "Explore", link: "/explore" },
-  { icon: <MdStorefront />, label: "Store", link: "/store" },
+  { icon: <MdStorefront />, label: "Trade", link: "/store" },
   { icon: <FaFileAlt />, label: "Wallet", link: "/wallet" },
   { icon: <FaUser />, label: "Profile", link: "/profile" },
 ];

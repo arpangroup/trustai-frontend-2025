@@ -8,6 +8,8 @@ import { useContext } from "react";
 import { useNotifications } from '../../context/NotificationContext';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext"; 
+import { TELEGRAM_LINK, WHATSAPP_LINK } from "../../constants/config";
+
 
 const HeaderV2 = () => {
   const navigate = useNavigate();
@@ -64,7 +66,7 @@ const HeaderV2 = () => {
           
           {/* WhatsApp Support */}
           <div className="menu-item" onClick={() => {
-            window.open("https://wa.me/919876543210", "_blank"); // Replace with real number
+            window.open(WHATSAPP_LINK, "_blank"); // Replace with real number
             setMenuOpen(false);
           }}>
             <i>💬</i><span>Support</span>
@@ -73,7 +75,7 @@ const HeaderV2 = () => {
 
           {/* Telegram Link */}
           <div className="menu-item" onClick={() => {
-            window.open("https://t.me/your_username", "_blank"); // Replace with real username
+            window.open(TELEGRAM_LINK, "_blank"); // Replace with real username
             setMenuOpen(false);
           }}>
             <i>📱</i><span>Telegram</span>
