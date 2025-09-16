@@ -43,9 +43,6 @@ const DepositPage = () => {
           <div className="select__wrapper">
             <select>
               <option>USDT-BEP-20</option>
-              <option>USDT-TRON</option>
-              <option>USDT-SOL</option>
-              <option>TUFT-BEP-20</option>
             </select>
           </div>
 

@@ -6,6 +6,9 @@ import Toast from '../toast/Toast';
 import apiClient from '../../api/apiClient';
 import { API_ROUTES } from '../../api/apiRoutes';
 import { OLP_DALAY_SECONDS } from '../../constants/config';
+import AlertModal from '../modal/success/AlertModal';
+import confetti from 'canvas-confetti';
+import SuccessIcon from '../../assets/icons/success.png';
 
 const inputLength = 6;
 
@@ -19,26 +22,43 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
   const [isResendDisabled, setIsResendDisabled] = useState(true);
   const [countdown, setCountdown] = useState(OLP_DALAY_SECONDS);
   const [toast, setToast] = useState(null);
+  const [modalData, setModalData] = useState({
+    isOpen: false,
+    type: '', // 'success' or 'error'
+    title: '',
+    content: '',
+    footerButtons: []
+  });
 
 
   useEffect(() => {
-  let timerInterval;
+    let timerInterval;
 
-  if (isResendDisabled) {
-    timerInterval = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev === 1) {
-          clearInterval(timerInterval);
-          setIsResendDisabled(false);
-          return OLP_DALAY_SECONDS; // reset for next resend
-        }
-        return prev - 1;
-      });
-    }, 1000);
-  }
+    if (isResendDisabled) {
+      timerInterval = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev === 1) {
+            clearInterval(timerInterval);
+            setIsResendDisabled(false);
+            return OLP_DALAY_SECONDS; // reset for next resend
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
 
-  return () => clearInterval(timerInterval);
-}, [isResendDisabled]);
+    return () => clearInterval(timerInterval);
+  }, [isResendDisabled]);
+
+
+  useEffect(() => {
+    // Resize canvas on mount
+    const canvas = document.getElementById('confetti-canvas');
+    if (canvas) {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+  }, []);
 
   const handleChange = (e, idx) => {
     const val = e.target.value.replace(/[^0-9]/g, '');
@@ -91,18 +111,25 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
   const handleFocus = (e) => {
     e.target.select();
   };
-  
+
   const showToast = (message, type = "success") => {
     setToast({ message, type });
     // showToast(err.response?.data?.message || err.message || 'Verification failed.', "error");
   };
+
+
+  const handleNavigateToLogin = () => {
+    navigate('/login', {
+      replace: true,
+    });
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // prevent page reload
     verifyOtp();
   };
 
-  const verifyOtp = async () => {    
+  const verifyOtp = async () => {
     const otpCode = otp.join('');
     if (otpCode.length !== inputLength) {
       showToast('Please enter the full OTP.', "info");
@@ -121,8 +148,9 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
       });
 
       const verificationResponse = response.data;
-      if(verificationResponse.success) {
-        navigate('/login', { replace: true });
+      if (verificationResponse.success) {
+        //navigate('/login', { replace: true });
+        showSuccessMessage();
       }
 
       //setSuccess('OTP verified successfully!');
@@ -136,6 +164,41 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
       setLoading(false);
     }
   }
+
+  const showSuccessMessage = () => {
+    setModalData({
+      isOpen: true,
+      type: 'success',
+      title: 'Registration Success!',
+      footerButtons: [
+        {
+          label: 'Login Now',
+          onClick: handleNavigateToLogin,
+          className: 'btn btn-success',
+        },
+      ],
+    });
+
+    // 🎉 Confetti trigger after modal is set
+    setTimeout(() => {
+      const canvas = document.getElementById('confetti-canvas');
+      if (canvas) {
+        confetti.create(canvas, { resize: true })({
+          particleCount: 150,
+          spread: 100,
+          origin: { y: 0.6 },
+        });
+
+        // Optional cleanup after 2 seconds
+        setTimeout(() => {
+          const ctx = canvas.getContext('2d');
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }, 2000);
+      }
+    }, 200);
+
+  }
+
 
   const handleResendOTP = async () => {
     setIsResendDisabled(true); // Start countdown
@@ -155,6 +218,18 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
 
   return (
     <div style={{ background: '#fff' }}>
+       {/* 🎉 Confetti canvas above all content */}
+        <canvas id="confetti-canvas" style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          pointerEvents: 'none',
+          width: '100vw',
+          height: '100vh',
+          zIndex: 2000
+        }} />
+
+
       {/* <div style={{background: '#fff', padding: '16px'}}>
         <button 
             onClick={() => onClose()}
@@ -199,7 +274,7 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
                 <span
                   className="resend"
                   onClick={handleResendOTP}
-                  style={{ cursor: 'pointer', color:'#1046c7 !important' }}
+                  style={{ cursor: 'pointer', color: '#1046c7 !important' }}
                 >
                   Resend Code
                 </span>
@@ -208,7 +283,7 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
 
             {error && <p className="otp-error">{error}</p>}
             {success && <p className="otp-success">{success}</p>}
-          </form>         
+          </form>
         </div>
       </div>
       {/* Toast */}
@@ -219,6 +294,19 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
           onClose={() => setToast(null)}
           duration={10000}
         />
+      )}
+
+
+      {modalData.isOpen && (
+        <AlertModal
+          type={"success"}
+          icon={SuccessIcon}
+          onClose={() => setModalData(prev => ({ ...prev, isOpen: false }))}
+          title={modalData.title}
+          footerButtons={modalData.footerButtons}
+        >
+          {modalData.content}
+        </AlertModal>
       )}
     </div>
   );

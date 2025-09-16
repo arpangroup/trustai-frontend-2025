@@ -3,12 +3,10 @@ import React, { useEffect, useState } from "react";
 import "./RegisterForm.css";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 
-
 import { AuthContext } from "../../context/AuthContext";
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from "../../api/apiRoutes";
 import Toast from "../../components/toast/Toast";
-
 
 import OTPVerification from "../../components/otp/OTPVerification";
 import SlidePanel from "../../components/panels/SlidePanel";
@@ -76,7 +74,7 @@ const RegisterForm = () => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     if (!formData.username || !formData.password || !formData.email || !formData.referralCode) {
       alert("Please fill all mandatory fields.");
       return;
@@ -104,7 +102,7 @@ const RegisterForm = () => {
       };
 
       const response = await apiClient.post(API_ROUTES.AUTH_API.REGISTRATION, payload);
-      setRregistrationResponse(response.data)
+      setRregistrationResponse(response.data);
       //console.log("RESPONSE: ", response.data);
       
       // Instead of registering immediately, show OTP panel
@@ -124,7 +122,6 @@ const RegisterForm = () => {
     } finally {
       setLoading(false);
     }
-
   };
 
 
@@ -289,8 +286,6 @@ const RegisterForm = () => {
         />
         )}
       </SlidePanel>
-
-
 
     </div>
   );
