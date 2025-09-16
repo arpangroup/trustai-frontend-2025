@@ -20,6 +20,7 @@ const DefaultLayout = () => {
     { path: '/deposit', title: 'Deposit' },
     { path: '/level', title: 'Level' },
     { path: '/tree', title: 'User Tree' },
+    { path: '/settings', title: 'User Settings' },
     // Add more as needed
   ];
 

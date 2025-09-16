@@ -31,6 +31,7 @@ import WithdrawRequest from './pages/withdraw/WithdrawRequest';
 import Level from './pages/level/Level';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AccountSetting from './pages/accountSetting/AccountSetting';
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
               <Route path="wallet" element={<Wallet />} />
               <Route path="assets" element={<Store />} />
               <Route path="profile" element={<UserProfile />} />
+              <Route path="settings" element={<AccountSetting />} />
 
               
               <Route path="/members" element={<Members />} />
