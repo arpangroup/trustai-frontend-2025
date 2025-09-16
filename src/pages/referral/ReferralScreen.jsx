@@ -2,18 +2,17 @@ import React, { useEffect, useState } from "react";
 import "./ReferralScreen.css";
 import { QRCodeCanvas } from "qrcode.react";
 import { FaCopy, FaDownload, FaShareAlt } from "react-icons/fa";
-import Toast from "../../components/toast/Toast";
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from "../../api/apiRoutes";
 import { REFERRAL_URL, REGISTRATION_URL } from "../../constants/config";
 import CopyToClipboard from "../../components/clipboard/CopyToClipboard";
+import { toast } from "react-toastify";
 
 export default function ReferralScreen() {
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState({});
   const [referralCode, setReferralCode] = useState("REF12345");
   const referralLink = REFERRAL_URL(referralCode);
-  const [toast, setToast] = useState(null);
 
   useEffect(() => {
     fetchUserDetails();
@@ -47,15 +46,6 @@ export default function ReferralScreen() {
     document.body.removeChild(downloadLink);
   };
 
-  const showToast = (message, type = "success") => {
-    setToast({ message, type });
-  };
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(referralCode);
-    showToast("Copied to clipboard!", "success");
-  };
-
   const shareReferral = () => {
     if (navigator.share) {
       navigator
@@ -66,7 +56,7 @@ export default function ReferralScreen() {
         })
         .catch((err) => console.error("Share failed:", err));
     } else {
-      alert("Sharing not supported on this browser.");
+      toast.error("Sharing not supported on this browser.");
     }
   };
 
@@ -86,7 +76,6 @@ export default function ReferralScreen() {
         {/* <FaCopy className="copy-icon" onClick={copyToClipboard} /> */}
         <CopyToClipboard
           text={referralCode}
-          onCopy={showToast}
           size={20}
           color="#4cafef"
           className="copy-icon"
@@ -97,15 +86,6 @@ export default function ReferralScreen() {
       <button className="share-button" onClick={shareReferral}>
         <FaShareAlt className="share-icon" /> Share Invite
       </button>
-
-      {/* Toast */}
-      {toast && (
-        <Toast
-          message={toast.message}
-          type={toast.type}
-          onClose={() => setToast(null)}
-        />
-      )}
 
     </div>
   );

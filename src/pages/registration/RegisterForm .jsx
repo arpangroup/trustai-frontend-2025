@@ -6,10 +6,10 @@ import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from "../../api/apiRoutes";
-import Toast from "../../components/toast/Toast";
 
 import OTPVerification from "../../components/otp/OTPVerification";
 import SlidePanel from "../../components/panels/SlidePanel";
+import { toast } from "react-toastify";
 // import RightPanel from "../../components/panel/RightPanel"; // Path to your RightPanel component
 
 const defaultRegistrationResponse = {
@@ -24,9 +24,8 @@ const RegisterForm = () => {
   const maxAttempts = 3;
   const [loading, setLoading] = useState(false);
   const [timer, setTimer] = useState(30);
-  const [toast, setToast] = useState(null);
   const [showOtpPanel, setShowOtpPanel] = useState(false);
-  const [registrationResponse, setRregistrationResponse] = useState(null)
+  const [registrationResponse, setRregistrationResponse] = useState(null);
 
   const [formData, setFormData] = useState({
     username: "johndoe",
@@ -66,27 +65,22 @@ const RegisterForm = () => {
       [e.target.name]: e.target.value,
     }));
   };
-
-  const showToast = (message, type = "success") => {
-    setToast({ message, type });
-  };
-
   
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!formData.username || !formData.password || !formData.email || !formData.referralCode) {
-      alert("Please fill all mandatory fields.");
+      toast.warning("Please fill all mandatory fields.");
       return;
     }
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match.");
+      toast.warning("Passwords do not match.");
       return;
     }
 
     if (attempts >= maxAttempts) {
-      showToast("You have exceeded the maximum number of attempts.", "error");
+      toast.warning("You have exceeded the maximum number of attempts.");
       return;
     }
 
@@ -114,9 +108,9 @@ const RegisterForm = () => {
       setAttempts((prev) => prev + 1);
 
       if (attempts + 1 >= maxAttempts) {
-        showToast("You have exceeded the maximum number of registration attempts. Please try again later.", "error");
+        toast.warning("You have exceeded the maximum number of registration attempts. Please try again later.");
       } else {
-        showToast(error.message || "Failed to register. Please try again.", "error");
+        toast.error(error.message || "Failed to register. Please try again.", "error");
       }
 
     } finally {
@@ -256,21 +250,10 @@ const RegisterForm = () => {
         </p>
 
         {attempts >= maxAttempts && (
-          <p className="lockout-msg">Too many attempts. Try again in {timer}m.</p>
+          <p className="lockout-msg">Too many attempts. Try again in {timer}s.</p>
         )}
 
-      </div>                  
-
-      {/* Toast */}
-      {toast && (
-        <Toast
-          message={toast.message}
-          type={toast.type}
-          onClose={() => setToast(null)}
-        />
-      )}
-
-     
+      </div>    
 
       <SlidePanel
         isOpen={showOtpPanel}
