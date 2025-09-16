@@ -1,4 +1,6 @@
 export const API_ROUTES = {
+  
+  CONFIGS: "/api/config",
 
   AUTH_API : {
     ACCESS_TOKEN: "/api/auth/accessToken",
@@ -56,8 +58,10 @@ export const API_ROUTES = {
   },
 
   WALLET: {
-    WALLET_BALANCE: '/api/v1/wallet/balance'
-  }
+    WALLET_BALANCE: "/api/v1/wallet/balance"
+  },
+
+
 
 
 };

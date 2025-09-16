@@ -62,3 +62,7 @@ export const RANK_TO_NUMBER_MAP = {
 
 const imageFileTypes = "image/png, image/jpeg, image/gif";
 export const ACCEPTED_FILE_TYPES = getConfigValue("ACCEPTED_FILE_TYPES", imageFileTypes);
+
+
+
+export const MAIN_HEADER_TITLE = getConfigValue("MAIN_HEADER_TITLE", "Welcome to TrustAI");

@@ -39,8 +39,9 @@
   flex-direction: column;
   gap: 9px;
   margin: 0 0 16px 0;
-  padding-left: 0;
+  padding: 16px 0px 24px 0px;
   width: 100%;
+  
 }
 .collection-item {
   background: #fff;

@@ -1,6 +1,9 @@
 
 import './BiddingSection.css'
 
+const imageUrl = "https://picsum.photos/200/300";
+const avatar = "https://picsum.photos/200/300";
+
 export default function BiddingSection() {
 
     return (
@@ -11,12 +14,12 @@ export default function BiddingSection() {
 
             <div className="bid-card">
                 <div className="bid-main">
-                    <img className="bid-image" src="https://i.ibb.co/mDbK2Vn/avatar.png" alt="NFT" />
+                    <img className="bid-image" src={imageUrl} alt="NFT" />
 
                     <div className="bid-info">
-                        <h3>PunkCate_1070</h3>
+                        <h3 className='info-title'>PunkCate_1070</h3>
                         <div className="creator">
-                            <img src="avatar.jpg" alt="Avatar" />
+                            <img src={avatar} alt="Avatar" />
                             <span>CryptoPunks</span>
                         </div>
 
@@ -41,12 +44,12 @@ export default function BiddingSection() {
 
             <div className="bid-card">
                 <div className="bid-main">
-                    <img className="bid-image" src="https://i.ibb.co/mDbK2Vn/avatar.png" alt="NFT" />
+                    <img className="bid-image" src={imageUrl} alt="NFT" />
 
                     <div className="bid-info">
-                        <h3>PunkCate_1070</h3>
+                        <h3 className='info-title'>PunkCate_1070</h3>
                         <div className="creator">
-                            <img src="avatar.jpg" alt="Avatar" />
+                            <img src={avatar} alt="Avatar" />
                             <span>CryptoPunks</span>
                         </div>
 
@@ -71,12 +74,12 @@ export default function BiddingSection() {
 
             <div className="bid-card">
                 <div className="bid-main">
-                    <img className="bid-image" src="https://i.ibb.co/mDbK2Vn/avatar.png" alt="NFT" />
+                    <img className="bid-image" src={imageUrl} alt="NFT" />
 
                     <div className="bid-info">
-                        <h3>PunkCate_1070</h3>
+                        <h3 className='info-title'>PunkCate_1070</h3>
                         <div className="creator">
-                            <img src="avatar.jpg" alt="Avatar" />
+                            <img src={avatar} alt="Avatar" />
                             <span>CryptoPunks</span>
                         </div>
 

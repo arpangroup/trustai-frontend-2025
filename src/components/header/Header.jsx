@@ -5,6 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 import Image1 from '../../assets/bids1.png';
 import { useNotifications } from "../../context/NotificationContext";
+import { MAIN_HEADER_TITLE } from "../../constants/config";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ export default function Header() {
       <div className="header-content" onClick={handleSignInClick} style={{ cursor: "pointer" }}>
         <img src={Image1} className="avatar" alt="User" />
         <div className="welcome-text">
-          <div className="welcome">Welcome to TrustAI</div>
+          <div className="welcome">{MAIN_HEADER_TITLE}</div>
           <div className="signin">
             {isAuthenticated && user?.username ? `Hello, ${user.username}` : "Click to sign in"}
           </div>
