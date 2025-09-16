@@ -33,8 +33,11 @@ export const API_ROUTES = {
   },
 
 
-  USER_INFO: "/api/v1/users/info",  
-  USER_KYC: "/api/v1/kyc",
+  
+  USER_INFO: "/api/v1/users/info",
+  UPDATE_USER_INFO: "/api/v1/users/info/update",
+
+
   INCOME_SUMMARY: "/api/v1/incomes/summary",
   MEMBER_SUMMARY: "/api/v1/users/metrics/member-summary",
 

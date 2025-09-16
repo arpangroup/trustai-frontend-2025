@@ -18,7 +18,6 @@ export const DEPOSIT_ADDRESS          = getConfigValue("app.config.deposit.addre
 export const MINIMUM_DEPOSIT          = getConfigValue("app.config.deposit.amount.min", "50");
 export const DEPOSIT_WARNING          = getConfigValue("app.config.deposit.warning", "*Only USDT-BEP-20 deposits accepted. Others will be lost.");
 // Withdraw:
-export const WITHDRAW_ADDRESS         = "0xABCD1234EFGH5678IJKL";
 export const WITHDRAW_WARNING         = getConfigValue("app.config.withdraw.warning", "warning");
 export const MINIMUM_WITHDRAW         = getConfigValue("app.config.withdraw.amount.min", "50");
 export const SERVICE_CHARGE           = getConfigValue("app.config.withdraw.service.charge", "5");

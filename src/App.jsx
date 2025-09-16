@@ -31,7 +31,7 @@ import WithdrawRequest from './pages/withdraw/WithdrawRequest';
 import Level from './pages/level/Level';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AccountSetting from './pages/accountSetting/AccountSetting';
+import AccountSetting from './pages/setting/AccountSetting';
 
 
 function App() {

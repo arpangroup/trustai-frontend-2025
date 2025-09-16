@@ -9,9 +9,12 @@ import { toast } from "react-toastify";
 
 const AccountSetting = () => {
     const [loading, setLoading] = useState(false);
+    const [initialData, setInitialData] = useState({});
 
     const [formData, setFormData] = useState({
         username: "johndoe",
+        firstname: "john",
+        lastname: "doe",
         country: "India",
         walletAddress: "0xABCD1234EFGH5678IJKL",
         countryCode: "+91",
@@ -24,18 +27,24 @@ const AccountSetting = () => {
         const fetchUserData = async () => {
             try {
                 setLoading(true);
-                const response = await apiClient.get(API_ROUTES.GET_USER_PROFILE); // Replace with your actual endpoint
+                const response = await apiClient.get(API_ROUTES.USER_INFO); // Replace with your actual endpoint
                 const user = response.data;
 
-                // Set form data with fetched values
-                setFormData({
+                
+                const userData = {
                     username: user.username || "",
+                    firstname: user.firstname || "",
+                    lastname: user.lastname || "",
                     country: user.country || "",
                     walletAddress: user.walletAddress || "",
                     countryCode: user.countryCode || "+91",
                     mobile: user.mobile || "",
                     email: user.email || "",
-                });
+                };
+
+                
+                setFormData(userData);
+                setInitialData(userData);
             } catch (error) {
                 console.error("Error fetching user data:", error);
                 toast.error("Failed to load account settings");
@@ -63,17 +72,26 @@ const AccountSetting = () => {
         setLoading(true);
 
         try {
-            const payload = {
-                country: formData.country,
-                walletAddress: formData.walletAddress,
-                countryCode: formData.countryCode,
-                mobile: formData.mobile,
-                email: formData.email,
-            };
+            const changedFields = {};
+            
+            // Loop through keys to find what has changed
+            Object.keys(formData).forEach((key) => {
+                if (formData[key] !== initialData[key]) {
+                    changedFields[key] = formData[key];
+                }
+            });
 
-            const response = await apiClient.post(API_ROUTES.USER_KYC, payload);
+            if (Object.keys(changedFields).length === 0) {
+                toast.info("No changes to update");
+                return setLoading(false);
+            }
+
+            const response = await apiClient.patch(API_ROUTES.UPDATE_USER_INFO, changedFields);
             toast.success("Account updated successfully");
             console.log("Update response:", response.data);
+            
+            // Optionally update the initialData again
+            setInitialData(formData);
         } catch (error) {
             console.error("Account setting update failed:", error);
             toast.error("Failed to update account settings");
@@ -87,25 +105,12 @@ const AccountSetting = () => {
     return (
         <div className="user-setting-container">
             <form onSubmit={handleSubmit}>
-
-                <div className="mb-3">
-                    <label className="form-label">Username</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="username"
-                        value={formData.username}
-                        onChange={handleChange}
-                        disabled
-                    />
-                </div>
-
                 <div className="mb-3">
                     <label className="form-label">Country</label>
                     <input
                         type="text"
                         className="form-control"
-                        name="username"
+                        name="country"
                         value={formData.country}
                         onChange={handleChange}
                         disabled
@@ -118,8 +123,45 @@ const AccountSetting = () => {
                     <input
                         type="text"
                         className="form-control"
-                        name="username"
+                        name="walletAddress"
                         value={formData.walletAddress}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+
+                
+                <div className="mb-3">
+                    <label className="form-label">Username</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        disabled
+                    />
+                </div>
+
+                
+                
+                <div className="mb-3">
+                    <label className="form-label">Firstname</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="firstname"
+                        value={formData.firstname}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Lastname</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="lastname"
+                        value={formData.lastname}
                         onChange={handleChange}
                     />
                 </div>
