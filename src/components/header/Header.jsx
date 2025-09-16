@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 import Image1 from '../../assets/bids1.png';
 import { useNotifications } from "../../context/NotificationContext";
-import { MAIN_HEADER_TITLE } from "../../constants/config";
+import { MAIN_HEADER_TITLE, TELEGRAM_LINK, WHATSAPP_LINK } from "../../constants/config";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -70,7 +70,7 @@ export default function Header() {
           
           {/* WhatsApp Support */}
           <div className="menu-item" onClick={() => {
-            window.open("https://wa.me/919876543210", "_blank"); // Replace with real number
+            window.open(WHATSAPP_LINK, "_blank"); // Replace with real number
             setMenuOpen(false);
           }}>
             <i>💬</i><span>Support</span>
@@ -79,7 +79,7 @@ export default function Header() {
 
           {/* Telegram Link */}
           <div className="menu-item" onClick={() => {
-            window.open("https://t.me/your_username", "_blank"); // Replace with real username
+            window.open(TELEGRAM_LINK, "_blank"); // Replace with real username
             setMenuOpen(false);
           }}>
             <i>📱</i><span>Telegram</span>

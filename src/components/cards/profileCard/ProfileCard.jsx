@@ -7,11 +7,6 @@ import CopyToClipboard from '../../../components/clipboard/CopyToClipboard';
 const ProfileCard = ({ username, uuid, level, points, profileImage }) => {
   const navigate = useNavigate();
 
-  const handleCopy = (message, type) => {
-    // You can integrate your Toast system here if needed
-    alert(message); // Replace with Toast if you have it
-  };
-
   return (
     <div className="profile-card">
       <div className="top-row">
@@ -25,7 +20,6 @@ const ProfileCard = ({ username, uuid, level, points, profileImage }) => {
             UID: {uuid}
             <CopyToClipboard
               text={uuid}
-              onCopy={handleCopy}
               size={14}
               color='#ccc'
               className="uid-copy-icon"

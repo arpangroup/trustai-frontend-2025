@@ -3,26 +3,34 @@ import { getConfigValue } from '../utils/configHelper';
 
 // BASE_URL from localStorage or fallback
 // export const BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
-export const BASE_URL = 'http://trustai.co.in';
-export const API_VERSION = '/api/v1';
-export const USER_ID = getConfigValue("USER_ID", 1);
 
-export const REGISTRATION_URL = `${BASE_URL}/register`;
-export const REFERRAL_URL = (referralCode) => `${BASE_URL}/register?ref=${referralCode}`;
-
-// Currency configs
-export const CURRENCY_UNIT = getConfigValue("CURRENCY_UNIT", "USDT");
-export const CURRENCY_UNIT_DEFAULT = getConfigValue("CURRENCY_UNIT_DEFAULT", "INR");
-export const CURRENCY_SYMBOL = getConfigValue("CURRENCY_SYMBOL", "$");
-export const CURRENCY_SYMBOL_DEFAULT = getConfigValue("CURRENCY_SYMBOL_DEFAULT", "₹");
-
+// Common:
+export const BASE_URL                 = getConfigValue("app.config.url.base", "http://trustai.co.in");
+export const API_VERSION              = getConfigValue("app.config.api.version", '/api/v1');
+export const CURRENCY_UNIT            = getConfigValue("app.config.currency.unit", "USDT");
+export const CURRENCY_SYMBOL          = getConfigValue("app.config.currency.symbol", "$");
+export const REGISTRATION_URL         = `${BASE_URL}/register`
+export const REFERRAL_URL             = (referralCode) => `${BASE_URL}/register?ref=${referralCode}`;
+export const CURRENCY_UNIT_DEFAULT    = "INR";
+export const CURRENCY_SYMBOL_DEFAULT  = "₹";
 // Deposit:
-export const DEPOSIT_ADDRESS = getConfigValue("DEPOSIT_ADDRESS", "0x5987d451a2d9f7db04d8e539e4d3d6f8aede71bb");
-
+export const DEPOSIT_ADDRESS          = getConfigValue("app.config.deposit.address", "0x5987d451a2d9f7db04d8e539e4d3d6f8aede71bb");
+export const MINIMUM_DEPOSIT          = getConfigValue("app.config.deposit.amount.min", "50");
+export const DEPOSIT_WARNING          = getConfigValue("app.config.deposit.warning", "*Only USDT-BEP-20 deposits accepted. Others will be lost.");
 // Withdraw:
-export const WITHDRAW_ADDRESS = getConfigValue("WITHDRAW_ADDRESS", "0xABCD1234EFGH5678IJKL");
-export const MINIMUM_WITHDRAW = getConfigValue("MINIMUM_WITHDRAW", "50");
-export const SERVICE_CHARGE   = getConfigValue("SERVICE_CHARGE", "5");
+export const WITHDRAW_ADDRESS         = getConfigValue("app.config.withdraw.address", "0xABCD1234EFGH5678IJKL");
+export const MINIMUM_WITHDRAW         = getConfigValue("app.config.withdraw.amount.min", "50");
+export const SERVICE_CHARGE           = getConfigValue("app.config.withdraw.service.charge", "5");
+// UI
+export const ACCEPTED_FILE_TYPES      = getConfigValue("app.config.accepted.file.types", "image/png, image/jpeg, image/gif");
+export const MAIN_HEADER_TITLE        = getConfigValue("app.config.header.main.title", "Welcome to TrustAI");
+export const OLP_DALAY_SECONDS        = getConfigValue("app.config.otp.delay.seconds", 30);
+export const TELEGRAM_LINK            = getConfigValue("app.config.support.telegram.link", "https://t.me/your_username");
+export const WHATSAPP_LINK            = getConfigValue("app.config.support.whatsapp.link", "https://wa.me/919876543210");
+
+
+export const USER_ID            = getConfigValue("USER_ID", 1);
+
 
 export const SCHEDULE_OPTIONS = [
   { label: "Hourly", value: 1, disabled: true,},
@@ -60,9 +68,3 @@ export const RANK_TO_NUMBER_MAP = {
   RANK_10: "10",
 };
 
-const imageFileTypes = "image/png, image/jpeg, image/gif";
-export const ACCEPTED_FILE_TYPES = getConfigValue("ACCEPTED_FILE_TYPES", imageFileTypes);
-
-
-
-export const MAIN_HEADER_TITLE = getConfigValue("MAIN_HEADER_TITLE", "Welcome to TrustAI");

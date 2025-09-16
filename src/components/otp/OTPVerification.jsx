@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router';
 import Toast from '../toast/Toast';
 import apiClient from '../../api/apiClient';
 import { API_ROUTES } from '../../api/apiRoutes';
+import { OLP_DALAY_SECONDS } from '../../constants/config';
 
 const inputLength = 6;
-const OTP_RESEND_DELAY_SECONDS = 30;
 
 function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVerified, onClose }) {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [isResendDisabled, setIsResendDisabled] = useState(true);
-  const [countdown, setCountdown] = useState(OTP_RESEND_DELAY_SECONDS);
+  const [countdown, setCountdown] = useState(OLP_DALAY_SECONDS);
   const [toast, setToast] = useState(null);
 
 
@@ -30,7 +30,7 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
         if (prev === 1) {
           clearInterval(timerInterval);
           setIsResendDisabled(false);
-          return OTP_RESEND_DELAY_SECONDS; // reset for next resend
+          return OLP_DALAY_SECONDS; // reset for next resend
         }
         return prev - 1;
       });

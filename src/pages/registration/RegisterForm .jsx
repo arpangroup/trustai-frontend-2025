@@ -43,7 +43,7 @@ const RegisterForm = () => {
 
   // Populate referralCode from URL
   useEffect(() => {
-    const referral = searchParams.get("referral");
+    const referral = searchParams.get("ref");
     if (referral) {
       setFormData((prev) => ({ ...prev, referralCode: referral }));
     }

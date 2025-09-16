@@ -3,15 +3,14 @@ import './DepositPage.css';
 import { useNavigate } from 'react-router-dom';
 import { QRCodeCanvas } from 'qrcode.react';
 import DepositManual from './DepositManual';
-import { DEPOSIT_ADDRESS } from '../../constants/config';
-import Toast from '../../components/toast/Toast';
-import apiClient from '../../api/apiClient';
-import { API_ROUTES } from '../../api/apiRoutes';
+import { CURRENCY_UNIT, DEPOSIT_ADDRESS, DEPOSIT_WARNING, MINIMUM_DEPOSIT } from '../../constants/config';
+import CopyToClipboard from '../../components/clipboard/CopyToClipboard';
 
 
 const DepositPage = () => {
     const navigate = useNavigate();
     const [panelOpen, setPanelOpen] = React.useState(false);
+    
     const downloadQRCode = () => {
       const canvas = document.querySelector("canvas");
       const pngUrl = canvas
@@ -52,8 +51,8 @@ const DepositPage = () => {
 
           <div className="qr-section">
             <h3>Deposit Chain</h3>
-            <p className="min-deposit">Minimum Deposit: 50 USDT</p>
-            <p className="warning-text">*Only USDT-BEP-20 deposits accepted. Others will be lost.</p>
+            <p className="min-deposit">Minimum Deposit: {MINIMUM_DEPOSIT} {CURRENCY_UNIT}</p>
+            <p className="warning-text">{DEPOSIT_WARNING}</p>
             <div className="qr-placeholder">
                 <QRCodeCanvas
                     value={DEPOSIT_ADDRESS}
@@ -74,11 +73,17 @@ const DepositPage = () => {
             <div className="detail-item">
               <span className="label">USDT Deposit Address</span>
               <div className="address-row">
-                <span className="address">0x70557e7f8d1fb2ca0f87042b9d5e3c62b97c59d9</span>
-                <img
+                <span className="address">{DEPOSIT_ADDRESS}</span>
+                {/* <img
                   src="https://image.treasurenft.xyz/Treasure2.5/btn/btn_edit_01_nor.png"
                   alt="copy"
                   className="copy-icon"
+                /> */}
+                <CopyToClipboard
+                  text={DEPOSIT_ADDRESS}
+                  size={14}
+                  color='#ccc'
+                  className="uid-copy-icon"
                 />
               </div>
             </div>

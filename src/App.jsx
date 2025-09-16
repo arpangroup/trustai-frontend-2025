@@ -29,6 +29,8 @@ import ReferralScreen from './pages/referral/ReferralScreen';
 import DepositPage from './pages/deposit/DepositPage';
 import WithdrawRequest from './pages/withdraw/WithdrawRequest';
 import Level from './pages/level/Level';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -77,6 +79,9 @@ function App() {
 
 
       </Routes>
+
+      {/* Add this ONCE, globally */}
+      <ToastContainer position="bottom-center" autoClose={3000} />
     </>
   )
 }
