@@ -4,6 +4,7 @@ import FileUpload from './components/FileUpload';
 import apiClient from '../../api/apiClient'; 
 import { API_ROUTES } from '../../api/apiRoutes';
 import Toast from '../../components/toast/Toast';
+import { MINIMUM_DEPOSIT } from '../../constants/config';
 
 const DepositManual = ({ onClose, onSuccess }) => {
     const [screenshotFile, setScreenshotFile] = useState(null);
@@ -37,6 +38,11 @@ const DepositManual = ({ onClose, onSuccess }) => {
         if (!amount || parseFloat(amount) <= 0) {
             setMessage('Please enter a valid amount.');
             showToast("Please enter a valid amount.");
+            return;
+        }
+        if (parseFloat(amount) <= MINIMUM_DEPOSIT) {
+            setMessage('Deposit amount should be minimum ' + MINIMUM_DEPOSIT);
+            showToast('Deposit amount should be minimum ' + MINIMUM_DEPOSIT);
             return;
         }
         if (!transactionId.trim()) {

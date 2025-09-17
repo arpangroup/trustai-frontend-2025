@@ -15,7 +15,7 @@ export const CURRENCY_UNIT_DEFAULT    = "INR";
 export const CURRENCY_SYMBOL_DEFAULT  = "₹";
 // Deposit:
 export const DEPOSIT_ADDRESS          = getConfigValue("app.config.deposit.address", "0x5987d451a2d9f7db04d8e539e4d3d6f8aede71bb");
-export const MINIMUM_DEPOSIT          = getConfigValue("app.config.deposit.amount.min", "50");
+export const MINIMUM_DEPOSIT          = getConfigValue("app.config.deposit.amount.min", 50);
 export const DEPOSIT_WARNING          = getConfigValue("app.config.deposit.warning", "*Only USDT-BEP-20 deposits accepted. Others will be lost.");
 // Withdraw:
 export const WITHDRAW_WARNING         = getConfigValue("app.config.withdraw.warning", "warning");
