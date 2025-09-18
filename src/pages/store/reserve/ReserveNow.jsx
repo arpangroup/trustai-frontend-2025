@@ -114,8 +114,6 @@ const ReserveNow = ({reservedStakes = [], onReservedSuccess}) => {
   }
 
   const handleReserveClick = async () => {
-    console.log("selectedRank: ", selectedRank);
-
     if (!selectedRank || !selectedInvestmentRange) {
       setModalData({
         isOpen: true,
@@ -163,9 +161,9 @@ const ReserveNow = ({reservedStakes = [], onReservedSuccess}) => {
         investmentRange: selectedInvestmentRange,
       };
 
-      //const response = await apiClient.post(API_ROUTES.RESERVATION_API.RESERVE_NOW, payload);
+      const response = await apiClient.post(API_ROUTES.RESERVATION_API.RESERVE_NOW, payload);
       //console.log("RESPONSE: ", response)
-      // window.location.reload();
+      window.location.reload();
       //setExpiryAt(response.expiryAt);
       //onReservedSuccess(response);
       //handleNavigateToTodaysStake();

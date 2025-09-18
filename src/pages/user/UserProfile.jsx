@@ -33,6 +33,7 @@ const defaultIncomeData = [
 ]
 
 const INCOME_TYPE_LABEL_MAP = {
+    SIGNUP_BONUS: "Signup Bonus",
     DAILY: "Comprehensive",
     RESERVE: "Reserve",
     TEAM: "Team",
