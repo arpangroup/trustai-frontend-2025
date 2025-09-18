@@ -48,7 +48,7 @@ export default function Header() {
 
 
 
-        <div onClick={() => navigate('/login')} style={{position: 'relative', cursor: 'pointer'}}>          
+        <div onClick={() => navigate('/notifications')} style={{position: 'relative', cursor: 'pointer'}}>          
           <div className="icon-btn" aria-label="Notifications" role="button">
             🔔
           </div>

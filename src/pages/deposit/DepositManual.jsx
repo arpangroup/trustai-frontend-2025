@@ -5,22 +5,18 @@ import apiClient from '../../api/apiClient';
 import { API_ROUTES } from '../../api/apiRoutes';
 import Toast from '../../components/toast/Toast';
 import { MINIMUM_DEPOSIT } from '../../constants/config';
+import { toast } from 'react-toastify';
 
 const DepositManual = ({ onClose, onSuccess }) => {
     const [screenshotFile, setScreenshotFile] = useState(null);
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
-    const [toast, setToast] = useState(null);
 
     const handleScreenshotChange = (file) => {
         setScreenshotFile(file);
     };
 
-    const showToast = (message, type = "error") => {
-        setToast({ message, type });
-    };
-
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();        
 
@@ -32,27 +28,27 @@ const DepositManual = ({ onClose, onSuccess }) => {
         // Validation
         if (!paymentMethod || paymentMethod === 'null') {
             setMessage('Please select a payment method.');
-            showToast("Please select a payment method.");
+            toast.warn("Please select a payment method.")
             return;
         }
         if (!amount || parseFloat(amount) <= 0) {
             setMessage('Please enter a valid amount.');
-            showToast("Please enter a valid amount.");
+            toast.warning("Please enter a valid amount");
             return;
         }
         if (parseFloat(amount) <= MINIMUM_DEPOSIT) {
             setMessage('Deposit amount should be minimum ' + MINIMUM_DEPOSIT);
-            showToast('Deposit amount should be minimum ' + MINIMUM_DEPOSIT);
+            toast.warning('Deposit amount should be minimum ' + MINIMUM_DEPOSIT);
             return;
         }
         if (!transactionId.trim()) {
             setMessage('Please enter a transaction ID.');
-            showToast('Please enter a transaction ID.');
+            toast.warning('Please enter a transaction ID.');
             return;
         }
         if (!screenshotFile) {
             setMessage('Please upload a screenshot before submitting.');
-            showToast('Please upload a screenshot before submitting.');
+            toast.warning('Please upload a screenshot before submitting.');
             return;
         }
         
@@ -74,7 +70,7 @@ const DepositManual = ({ onClose, onSuccess }) => {
             });
             
             console.log("DEPOSIT_RESPONSE: ", response);
-            showToast('Deposit submitted successfully!', "success");
+            toast.success('Deposit submitted successfully!', "success");
             onSuccess(true)
             
 
@@ -152,15 +148,6 @@ const DepositManual = ({ onClose, onSuccess }) => {
                     </form>
                 </div>
             </div>
-            {/* Toast */}
-
-            {toast && (
-            <Toast
-                message={toast.message}
-                type={toast.type}
-                onClose={() => setToast(null)}
-            />
-            )}
         </div>
     );
 };
