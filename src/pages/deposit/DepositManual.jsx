@@ -36,7 +36,7 @@ const DepositManual = ({ onClose, onSuccess }) => {
             toast.warning("Please enter a valid amount");
             return;
         }
-        if (parseFloat(amount) <= MINIMUM_DEPOSIT) {
+        if (parseFloat(amount) < MINIMUM_DEPOSIT) {
             setMessage('Deposit amount should be minimum ' + MINIMUM_DEPOSIT);
             toast.warning('Deposit amount should be minimum ' + MINIMUM_DEPOSIT);
             return;

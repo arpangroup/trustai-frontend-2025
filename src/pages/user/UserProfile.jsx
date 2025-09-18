@@ -75,6 +75,7 @@ export default function UserProfile() {
     const [incomeData, setIncomeData] = useState([]);
     const [myOrders, setMyOrders] = useState([]);
     const [myTeams, setMyTeams] = useState([]);
+    const [todayIncome, setTodayIncome] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -111,6 +112,9 @@ export default function UserProfile() {
                 total: item.totalAmount              // map totalAmount to total
             }));
 
+            const filterTodayIncome = incomeResponse.filter(d => d.incomeType==='DAILY')?.[0]?.todayAmount || '0';
+            setTodayIncome(filterTodayIncome);
+            // console.log("TODAY_INCOME: ", incomeResponse);
             setIncomeData(formattedIncomeData);
         } catch (err) {
             console.error("Failed to fetch income data:", err);
@@ -192,7 +196,7 @@ export default function UserProfile() {
             {/* Profit & Balance Cards */}
             <div className="profit-cards-container">
                 <ProfitBalanceCard amount={userInfo.walletBalance} currency={CURRENCY_UNIT} label="Wallet Balance" />
-                <ProfitBalanceCard amount={-325.50} currency={CURRENCY_UNIT} label="Today Reservation" />
+                <ProfitBalanceCard amount={todayIncome} currency={CURRENCY_UNIT} label="Today Income" />
             </div>
 
 

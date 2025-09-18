@@ -89,7 +89,7 @@ const ReserveNow = ({reservedStakes = [], onReservedSuccess}) => {
   useEffect(() => {
     if (selectedRank) {
       setSelectedInvestmentRange(
-        `${selectedRank.minInvestmentAmount}-${selectedRank.maxInvestmentAmount}`
+        `${selectedRank.minDeposit}-${selectedRank.maxDeposit}`
       );
     } else {
       setSelectedInvestmentRange(null);
@@ -114,6 +114,8 @@ const ReserveNow = ({reservedStakes = [], onReservedSuccess}) => {
   }
 
   const handleReserveClick = async () => {
+    console.log("selectedRank: ", selectedRank);
+
     if (!selectedRank || !selectedInvestmentRange) {
       setModalData({
         isOpen: true,
@@ -124,15 +126,46 @@ const ReserveNow = ({reservedStakes = [], onReservedSuccess}) => {
       return;
     }
 
+    if("RANK_0" === selectedRank.rankCode && selectedRank.txnLimit === 0) {
+      setModalData({
+        isOpen: true,
+        type: 'error',
+        title: 'Not Eligible for Reservation',
+        content: (
+          <p>To earn daily income, please upgrade your account by maintaining a minimum deposit balance of $40.</p>
+        ),
+        footerButtons: [
+          {
+            label: 'Deposit Balance',
+            onClick: () => { navigate('/deposit')},
+            className: 'btn btn-success',
+          },
+        ],
+      });
+      return;
+    }
+
+    if(selectedRank.txnLimit === 0) {
+      setModalData({
+        isOpen: true,
+        type: 'error',
+        title: 'Daily Transaction Limit Reached!',
+        content: (
+          <p>You are allowed only one transaction per day. Please try again tomorrow.</p>
+        ),
+      });
+      return;
+    }
+
     try {
       const payload = {
         rankCode: selectedRank.rankCode,
         investmentRange: selectedInvestmentRange,
       };
 
-      const response = await apiClient.post(API_ROUTES.RESERVATION_API.RESERVE_NOW, payload);
+      //const response = await apiClient.post(API_ROUTES.RESERVATION_API.RESERVE_NOW, payload);
       //console.log("RESPONSE: ", response)
-      window.location.reload();
+      // window.location.reload();
       //setExpiryAt(response.expiryAt);
       //onReservedSuccess(response);
       //handleNavigateToTodaysStake();
@@ -152,8 +185,8 @@ const ReserveNow = ({reservedStakes = [], onReservedSuccess}) => {
   // Prepare options for Investment Range dropdown (currently just one range per rank)
   const investmentRangeOptions = selectedRank ? [
     {
-      value: `${selectedRank.minInvestmentAmount}-${selectedRank.maxInvestmentAmount}`,
-      label: `${formatAmount(selectedRank.minInvestmentAmount)} - ${formatAmount(selectedRank.maxInvestmentAmount)}`
+      value: `${selectedRank.minDeposit}-${selectedRank.maxDeposit}`,
+      label: `${formatAmount(selectedRank.minDeposit)} - ${formatAmount(selectedRank.maxDeposit)}`
     }
   ]
     : [];

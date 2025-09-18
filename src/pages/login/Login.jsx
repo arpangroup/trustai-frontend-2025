@@ -66,6 +66,12 @@ const Login = () => {
         {/* Form */}
         <h3>Sign in to your account</h3>
         <p className="sub-text">Enter your email and password to sign in</p>
+        
+        {error && (
+          <div className="alert mt-3 alert-danger" role="alert">
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleLogin} autoComplete="off">
           <label htmlFor="account">
@@ -104,10 +110,6 @@ const Login = () => {
         <p className="signup-text">
           No account? <Link to="/register">SIGN UP</Link>
         </p>
-
-        <div className="alert">
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-        </div>
       </div>
     </div>
   );

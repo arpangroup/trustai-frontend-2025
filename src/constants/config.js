@@ -42,16 +42,17 @@ export const SCHEDULE_OPTIONS = [
 ];
 
 export const RANK_LABEL_MAP = {
-  RANK_0: "LV1",
-  RANK_1: "LV2",
-  RANK_2: "LV3",
-  RANK_3: "LV4",
-  RANK_4: "LV5",
-  RANK_5: "LV6",
-  RANK_6: "LV7",
-  RANK_7: "LV8",
-  RANK_8: "LV9",
-  RANK_9: "LV10",
+  RANK_0: "LV0",
+  RANK_1: "LV1",
+  RANK_2: "LV2",
+  RANK_3: "LV3",
+  RANK_4: "LV4",
+  RANK_5: "LV5",
+  RANK_6: "LV6",
+  RANK_7: "LV7",
+  RANK_8: "LV8",
+  RANK_9: "LV9",
+  RANK_10: "LV10",
 };
 
 export const RANK_TO_NUMBER_MAP = {
