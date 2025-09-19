@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./MemberContribution.css";
 
 import StatPanel from "../../components/statPanel/StatPanel";
@@ -7,48 +7,47 @@ import { API_ROUTES } from "../../api/apiRoutes";
 import apiClient from "../../api/apiClient";
 import DataContainer from "../../components/container/DataContainer";
 import StatPanelSkeleton from "../../components/statPanel/skeleton/StatPanelSkeleton";
-
-// import TabContainer from "../../../components/tab/TabContainer";
-// import Tab from "../../../components/tab/Tab";
-import { useLocation } from "react-router";
 import Tabs from "../store/tabs/Tabs";
 import TabsSkeleton from "../../components/tabs/skeleton/TabsSkeleton";
-// import Transaction from "../../../components/transaction/Transaction";
-// import MemberCard from "../../../components/card/recentItem/RecentItem";
-// import RecentItem from "../../../components/card/recentItem/RecentItem";
 
-const defaultItems = [
-    { label: "5", value: "Registered Member" },
-    { label: "3", value: "Total Active Member" },
-    { label: "7", value: "Member A" },
-    { label: "12", value: "Valid A" },
-];
+//const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const tabs = [
-    { key: "a_member", label: "AMember" },
-    { key: "b_member", label: "BMember" },
-    { key: "c_member", label: "CMember" },
+  { key: "a_member", label: "AMember" },
+  { key: "b_member", label: "BMember" },
+  { key: "c_member", label: "CMember" },
 ];
 
+const CombinedSkeleton = () => (
+  <>
+    <StatPanelSkeleton cards={4} panels={1} />
+    <TabsSkeleton count={4} />
+  </>
+);
 
-const tabTitleToIndex = {
-  LabelA: 0,
-  LabelB: 1,
-  LabelC: 2,
-};
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+// ✅ Extracted reusable component
+const MemberList = ({ members = [] }) => {
+  if (members.length === 0) {
+    return <div className="text-center text-muted p-3">No members found</div>;
+  }
 
-const CombinedSkeleton = () => {
   return (
-    <>
-      <StatPanelSkeleton cards={4} panels={1} />
-      <TabsSkeleton count={4} />
-    </>
+    <div className="list-group">
+      {members.map((m) => (
+        <div key={m.userId} className="list-card" role="listitem">
+          <div className="list-card-left">
+            <div className="user-icon">{m.username.charAt(0).toUpperCase()}</div>
+            <div className="username">{m.username}</div>
+          </div>
+          <div className="share-amount">${m.share}</div>
+        </div>
+      ))}
+    </div>
   );
 };
 
 export default function MemberContribution() {
-  const [dateRange, setDateRange] = useState({ start: "", end: "" });  
+  const [dateRange, setDateRange] = useState({ start: "", end: "" });
   const [members, setMembers] = useState([]);
   const [activeTab, setActiveTab] = useState("a_member");
 
@@ -57,93 +56,44 @@ export default function MemberContribution() {
     if (dateRange.start) params.start = dateRange.start;
     if (dateRange.end) params.end = dateRange.end;
 
-    //await delay(1000 * 3);
-
+    //await delay(1000 * 5);
     const response = await apiClient.get(API_ROUTES.MEMBER_SUMMARY, { params });
 
-    // ✅ Map your response as needed
     const data = response.data;
-    setMembers(data.memembers);
-    // console.log("MEMBER_DATA: ", data);
-    const transformedItems = [
+    setMembers(data.memembers || []);
+
+    return [
       { label: data.totalShare || "0", value: "All Rebates" },
       { label: data.memberA || "0", value: "Rebate A" },
       { label: data.memberB || "0", value: "Rebate B" },
       { label: data.memberC || "0", value: "Rebate C" },
     ];
+  };
 
-    return transformedItems || [];
+  const getFilteredMembers = () => {
+    const relatedType = activeTab.charAt(0).toUpperCase(); // "a_member" → "A"
+    return members.filter((m) => m.related === relatedType);
   };
 
   return (
-    <div className="date-filter-container" style={{padding: '1rem', minHeight: '100vh'}}>
-      
-      <DateFilter onDateChange={(range) => setDateRange(range)} />
+    <div className="date-filter-container" style={{ padding: '1rem', minHeight: '100vh' }}>
+      <DateFilter onDateChange={setDateRange} />
 
-      
       <DataContainer
         fetchData={fetchMemberSummary}
         dependencies={[dateRange]}
         noDataMessage="No Data found"
-        loadingComponent={<CombinedSkeleton/>}
+        loadingComponent={<CombinedSkeleton />}
         renderData={(items) => (
           <>
-            <StatPanel key="1" items={items} />
-
+            <StatPanel key="stat-panel" items={items} />
             <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
-
+            <div className="tab-content">
+              <MemberList members={getFilteredMembers()} />
+            </div>
           </>
         )}
       />
-
-       {/* <TabContainer activeIndex={activeTabIndex} onTabChange={setActiveTabIndex}>
-                <Tab title="LabelA"> 
-                  <div className="member-list">
-                    {members
-                    ?.filter(m => m.related === "A")
-                    .map(m => (
-                        // <div key={m.userId} className="member-row">
-                        // <span className="member-name">{m.name}</span>
-                        // <span className="member-share">{m.share}</span>
-                        // </div>
-                        
-                        <RecentItem
-                            key={m.userId}
-                            title={m.name}
-                            description="sasaasasasa"
-                            amount={m.share}
-                        />
-                    ))}
-                    </div>
-                </Tab>
-                <Tab title="LabelB">                 
-                   
-                  <div className="member-list">
-                    {members
-                    ?.filter(m => m.related === "B")
-                    .map(m => (
-                        <div key={m.userId} className="member-row">
-                        <span className="member-name">{m.name}</span>
-                        <span className="member-share">{m.share}</span>
-                        </div>
-                    ))}
-                    </div>
-                </Tab>
-                <Tab title="LabelC"> 
-                   
-                  <div className="member-list">
-                    {members
-                    ?.filter(m => m.related === "C")
-                    .map(m => (
-                        <div key={m.userId} className="member-row">
-                        <span className="member-name">{m.name}</span>
-                        <span className="member-share">{m.share}</span>
-                        </div>
-                    ))}
-                    </div>
-                </Tab>
-            </TabContainer> */}
-
     </div>
   );
 }
