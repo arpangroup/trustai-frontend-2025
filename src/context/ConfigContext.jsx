@@ -66,8 +66,9 @@ export const ConfigProvider = ({ children }) => {
   };
 
 
+  // ✅ Expose fetchConfig as reloadConfig
   return (
-    <ConfigContext.Provider value={{ config, loading }}>
+    <ConfigContext.Provider value={{ config, loading, reloadConfig: fetchConfig }}>
       {children}
     </ConfigContext.Provider>
   );

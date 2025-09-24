@@ -13,6 +13,7 @@ const Login = () => {
   const [error, setError] = useState(null);
 
   const { login } = useContext(AuthContext);
+  const { reloadConfig } = useContext(ConfigContext); 
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -40,6 +41,9 @@ const Login = () => {
     } = res.data;
       // Store tokens in AuthContext
       login(accessToken, refreshToken, accessTokenExpiry, refreshTokenExpiry, username);
+
+      // 👇 Load config BEFORE navigating
+      await reloadConfig();
 
       // Navigate to previous or default route
       navigate(from, { replace: true });
