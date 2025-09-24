@@ -113,10 +113,26 @@ export default function UserProfile() {
                 total: item.totalAmount              // map totalAmount to total
             }));
 
+            // Find the DAILY/Comprehensive income first
+            const comprehensiveIncome = formattedIncomeData.find(item => item.incomeType === "Comprehensive");
+
+            // Override Reserve with Comprehensive values
+            const modifiedIncomeData = formattedIncomeData.map(item => {
+                if (item.incomeType === "Reserve" && comprehensiveIncome) {
+                    return {
+                        ...item,
+                        daily: comprehensiveIncome.daily,
+                        total: comprehensiveIncome.total
+                    };
+                }
+                return item;
+            });
+
             const filterTodayIncome = incomeResponse.filter(d => d.incomeType==='DAILY')?.[0]?.todayAmount || '0';
             setTodayIncome(filterTodayIncome);
             // console.log("TODAY_INCOME: ", incomeResponse);
-            setIncomeData(formattedIncomeData);
+            //setIncomeData(formattedIncomeData);
+            setIncomeData(modifiedIncomeData);
         } catch (err) {
             console.error("Failed to fetch income data:", err);
         }
