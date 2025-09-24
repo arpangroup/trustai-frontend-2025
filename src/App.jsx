@@ -42,8 +42,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<RegisterForm />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<RegisterForm />} />
         <Route path="/forgot" element={<ForgotPassword />} />
 
         <Route path="/" element={<MobileLayout />}>
@@ -88,4 +88,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

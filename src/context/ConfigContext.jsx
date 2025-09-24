@@ -10,17 +10,17 @@ export const ConfigProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const { isAuthenticated } = useContext(AuthContext);
 
-  useEffect(() => {
-    fetchConfig();
-  }, []); 
-
   // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     fetchConfig();
-  //   } else {
-  //    loadFronLocalStorage();
-  //   }
-  // }, [isAuthenticated]); 
+  //   fetchConfig();
+  // }, []); 
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchConfig(); // 👇 auto-refresh from API after login
+    } else {
+     loadFronLocalStorage();
+    }
+  }, [isAuthenticated]); 
 
 
   const loadFronLocalStorage = () => {
