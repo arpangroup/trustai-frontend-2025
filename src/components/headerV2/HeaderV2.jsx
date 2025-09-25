@@ -40,7 +40,7 @@ const HeaderV2 = () => {
         </div>
       </div>
 
-      <div className="headerTitle">Reserve</div>
+      <div className="headerTitle"></div>
 
       <div className="headerIcons">
         {/* Alarm Icon */}
