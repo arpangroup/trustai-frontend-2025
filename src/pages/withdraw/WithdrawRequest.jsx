@@ -68,6 +68,7 @@ export default function WithdrawRequest() {
     }
 
     const numericAmount = parseFloat(amount);
+    const serviceCharge = parseFloat(SERVICE_CHARGE);
 
     if (!amount || isNaN(amount) || parseFloat(amount) <= 0) {
       toast.warning("Please enter a valid amount.");
@@ -84,7 +85,11 @@ export default function WithdrawRequest() {
       return;
     }
 
-    const totalDeduction = numericAmount + SERVICE_CHARGE;
+    console.log("AMOUNT: ", numericAmount);
+    console.log("SERVICE_CHARGE: ", serviceCharge)
+    const totalDeduction = numericAmount + serviceCharge;
+    console.log("ROTAL_DEDUCTION: ", totalDeduction)
+    console.log("WALLET_BALANCE: ", walletBalance)
     if (totalDeduction > parseFloat(walletBalance)) {
       toast.warning(`You don't have enough balance after service charge (${SERVICE_CHARGE} ${CURRENCY_UNIT}).`);
       return;
