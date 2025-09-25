@@ -95,7 +95,7 @@ export default function WithdrawRequest() {
 
       const payload = {
         amount: parseFloat(amount),
-        address: WITHDRAW_ADDRESS,
+        walletAddress: walletAddress,
       };
 
       const response = await apiClient.post(API_ROUTES.WITHDRAWAL.WITHDRAW_REQUEST, payload);
