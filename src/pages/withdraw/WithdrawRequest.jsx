@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./WithdrawRequest.css";
 import { FaTimes } from "react-icons/fa";
-import { CURRENCY_UNIT, MINIMUM_WITHDRAW, SERVICE_CHARGE } from "../../constants/config";
+import { CURRENCY_UNIT, MINIMUM_WITHDRAW, SERVICE_CHARGE_PERCENTAGE, SERVICE_CHARGE_FIXED, SERVICE_CHARGE_THRESHOLD, CURRENCY_SYMBOL  } from "../../constants/config";
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from "../../api/apiRoutes";
 import { toast } from "react-toastify";
@@ -11,6 +11,18 @@ export default function WithdrawRequest() {
   const [walletAddress, setWalletAddress] = useState("");
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(true);
+
+  // Function to calculate service charge
+  const calculateServiceCharge = (amount) => {
+    if (!amount || isNaN(amount)) return 0;
+    const numericAmount = parseFloat(amount);
+
+    if (numericAmount <= parseFloat(SERVICE_CHARGE_THRESHOLD)) {
+      return parseFloat(SERVICE_CHARGE_FIXED);
+    } else {
+      return numericAmount * parseFloat(SERVICE_CHARGE_PERCENTAGE);
+    }
+  };
 
 
   // ✅ Fetch user data on component mount
@@ -66,14 +78,14 @@ export default function WithdrawRequest() {
       toast.warning("Wallet address must be at least 5 characters long.");
       return;
     }
-
-    const numericAmount = parseFloat(amount);
-    const serviceCharge = parseFloat(SERVICE_CHARGE);
-
+    
     if (!amount || isNaN(amount) || parseFloat(amount) <= 0) {
       toast.warning("Please enter a valid amount.");
       return;
     }
+
+    const numericAmount = parseFloat(amount);
+    const serviceCharge = calculateServiceCharge(numericAmount);
 
     if (numericAmount < MINIMUM_WITHDRAW) {
       toast.warning(`Minimum withdraw amount is ${MINIMUM_WITHDRAW} ${CURRENCY_UNIT}.`);
@@ -85,13 +97,9 @@ export default function WithdrawRequest() {
       return;
     }
 
-    console.log("AMOUNT: ", numericAmount);
-    console.log("SERVICE_CHARGE: ", serviceCharge)
     const totalDeduction = numericAmount + serviceCharge;
-    console.log("ROTAL_DEDUCTION: ", totalDeduction)
-    console.log("WALLET_BALANCE: ", walletBalance)
     if (totalDeduction > parseFloat(walletBalance)) {
-      toast.warning(`You don't have enough balance after service charge (${SERVICE_CHARGE} ${CURRENCY_UNIT}).`);
+      toast.warning(`You don't have enough balance after service charge (${SERVICE_CHARGE_PERCENTAGE} ${CURRENCY_UNIT}).`);
       return;
     }
 
@@ -170,8 +178,14 @@ export default function WithdrawRequest() {
               <span>{MINIMUM_WITHDRAW} {CURRENCY_UNIT}</span>
             </div>
             <div className="info-row">
-              <span>Service Charge</span>
-              <span>{SERVICE_CHARGE} {CURRENCY_UNIT}</span>
+             <span>
+                Service Charge (
+                {amount && parseFloat(amount) <= parseFloat(SERVICE_CHARGE_THRESHOLD)
+                  ? `${parseFloat(SERVICE_CHARGE_FIXED).toString()}${CURRENCY_SYMBOL}`
+                  : `${parseFloat(SERVICE_CHARGE_PERCENTAGE) * 100}%`}
+                )
+              </span>
+              <span>{calculateServiceCharge(amount)} {CURRENCY_UNIT}</span>
             </div>
 
             <hr className="divider" />
