@@ -6,11 +6,15 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
+.deposit-main {
+  padding: 20px;
+}
+
 .deposit-header {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .deposit-main {
@@ -211,7 +215,7 @@
 } */
 
 .panel-toggle-btn {
-  position: fixed;
+  position: absolute;
   top: 50%;
   right: 0px;
   transform: translateY(-50%);
@@ -223,23 +227,13 @@
   height: 56px;
   font-size: 18px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  animation: pulse 2s infinite;
-  transition: background-color 0.3s, transform 0.3s;
-
-  
-  line-height: 0.5;
-  font-size: 1.2rem;
-  padding: 12px;
-  cursor: pointer; 
-  /* Add the box-shadow */
+  padding: 12px;  
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-
-  /* Smooth hover transitions */
+  animation: pulse 2s infinite;
   transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
@@ -250,6 +244,27 @@
   line-height: 0.5;
   margin-top: -2px;
   margin-left: 8px;
+}
+
+@media (max-width: 480px) {
+  .panel-toggle-btn {
+    position: fixed;
+    top: auto;
+    /* bottom: 20px; */
+    /* right: 20px; */
+    bottom: 70px;
+    right: 10px;
+    transform: none;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  .panel-toggle-btn span {
+    display: none;
+  }
 }
 
 
@@ -363,7 +378,7 @@
 
 .light-theme .deposit-main {
   background-color: #ffffff;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
 }
 
 .light-theme .select__wrapper select {
@@ -429,3 +444,4 @@
 .light-theme .panel-header {
   border-bottom: 1px solid #ddd;
 }
+

@@ -26,9 +26,10 @@ const DepositPage = () => {
 
   return (
     <>
-    <div className="deposit-container">
+    <div className="deposit-page">
       {/* <button className="panel-toggle-btn" onClick={() => setPanelOpen(true)}>&lt; <span>Manual</span></button> */}
-      <button className="panel-toggle-btn" onClick={() => setPanelOpen(true)}>
+      
+     <button className="panel-toggle-btn" onClick={() => setPanelOpen(true)}>
         &lt;<span>Submit Proof</span>
       </button>
 

@@ -119,10 +119,16 @@ const AccountSetting = () => {
 
 
                 <div className="mb-3">
-                    <label className="form-label">Wallet address</label>
+                    <label className="form-label">Wallet address</label> 
+                    
+                    <div className="select__wrapper" style={{marginBottom: '6px'}}>
+                        <select>
+                            <option>USDT-BEP-20</option>
+                        </select>
+                    </div>                   
                     <input
                         type="text"
-                        className="form-control"
+                        className="form-control mt-4"
                         name="walletAddress"
                         value={formData.walletAddress}
                         onChange={handleChange}

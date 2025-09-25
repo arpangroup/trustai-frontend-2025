@@ -5,7 +5,7 @@
   left: 0;
   width: 100vw;   /* Full viewport width */
   height: 100vh;  /* Full viewport height */
-  background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent overlay */
+  /* background-color: rgba(0, 0, 0, 0.3); */
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -14,6 +14,7 @@
 
 .fullscreen-modal-content {
   width: 100%;
+  max-width: 430px;
   height: 100%;
   overflow-y: auto;
   display: flex;
@@ -47,7 +48,7 @@
 .deposit-header {
   display: flex;
   align-items: center;
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
 }
 
 .back-button {

@@ -115,7 +115,7 @@ const DepositManual = ({ onClose, onSuccess }) => {
 
                 <div className="deposit-main">
                      <form className="deposit-form" onSubmit={handleSubmit}>
-                        <div className="form-group">
+                        <div className="form-group me-0">
                             <label htmlFor="payment_method">Payment Method</label>
                             <select id="payment_method" name="payment_method" defaultValue="BINANCE">
                                 <option disabled value="">--Select Gateway--</option>
