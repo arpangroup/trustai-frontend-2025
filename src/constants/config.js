@@ -19,10 +19,10 @@ export const MINIMUM_DEPOSIT          = getConfigValue("app.config.deposit.amoun
 export const DEPOSIT_WARNING          = getConfigValue("app.config.deposit.warning", "*Only USDT-BEP-20 deposits accepted. Others will be lost.");
 // Withdraw:
 export const WITHDRAW_WARNING         = getConfigValue("withdraw.config.warning", "warning");
-export const MINIMUM_WITHDRAW         = getConfigValue("withdraw.config.amount.min", "10");
-export const SERVICE_CHARGE_PERCENTAGE= getConfigValue("withdraw.config.service.charge.percentage", "0.05");
-export const SERVICE_CHARGE_FIXED     = getConfigValue("withdraw.config.service.charge.fixed", "2.0");
-export const SERVICE_CHARGE_THRESHOLD = getConfigValue("withdraw.config.service.charge.threshold", "10");
+export const MINIMUM_WITHDRAW         = getConfigValue("withdraw.config.amount-min", "10");
+export const SERVICE_CHARGE_PERCENTAGE= getConfigValue("withdraw.config.service-charge-percentage", "0.05");
+export const SERVICE_CHARGE_FIXED     = getConfigValue("withdraw.config.service-charge-fixed", "2.0");
+export const SERVICE_CHARGE_THRESHOLD = getConfigValue("withdraw.config.service-charge-threshold", "10");
 // UI
 export const ACCEPTED_FILE_TYPES      = getConfigValue("app.config.accepted.file.types", "image/png, image/jpeg, image/gif");
 export const MAIN_HEADER_TITLE        = getConfigValue("app.config.header.main.title", "Welcome to TrustAI");
