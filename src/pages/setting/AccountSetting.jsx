@@ -5,6 +5,7 @@ import { Link, useLocation, useSearchParams } from "react-router-dom";
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from "../../api/apiRoutes";
 import { toast } from "react-toastify";
+import { INDIAN_STATES } from "../../constants/config";
 
 
 const AccountSetting = () => {
@@ -20,6 +21,7 @@ const AccountSetting = () => {
         countryCode: "+91",
         mobile: "987654321",
         email: "john@doe.com",
+        state: "WB",
     });
 
     // ✅ Fetch user data on component mount
@@ -40,6 +42,10 @@ const AccountSetting = () => {
                     countryCode: user.countryCode || "+91",
                     mobile: user.mobile || "",
                     email: user.email || "",
+                    state: user.state || "",
+                    city: user.city || "",
+                    address: user.address || "",
+                    zipCode: user.zipCode || "",
                 };
 
                 
@@ -202,6 +208,55 @@ const AccountSetting = () => {
                             onChange={handleChange}
                         />
                     </div>
+                </div>
+
+                
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                    <div style={{ flexBasis: '50%' }}>
+                        <label className="form-label">State</label>
+                        <select name="state" value={formData.state} onChange={handleChange} style={{ maxHeight: '38px', width: '100%' }}>
+                            <option value="" disabled>Select a State</option>
+                            {INDIAN_STATES.map(({ code, name }) => (
+                                <option key={code} value={code}>
+                                {name}
+                                </option>
+                            ))}                      
+                        </select>
+                    </div>
+                     <div style={{ flexBasis: '50%' }}>
+                        <label className="form-label">City</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="city"
+                            value={formData.city}
+                            onChange={handleChange}
+                            style={{ width: '100%' }}
+                        />
+                    </div>
+                </div>
+
+                
+                <div className="mb-3">
+                    <label className="form-label">Address</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="address"
+                        value={formData.address}
+                        onChange={handleChange}
+                    />
+                </div>
+                
+                <div className="mb-3">
+                    <label className="form-label">ZipCode</label>
+                    <input
+                        type="number"
+                        className="form-control"
+                        name="zipCode"
+                        value={formData.zipCode}
+                        onChange={handleChange}
+                    />
                 </div>
 
                 {/* Register Button */}
