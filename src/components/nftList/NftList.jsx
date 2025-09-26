@@ -7,7 +7,7 @@ import Image1 from '../../assets/bids1.png';
 import Image2 from '../../assets/bids2.png';
 
 
-const nftCards = [
+const defaultNftCards = [
   {
     imgSrc: Image1,
     alt: "NFT Art1",
@@ -38,19 +38,23 @@ const nftCards = [
 ];
 
 const NftList = ({ items }) => {
+  const nftCards = items || defaultNftCards
+  const imageUrl = "https://picsum.photos/200/300";
+  const avatar = "https://picsum.photos/200/300";
+
   return (
     <div className="nft-list" id="nftList">
       {nftCards.map(
         ({ imgSrc, alt, title, timeLeft, ownerImg, ownerName, price }, i) => (
           <div className="nft-card" key={i}>
-            <img src={imgSrc} className="nft-img" alt={alt} />
+            <img src={imgSrc || imageUrl} className="nft-img" alt={alt} />
             <div className="nft-title-row">
               <span className="nft-title">{title}</span>
               <span className="nft-time">{timeLeft}</span>
             </div>
             <div className="nft-info-row">
               <span className="nft-owner">
-                <img src={ownerImg} alt="OWNER" />
+                <img src={ownerImg || avatar} alt="OWNER" />
                 {ownerName}
               </span>
               <span className="nft-price">{price}</span>

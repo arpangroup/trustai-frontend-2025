@@ -72,6 +72,7 @@ export const API_ROUTES = {
 
 export const WEB_ROUTES = {
   EXPLORE: '/explore',
+  
   STAKE_DETAILS: '/exploreDetails',
 }
 

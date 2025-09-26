@@ -12,6 +12,8 @@ import NftList from "../../components/nftList/NftList";
 import TopCollectionList from "../../components/topCollectionList/TopCollectionList";
 import FeatureSection from "./feature/FeatureSection";
 import BiddingSection from "./bidding/BiddingSection";
+import { useNavigate } from "react-router-dom";
+import { WEB_ROUTES } from "../../api/apiRoutes";
 
 const carouselSlides = [
     {
@@ -40,7 +42,7 @@ const collections = [
         imgSrc: Image1,
         alt: "Chain Hard Art #29",
         title: "Chain Hard Art #29",
-        floor: "Floor: 17.98 ETH",
+        badge: "Floor: 17.98 ETH",
         value: "160.58",
         change: "-78%",
     },
@@ -50,7 +52,7 @@ const collections = [
         imgSrc: Image2,
         alt: "Chain Hard Art #19",
         title: "Chain Hard Art #19",
-        floor: "Floor: 17.98 ETH",
+        badge: "Floor: 17.98 ETH",
         value: "140.79",
         change: "-56%",
     },
@@ -60,7 +62,7 @@ const collections = [
         imgSrc: Image1,
         alt: "Chain Hard Art #3",
         title: "Chain Hard Art #3",
-        floor: "Floor: 17.98 ETH",
+        badge: "Floor: 17.98 ETH",
         value: "110.64",
         change: "-14%",
     },
@@ -70,7 +72,7 @@ const collections = [
         imgSrc: "images/01.jpg",
         alt: "Chain Hard Art #89",
         title: "Chain Hard Art #89",
-        floor: "Floor: 17.98 ETH",
+        badge: "Floor: 17.98 ETH",
         value: "60.04",
         change: "-6%",
     },
@@ -83,25 +85,49 @@ const navButtons = [
     { icon: "⚖️", label: "Govern", },
 ];
 
-const tabsData = [
-    { id: "all", label: "All", Component: NftList },
-    { id: "art", label: "Art", Component: NftList },
-    { id: "celebrities", label: "Celebrities", Component: NftList },
-    { id: "gaming", label: "Gaming", Component: NftList },
-    { id: "more", label: "More", Component: NftList },
-];
 
 export default function Home() {
+    const navigate = useNavigate();
     const [activeCarouselIndex, setActiveCarouselIndex] = useState(0);
     const [activeTab, setActiveTab] = useState("all");
     const intervalRef = useRef(null);
+    const [nfts, setNfts] = useState([]);
+
+    const tabsData = [
+        { id: "all", label: "All", Component: () => <NftList items={nfts.slice(0, 3)} /> },
+        { id: "art", label: "Art", Component: NftList },
+        { id: "celebrities", label: "Celebrities", Component: NftList },
+        { id: "gaming", label: "Gaming", Component: NftList },
+        { id: "more", label: "More", Component: NftList },
+    ];
 
     useEffect(() => {
-        intervalRef.current = setInterval(() => {
-            setActiveCarouselIndex((prev) => (prev + 1) % carouselSlides.length);
-        }, 4000);
-        return () => clearInterval(intervalRef.current);
+        fetchNfts();
+        // intervalRef.current = setInterval(() => {
+        //     setActiveCarouselIndex((prev) => (prev + 1) % carouselSlides.length);
+        // }, 4000);
+        // return () => clearInterval(intervalRef.current);
     }, []);
+
+
+    const fetchNfts = async () => {
+        try{
+            const res = await fetch("/api/nfts");
+            if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+
+            const data = await res.json();
+            //console.log("NFT_LIST: ", data);
+            setNfts(data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        } finally {
+
+        }
+    };
+
+    const handleMoreClick = () => {
+        navigate(WEB_ROUTES.EXPLORE);
+    }   
 
     return (
         <div>
@@ -118,7 +144,8 @@ export default function Home() {
             <Tabs tabs={tabsData} />
 
             {/* TOP COLLECTIONS */}
-            <TopCollectionList collections={collections} />
+            {/* <TopCollectionList collections={collections} onMoreClick= {handleMoreClick} /> */}
+            <TopCollectionList collections={nfts.slice(3, 10)} onMoreClick= {handleMoreClick} />
 
             {/* Feature Section */}
             <FeatureSection />
