@@ -55,6 +55,9 @@
   /* position: relative; */
   gap: 10px;
 }
+.collection-item :hover {
+  cursor: pointer;
+}
 .collection-rank {
   background: linear-gradient(135deg, #ffbb4c 55%, #f5831f);
   color: #fff;

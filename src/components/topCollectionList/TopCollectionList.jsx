@@ -40,7 +40,7 @@ export default function TopCollectionList({ collections, onMoreClick }) {
       </div>
       <div className="collection-list">
         {collectionsWithBg.map(({ rank, rankBg, imgSrc, alt, title, badge, value, change }, i) => (
-          <div className="collection-item" key={i}>
+          <div className="collection-item" key={i} onClick={onMoreClick} >
             <div className="collection-rank" style={{ background: rankBg }}>
               {i+1}
             </div>
