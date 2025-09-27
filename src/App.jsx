@@ -25,13 +25,14 @@ import NotificationList from './pages/notifications/NotificationList';
 import Members from './pages/members/Members';
 import MemberContribution from './pages/contributors/MemberContribution';
 import Orders from './pages/orders/Orders';
+import AccountSetting from './pages/setting/AccountSetting';
+import TransactionHistory from './pages/transactions/TransactionHistory';
 import ReferralScreen from './pages/referral/ReferralScreen';
 import DepositPage from './pages/deposit/DepositPage';
 import WithdrawRequest from './pages/withdraw/WithdrawRequest';
 import Level from './pages/level/Level';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AccountSetting from './pages/setting/AccountSetting';
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
               <Route path="/members" element={<Members />} />
               <Route path="/contributions" element={<MemberContribution />} /> 
               <Route path="/orders" element={<Orders />} />
+              <Route path="/transactions" element={<TransactionHistory />} />
 
               <Route path="/referral" element={<ReferralScreen />} />
               <Route path="/deposit" element={<DepositPage />} />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Wallet.css';
 import PendingTransactions from '../../components/transaction/PendingTransactions';
-import TransactionHistory from '../../components/transactionHistory/TransactionHistory';
+import TransactionWidget from '../transactions/widget/TransactionWidget';
 import Toast from '../../components/toast/Toast';
 import apiClient from '../../api/apiClient';
 import { API_ROUTES } from '../../api/apiRoutes';
@@ -30,6 +30,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const Wallet = () => {    
     const navigate = useNavigate();
+    const [transactions, setTransactions] = useState([]);
     const [toastMessage, setToastMessage] = useState('');
     const [showToast, setShowToast] = useState(false);
     const [wallet, setWallet] = useState({});
@@ -37,6 +38,7 @@ const Wallet = () => {
     
     useEffect(() => {
         fetchWalletBalance();
+        fetchRecentTransactions();
     }, []);
 
     const fetchWalletBalance = async () => {
@@ -48,6 +50,25 @@ const Wallet = () => {
             setLoading(false); 
         }
     };    
+
+    
+    const fetchRecentTransactions = async () => {
+        // await delay(1000 * 100);
+
+        const response = await apiClient.get(API_ROUTES.TRANSACTIONS.TRANSACTION_HISTORY);
+        console.log("Transactions Response: ", response.data);
+        const transactions = response.data?.content || [];
+
+        const transformedTransactions = transactions.map(txn => ({
+            amount: new Intl.NumberFormat().format(txn.amount),
+            txnType: txn.txnTypeDisplayName,
+            credit: txn.credit,
+            remarks: txn.remarks,
+            date: txn.createdAt,
+        }));
+        setTransactions(transformedTransactions);
+    };
+
 
     const handleIconClick = (message) => {
         // setToastMessage(message);
@@ -105,7 +126,7 @@ const Wallet = () => {
                 ))}
             </div>
 
-            <TransactionHistory />
+            <TransactionWidget transactions={transactions.slice(0, 5)} />
 
             {/* Recent Transactions Component */}
             {/* Pending Deposit or Pending Withdraw Requests */}

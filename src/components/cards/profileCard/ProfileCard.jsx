@@ -14,7 +14,7 @@ const ProfileCard = ({ username, uuid, level, points, profileImage }) => {
         <div className="user-info">
           <div className="user-header">
             <h2 className="username">{username}</h2>
-            <FaWallet className="wallet-icon" onClick={() => navigate(`/members`)} />
+            <FaWallet className="wallet-icon" onClick={() => navigate(`/transactions`)} />
           </div>
           <div className="user-id">
             UID: {uuid}

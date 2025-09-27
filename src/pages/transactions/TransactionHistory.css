@@ -1,0 +1,26 @@
+/* Base style */
+.date-filter-container {
+  padding: 1rem;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+
+  /* Dark theme default */
+  background-color: #121212;
+  color: #ffffff;
+
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light theme override */
+.light-theme .date-filter-container.transactions {
+  background-color: #f9f9f9;
+  color: #1a1a1a;
+}
+
+.light-theme.date-filter-container.transactions {
+  background: #fff;
+}
+
+.history-list.transaction-history {
+
+}

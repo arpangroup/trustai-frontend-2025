@@ -13,6 +13,7 @@ const DefaultLayout = () => {
     { path: '/exploreDetails', title: 'Explore Details' },
     { path: '/notifications', title: 'Notifications' },
     { path: '/members', title: 'Members' },
+    { path: '/transactions', title: 'Transactions' },
     { path: '/contributions', title: 'Contributions' },
     { path: '/orders', title: 'Orders' },
     { path: '/referral', title: 'Referral' },
