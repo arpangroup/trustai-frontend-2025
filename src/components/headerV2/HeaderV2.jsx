@@ -10,6 +10,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext"; 
 import { TELEGRAM_LINK, WHATSAPP_LINK } from "../../constants/config";
 
+import logoImage from '../../assets/icons/logo.png'; 
+
 
 const HeaderV2 = () => {
   const navigate = useNavigate();
@@ -34,7 +36,8 @@ const HeaderV2 = () => {
   return (
     <div className="headerWhite">
       <div className="logo" onClick={() => window.location.href = '/'}>
-        <div className="logoIcon"></div>
+        {/* <div className="logoIcon"></div> */}
+        <img src={logoImage}/>
         <div className="logoText">
           Trust<span style={{ color: "#46dbff" }}>AI</span>
         </div>

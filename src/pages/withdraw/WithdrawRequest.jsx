@@ -97,7 +97,8 @@ export default function WithdrawRequest() {
       return;
     }
 
-    const totalDeduction = numericAmount + serviceCharge;
+    //const totalDeduction = numericAmount + serviceCharge;
+    const totalDeduction = numericAmount; // service charge will be deducted from admin side
     if (totalDeduction > parseFloat(walletBalance)) {
       toast.warning(`You don't have enough balance after service charge (${SERVICE_CHARGE_PERCENTAGE} ${CURRENCY_UNIT}).`);
       return;
