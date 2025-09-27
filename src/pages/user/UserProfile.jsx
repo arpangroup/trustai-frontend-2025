@@ -76,7 +76,7 @@ export default function UserProfile() {
     const [incomeData, setIncomeData] = useState([]);
     const [myOrders, setMyOrders] = useState([]);
     const [myTeams, setMyTeams] = useState([]);
-    const [todayIncome, setTodayIncome] = useState("");
+    const [todayTotalIncome, setTodayTotalIncome] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -113,8 +113,8 @@ export default function UserProfile() {
                 total: item.totalAmount              // map totalAmount to total
             }));
 
-            const filterTodayIncome = incomeResponse.filter(d => d.incomeType==='DAILY')?.[0]?.todayAmount || '0';
-            setTodayIncome(filterTodayIncome);
+            const filterTodayTotalIncome = incomeResponse.filter(d => d.incomeType==='TOTAL')?.[0]?.todayAmount || '0';
+            setTodayTotalIncome(filterTodayTotalIncome);
             // console.log("TODAY_INCOME: ", incomeResponse);
             setIncomeData(formattedIncomeData);
         } catch (err) {
@@ -197,7 +197,7 @@ export default function UserProfile() {
             {/* Profit & Balance Cards */}
             <div className="profit-cards-container">
                 <ProfitBalanceCard amount={userInfo.walletBalance} currency={CURRENCY_UNIT} label="Wallet Balance" />
-                <ProfitBalanceCard amount={todayIncome} currency={CURRENCY_UNIT} label="Today Income" />
+                <ProfitBalanceCard amount={todayTotalIncome} currency={CURRENCY_UNIT} label="Today Income" />
             </div>
 
 
