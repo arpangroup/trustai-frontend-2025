@@ -5,23 +5,11 @@ import DateFilter from "../../components/dateFilter/DateFilter";
 import { API_ROUTES } from "../../api/apiRoutes";
 import apiClient from "../../api/apiClient";
 import DataContainer from "../../components/container/DataContainer";
-import StatPanelSkeleton from "../../components/statPanel/skeleton/StatPanelSkeleton";
-import { formatTimestampTo_YY_MM_DD_HH_MM_SS } from '../../constants/dateFormatter';
 import TransactionList from "./TransactionList";
+import TransactionHistorySkeleton from "./skeleton/TransactionHistorySkeleton";
 
-const isCredit = (item) => {
-  if (typeof item.credit === 'boolean') {
-    return item.credit;
-  }
 
-  // Fallback logic
-  if (item.txnType === 'WITHDRAWAL') {
-    return false;
-  }
-
-  return true;
-};
-
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export default function TransactionHistory() {
   const [dateRange, setDateRange] = useState({ start: "", end: "" });
@@ -42,7 +30,7 @@ export default function TransactionHistory() {
       txnType: txn.txnTypeDisplayName,
       credit: txn.credit,
       remarks: txn.remarks,
-      date: formatTimestampTo_YY_MM_DD_HH_MM_SS(txn.createdAt),
+      date: txn.createdAt,
     }));
     return transformedTransactions;
   };
@@ -57,7 +45,7 @@ export default function TransactionHistory() {
         fetchData={fetchTransactions}
         dependencies={[dateRange]}
         noDataMessage="No Data found"
-        // loadingComponent={<StatPanelSkeleton cards={8} panels={2}/>}
+        loadingComponent={<TransactionHistorySkeleton cards={8} panels={2}/>}
         renderData={(items) => (    
           <TransactionList items={items} />
         )}

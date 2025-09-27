@@ -26,7 +26,7 @@ const sectionIconsData = [
     ]
 ];
 
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+// const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const Wallet = () => {    
     const navigate = useNavigate();
@@ -34,7 +34,8 @@ const Wallet = () => {
     const [toastMessage, setToastMessage] = useState('');
     const [showToast, setShowToast] = useState(false);
     const [wallet, setWallet] = useState({});
-    const [loading, setLoading] = useState(true);
+    const [loadingWallet, setLoadingWallet] = useState(true);
+    const [loadingTransactions, setLoadingTransactions] = useState(true);
     
     useEffect(() => {
         fetchWalletBalance();
@@ -43,30 +44,35 @@ const Wallet = () => {
 
     const fetchWalletBalance = async () => {
         try {
-            //await delay(1000 * 3);
+            //await delay(1000 * 5);
             const response = await apiClient.get(API_ROUTES.WALLET.WALLET_BALANCE);
             setWallet(response.data);
         } finally {
-            setLoading(false); 
+            setLoadingWallet(false); 
         }
     };    
 
     
     const fetchRecentTransactions = async () => {
-        // await delay(1000 * 100);
+        //await delay(1000 * 100);
 
-        const response = await apiClient.get(API_ROUTES.TRANSACTIONS.TRANSACTION_HISTORY);
-        console.log("Transactions Response: ", response.data);
-        const transactions = response.data?.content || [];
+        try {
+            const response = await apiClient.get(API_ROUTES.TRANSACTIONS.TRANSACTION_HISTORY);
+            console.log("Transactions Response: ", response.data);
+            const transactions = response.data?.content || [];
 
-        const transformedTransactions = transactions.map(txn => ({
-            amount: new Intl.NumberFormat().format(txn.amount),
-            txnType: txn.txnTypeDisplayName,
-            credit: txn.credit,
-            remarks: txn.remarks,
-            date: txn.createdAt,
-        }));
-        setTransactions(transformedTransactions);
+            const transformedTransactions = transactions.map(txn => ({
+                amount: new Intl.NumberFormat().format(txn.amount),
+                txnType: txn.txnTypeDisplayName,
+                credit: txn.credit,
+                remarks: txn.remarks,
+                date: txn.createdAt,
+            }));
+            setTransactions(transformedTransactions);
+        } finally {
+            setLoadingTransactions(false);
+        }
+
     };
 
 
@@ -77,7 +83,7 @@ const Wallet = () => {
         setTimeout(() => setShowToast(false), 3000);
     };
 
-    if (loading) {
+    if (loadingWallet || loadingTransactions) {
         return <WalletPageSkeleton />;
     }
     
