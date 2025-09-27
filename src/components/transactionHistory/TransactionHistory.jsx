@@ -37,6 +37,19 @@ const historyData = [
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+const isCredit = (item) => {
+  if (typeof item.credit === 'boolean') {
+    return item.credit;
+  }
+
+  // Fallback logic
+  if (item.txnType === 'WITHDRAWAL') {
+    return false;
+  }
+
+  return true;
+};
+
 
 const TransactionHistory = () => {
 
@@ -82,14 +95,14 @@ const TransactionHistory = () => {
               {transactions.map((item, index) => (
                 <li className="history-item" key={index}>
                   <div>
-                    <div className="desc">{item.remarks.split(':')[0]}</div>
+                    <div className="desc">{item.remarks?.split(':')[0] ?? ''}</div>
                     {/* <div className="date">{item.remarks}</div> */}
                     <div className="date">{item.date}</div>
                   </div>
                   <div className="right-block">
-                    <span className={`amount ${item.amount < 0 ? 'negative' : 'positive'}`}>
-                      {item.amount < 0 ? '' : '+'}{item.amount}
-                    </span>
+                     <span className={`amount ${isCredit(item) ? 'positive' : 'negative'}`}>
+                        {isCredit(item) ? '+' : '-'}{item.amount}
+                      </span>
                     <span className="deposited">{item.txnType}</span>
                   </div>
                 </li>

@@ -93,7 +93,7 @@ body.dark .recent-item-desc {
   color: #ccc;
 }
 
-.recent-amount {
+.recent-amount.positive {
   font-weight: 600;
   color: #16A34A; /* green */
 }

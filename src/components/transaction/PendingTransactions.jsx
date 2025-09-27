@@ -63,9 +63,38 @@ const recentTransactions = [
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+
+const isCredit = (item) => {
+  if (typeof item.credit === 'boolean') {
+    return item.credit;
+  }
+
+  // Fallback logic
+  if (item.txnType === 'WITHDRAWAL') {
+    return false;
+  }
+
+  return true;
+};
+
 export default function PendingTransactions() { // Pending Deposit or Pending Withdraw Requests
     const navigate = useNavigate();
     const [totalPending, setTotalPending] = useState(0);
+
+    const fetchCombinedPendingTransactions = async () => {
+        const [deposits, withdrawals] = await Promise.all([
+            fetchPendingDeposits(),
+            fetchPendingWithdraws()
+        ]);
+
+        const combined = [...deposits, ...withdrawals];
+
+        // Optional: sort by some logic, e.g., descending amount or timestamp if available
+        // combined.sort((a, b) => Number(b.amount) - Number(a.amount));
+
+        setTotalPending(combined.length);
+        return combined;
+    };
     
     const fetchPendingDeposits = async () => {
         // await delay(1000 * 3);
@@ -84,12 +113,35 @@ export default function PendingTransactions() { // Pending Deposit or Pending Wi
             iconColor: '#03C9D7',
             iconBg: '#E5FAFB',
             pcColor: 'green-600',
+            credit: true,
         }));
 
-        console.log("transformPendingDeposits: ", transformPendingDeposits);
-
-        setTotalPending(transformPendingDeposits.length);
+        //console.log("transformPendingDeposits: ", transformPendingDeposits);
         return transformPendingDeposits;
+    };
+
+    
+    const fetchPendingWithdraws = async () => {     
+        console.log("Fetching pending withdraws..."); 
+        const response = await apiClient.get(API_ROUTES.WITHDRAWAL.WITHDRAWAL_HISTORY, {
+            params: { status: 'PENDING' }
+        });
+        //console.log("API Response: ", response.data?.content);
+        const pendingWithdraws = response.data?.content || [];
+
+        const transformPendingWithdraws = pendingWithdraws.map(pendingWithdraw => ({
+            icon: <BsCurrencyDollar />,
+            amount: pendingWithdraw.amount.toString(), // or use formatting if needed
+            title: "Withdraw Request",
+            desc: pendingWithdraw.txnRefId,
+            iconColor: '#03C9D7',
+            iconBg: '#E5FAFB',
+            pcColor: 'green-600',
+            credit: false,
+        }));
+
+        console.log("transformPendingWithdraws: ", transformPendingWithdraws);
+        return transformPendingWithdraws;
     };
 
     return (      
@@ -102,7 +154,7 @@ export default function PendingTransactions() { // Pending Deposit or Pending Wi
                     </div>
                     <div className="recent-list">
                         <DataContainer
-                            fetchData={fetchPendingDeposits}
+                            fetchData={fetchCombinedPendingTransactions}
                             dependencies={[]}
                             noDataMessage="No pending records found."
                             noDataStyle={{height: '30vh'}}
@@ -127,8 +179,8 @@ export default function PendingTransactions() { // Pending Deposit or Pending Wi
                                                 <p className="recent-item-desc">{item.desc}</p>
                                             </div>
                                         </div>
-                                        <p className={`recent-amount ${Number(item.amount) < 0 ? 'negative' : ''}`}>
-                                            {Number(item.amount) < 0 ? '-' : '+'}${Math.abs(Number(item.amount))}
+                                        <p className={`recent-amount ${isCredit(item) ? 'positive' : 'negative'}`}>
+                                            {isCredit(item) ? '+' : '-'}${Math.abs(Number(item.amount))}
                                         </p>
                                     </div>
                                 ))}
