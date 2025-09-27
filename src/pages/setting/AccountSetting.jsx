@@ -5,7 +5,7 @@ import { Link, useLocation, useSearchParams } from "react-router-dom";
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from "../../api/apiRoutes";
 import { toast } from "react-toastify";
-import { INDIAN_STATES } from "../../constants/config";
+import { INDIAN_STATES, REQUIRED_KYC_FIELDS } from "../../constants/config";
 
 
 const AccountSetting = () => {
@@ -76,6 +76,16 @@ const AccountSetting = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+
+        // 🚨 Validate required fields
+        for (const field of REQUIRED_KYC_FIELDS) {
+            const value = formData[field];
+            if (!value || (typeof value === "string" && value.trim() === "")) {
+                toast.error(`Please fill out the required field: ${field}`);
+                setLoading(false);
+                return;
+            }
+        }
 
         try {
             const changedFields = {};

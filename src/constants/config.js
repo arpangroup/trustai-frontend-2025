@@ -71,6 +71,8 @@ export const RANK_TO_NUMBER_MAP = {
   RANK_10: "10",
 };
 
+export const REQUIRED_KYC_FIELDS = ["walletAddress", "firstname", "lastname", "mobile", "state", "city", "address", "zipCode"];
+
 export const INDIAN_STATES = [
   { code: "AP", name: "Andhra Pradesh" },
   { code: "AR", name: "Arunachal Pradesh" },
