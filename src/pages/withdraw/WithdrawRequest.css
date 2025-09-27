@@ -116,3 +116,19 @@
 .confirm-button:hover {
   background-color: #0056b3;
 }
+
+
+.wallet-input-wrapper {
+  position: relative;
+}
+
+.edit-icon {
+  position: absolute;
+  right: 12px;
+  top: 40%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #007bff;
+  font-size: 1.2rem;
+  user-select: none;
+}

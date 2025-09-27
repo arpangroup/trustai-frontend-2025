@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./WithdrawRequest.css";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaEdit } from "react-icons/fa";
 import { CURRENCY_UNIT, MINIMUM_WITHDRAW, SERVICE_CHARGE_PERCENTAGE, SERVICE_CHARGE_FIXED, SERVICE_CHARGE_THRESHOLD, CURRENCY_SYMBOL  } from "../../constants/config";
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from "../../api/apiRoutes";
 import { toast } from "react-toastify";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function WithdrawRequest() {
+  const navigate = useNavigate();
   const [walletBalance, setWalletBalance] = useState("100");
   const [walletAddress, setWalletAddress] = useState("");
   const [amount, setAmount] = useState("");
@@ -141,12 +143,28 @@ export default function WithdrawRequest() {
             {/* Withdraw Address */}
             <div className="form-group">
               <label>Withdraw Address</label>
-              <input
+              {/* <input
                 type="text"
                 value={walletAddress}
                 disabled
                 className="withdraw-input"
+              /> */}
+              <div className="wallet-input-wrapper">
+              <input
+                type="text"
+                value={walletAddress}
+                disabled={!!walletAddress}  // disable input if walletAddress exists
+                onChange={(e) => setWalletAddress(e.target.value)}
+                className="withdraw-input"
+                placeholder="Enter your wallet address"
               />
+              {!walletAddress && (
+                <FaEdit
+                  className="edit-icon"
+                  onClick={() => navigate("/settings")}
+                />
+              )}
+            </div>
             </div>
 
             <hr className="divider" />
