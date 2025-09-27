@@ -125,6 +125,15 @@ export default function Home() {
         }
     };
 
+    function shuffleArray(array) {
+        const shuffled = [...array]; // Clone the array to avoid mutating original
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }
+
     const handleMoreClick = () => {
         navigate(WEB_ROUTES.EXPLORE);
     }   
@@ -145,7 +154,7 @@ export default function Home() {
 
             {/* TOP COLLECTIONS */}
             {/* <TopCollectionList collections={collections} onMoreClick= {handleMoreClick} /> */}
-            <TopCollectionList collections={nfts.slice(3, 10)} onMoreClick= {handleMoreClick} />
+            <TopCollectionList collections={shuffleArray(nfts.slice(3, 10))} onMoreClick= {handleMoreClick} />
 
             {/* Feature Section */}
             <FeatureSection />
