@@ -14,6 +14,7 @@ import FeatureSection from "./feature/FeatureSection";
 import BiddingSection from "./bidding/BiddingSection";
 import { useNavigate } from "react-router-dom";
 import { WEB_ROUTES } from "../../api/apiRoutes";
+import HtmlRenderer from "./HtmlRenderer";
 
 const carouselSlides = [
     {
@@ -160,7 +161,9 @@ export default function Home() {
             <FeatureSection />
 
             {/* Stake and Bidding Section */}
-            <BiddingSection/>
+            {/* <BiddingSection/> */}
+
+            <HtmlRenderer/>
 
             {/* BOTTOM NAV */}
             <BottomNav />

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Trade Dashboard</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff;
+    margin: 0;
+    padding: 20px;
+    color: #111;
+  }
+  .container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  h3.section-title {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  /* Major indices */
+  .major-indices {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .index-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px;
+  }
+  .index-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .index-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    flex-shrink: 0;
+  }
+  .blue-100 { background: #1178f2; }
+  .blue-225 { background: #195192; }
+  .blue-dark { background: #1763a7; }
+  .green-40 { background: #1a856a; }
+  .red-500 { background: #be2026; }
+  .grey-100 { background: #5d5d5d; }
+  .grey-225 { background: #3b3b3b; }
+
+  .index-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .index-symbol {
+    font-weight: 700;
+    font-size: 14px;
+    color: #222;
+  }
+  .index-symbol small {
+    font-weight: 400;
+    font-size: 11px;
+    margin-left: 3px;
+    color: #777;
+  }
+  .index-price {
+    font-weight: 600;
+    font-size: 16px;
+    color: #111;
+  }
+  .index-price span {
+    font-weight: 400;
+    font-size: 12px;
+    margin-left: 3px;
+    color: #666;
+  }
+  .index-change {
+    font-weight: 700;
+    font-size: 14px;
+    width: 70px;
+    text-align: right;
+  }
+  .positive { color: #1e6f23; }
+  .negative { color: #b80606; }
+
+
+  /* S&P500 section */
+  .sp500-section {
+    background: #f8faff;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    box-shadow: 2px 3px 15px rgb(20 97 193 / 9%);
+  }
+  .sp500-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    color: #be1e2d;
+  }
+  .sp500-title {
+    font-weight: 800;
+    font-size: 23px;
+  }
+  .sp500-symbol {
+    font-weight: 500;
+    font-size: 14px;
+    color: #888;
+  }
+  .sp500-price {
+    font-weight: 800;
+    font-size: 32px;
+    color: #000;
+    margin-top: 4px;
+  }
+  .sp500-change {
+    font-weight: 600;
+    font-size: 16px;
+    color: #0a730d;
+    margin-top: 3px;
+  }
+  #sp500Chart {
+    width: 100%;
+    height: 84px;
+    margin-top: 16px;
+  }
+
+  /* Crypto market cap */
+  .crypto-section {
+    margin-bottom: 24px;
+  }
+  .crypto-title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  .crypto-market-cap {
+    font-weight: 800;
+    font-size: 21px;
+    color: #222;
+    margin-bottom: 6px;
+  }
+  .crypto-change {
+    font-weight: 600;
+    font-size: 14px;
+    color: #b80606;
+    margin-bottom: 14px;
+  }
+  .bitcoin-dominance {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .dom-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #111;
+  }
+  .dot {
+    border-radius: 50%;
+    width: 13px;
+    height: 13px;
+  }
+  .btc-dot { background: #27639e; }
+  .eth-dot { background: #af4c94; }
+  .others-dot { background: #6db4ca; }
+
+  .crypto-prices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .crypto-price {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .crypto-price span {
+    font-weight: 400;
+    font-size: 12px;
+    color: #555;
+  }
+
+
+  /* Most volatile stocks */
+  .volatile-section {
+    margin-bottom: 24px;
+  }
+  .volatile-section h3 {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #444;
+  }
+  .volatile-stock {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1.5px solid #eee;
+  }
+  .stock-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: #222;
+  }
+  .stock-name small {
+    font-weight: 500;
+    font-size: 11px;
+    margin-left: 4px;
+    color: #666;
+  }
+  .stock-price {
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .stock-change-positive {
+    color: #157651;
+  }
+  .stock-change-negative {
+    color: #a00404;
+  }
+
+
+  /* Economy and inflation */
+  .economy {
+    font-weight: 700;
+    font-size: 16px;
+    color: #007acc;
+    cursor: pointer;
+    margin-bottom: 12px;
+    user-select: none;
+  }
+  .global-inflation-map {
+    max-height: 210px;
+    margin-bottom: 24px;
+  }
+  .global-inflation-map img {
+    width: 100%;
+    height: auto;
+    border-radius: 7px;
+    box-shadow: 1px 2px 6px rgb(0 0 0 / 0.1);
+  }
+  .see-more {
+    font-weight: 700;
+    color: #007acc;
+    cursor: pointer;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+  <div class="container" role="main" aria-label="Trade Dashboard">
+
+    <section class="major-indices" aria-label="Major indices">
+      <div class="index-card" tabindex="0">
+        <div class="index-left">
+          <div class="index-circle blue-100" aria-hidden="true">100</div>
+          <div class="index-info">
+            <div class="index-symbol">Nasdaq 100 <small>NDX</small></div>
+            <div class="index-price">24,503.85 <span>USD</span></div>
+          </div>
+        </div>
+        <div class="index-change positive" aria-live="polite">+0.44%</div>
+      </div>
+
+      <div class="index-card" tabindex="0">
+        <div class="index-left">
+          <div class="index-circle blue-225" aria-hidden="true">225</div>
+          <div class="index-info">
+            <div class="index-symbol">Japan 225 <small>NI225</small></div>
+            <div class="index-price">45,354.99 <span>JPY</span></div>
+          </div>
+        </div>
+        <div class="index-change negative" aria-live="polite">-0.87%</div>
+      </div>
+
+      <div class="index-card" tabindex="0">
+        <div class="index-left">
+          <div class="index-circle blue-dark" aria-hidden="true">SSE</div>
+          <div class="index-info">
+            <div class="index-symbol">SSE Composite <small>000001</small></div>
+            <div class="index-price">3,828.1060 <span>CNY</span></div>
+          </div>
+        </div>
+        <div class="index-change negative" aria-live="polite">-0.65%</div>
+      </div>
+      
+      <div class="index-card" tabindex="0">
+        <div class="index-left">
+          <div class="index-circle grey-100" aria-hidden="true">100</div>
+          <div class="index-info">
+            <div class="index-symbol">FTSE 100 <small>UKX</small></div>
+            <div class="index-price">9,284.83 <span>GBP</span></div>
+          </div>
+        </div>
+        <div class="index-change positive" aria-live="polite">+0.77%</div>
+      </div>
+      
+      <div class="index-card" tabindex="0">
+        <div class="index-left">
+          <div class="index-circle grey-225" aria-hidden="true">DAX</div>
+          <div class="index-info">
+            <div class="index-symbol">DAX <small>DAX</small></div>
+            <div class="index-price">23,739.47 <span>EUR</span></div>
+          </div>
+        </div>
+        <div class="index-change positive" aria-live="polite">+0.87%</div>
+      </div>
+      
+      <div class="index-card" tabindex="0">
+        <div class="index-left">
+          <div class="index-circle green-40" aria-hidden="true">40</div>
+          <div class="index-info">
+            <div class="index-symbol">CAC 40 <small>PX1</small></div>
+            <div class="index-price">7,870.68 <span>EUR</span></div>
+          </div>
+        </div>
+        <div class="index-change positive" aria-live="polite">+0.97%</div>
+      </div>
+    </section>
+
+    <section class="sp500-section" aria-label="S&P 500 Stock Index">
+      <div class="sp500-header">
+        <div class="sp500-title">S&P 500 <small class="sp500-symbol">SPX</small></div>
+        <div class="sp500-price">6,643.71 <span>USD</span></div>
+      </div>
+      <div class="sp500-change positive" aria-live="polite">+0.59%</div>
+      <canvas id="sp500Chart" role="img" aria-label="S&P 500 price chart" width="360" height="80"></canvas>
+    </section>
+
+    <section class="crypto-section" aria-label="Cryptocurrency Market Capitalization">
+      <div class="crypto-title">Crypto market cap</div>
+      <div class="crypto-market-cap">3.73T USD</div>
+      <div class="crypto-change negative" aria-live="polite">-3.08%</div>
+      <div class="bitcoin-dominance" aria-label="Bitcoin dominance">
+        <div class="dom-item"><div class="dot btc-dot"></div>Bitcoin 58.58%</div>
+        <div class="dom-item"><div class="dot eth-dot"></div>Ethereum 12.99%</div>
+        <div class="dom-item"><div class="dot others-dot"></div>Others 28.43%</div>
+      </div>
+      <div class="crypto-prices">
+        <div class="crypto-price">
+          Bitcoin <span>109,639 USD</span> <span class="negative">-0.04%</span>
+        </div>
+        <div class="crypto-price">
+          Ethereum <span>4,015.2 USD</span> <span class="negative">-0.11%</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="volatile-section" aria-label="Most volatile stocks">
+      <h3>Most volatile stocks</h3>
+      <div class="volatile-stock">
+        <div class="stock-name">Smart Digital Group Limited <small>(SDM)</small></div>
+        <div class="stock-price stock-change-negative">1.85 USD -86.41%</div>
+      </div>
+      <div class="volatile-stock">
+        <div class="stock-name">Indaptus Therapeutics, Inc. <small>(INDP)</small></div>
+        <div class="stock-price stock-change-positive">3.49 USD +6.40%</div>
+      </div>
+      <div class="volatile-stock">
+        <div class="stock-name">Zhengye Biotechnology H... <small>(ZYBT)</small></div>
+        <div class="stock-price stock-change-negative">1.84 USD -38.67%</div>
+      </div>
+      <div class="volatile-stock">
+        <div class="stock-name">Applied Therapeutics, Inc. <small>(APLT)</small></div>
+        <div class="stock-price stock-change-positive">1.24 USD +121.35%</div>
+      </div>
+      <div class="volatile-stock">
+        <div class="stock-name">MEGAN HOLDINGS LIMITED <small>(MGN)</small></div>
+        <div class="stock-price stock-change-positive">4.85 USD +329.20%</div>
+      </div>
+      <div class="volatile-stock">
+        <div class="stock-name">Pop Culture Group Co., ... <small>(CPOP)</small></div>
+        <div class="stock-price stock-change-negative">0.9198 USD -55.13%</div>
+      </div>
+    </section>
+
+    <div class="economy" tabindex="0">Economy &gt;</div>
+
+    <section class="global-inflation-map" aria-label="Global inflation map">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Inflation_map_2023.png/320px-Inflation_map_2023.png" alt="Global inflation map" />
+    </section>
+
+    <div class="see-more" tabindex="0">See more global trends &gt;</div>
+
+  </div>
+
+<script>
+  // Draw a simple S&P 500 chart on canvas using JS (mock data)
+  const canvas = document.getElementById('sp500Chart');
+  const ctx = canvas.getContext('2d');
+  const width = canvas.width;
+  const height = canvas.height;
+  const padding = 20;
+
+  const prices = [
+    6645, 6638, 6640, 6643, 6632, 6628, 6635, 6641, 6643, 6644, 6643
+  ];
+
+  // Map data points to canvas coordinates
+  const maxPrice = Math.max(...prices);
+  const minPrice = Math.min(...prices);
+  const pxToPriceRatio = (height - padding * 2) / (maxPrice - minPrice);
+
+  // Clear
+  ctx.clearRect(0, 0, width, height);
+
+  // Chart background fill
+  ctx.fillStyle = '#cee7f8';
+  ctx.fillRect(0, 0, width, height);
+
+  ctx.beginPath();
+  ctx.strokeStyle = '#007acc';
+  ctx.lineWidth = 2;
+
+  prices.forEach((price, i) => {
+    const x = i * (width / (prices.length - 1));
+    const y = height - padding - (price - minPrice) * pxToPriceRatio;
+    if (i === 0) {
+      ctx.moveTo(x, y);
+    } else {
+      ctx.lineTo(x, y);
+    }
+  });
+
+  ctx.stroke();
+
+  // Fill below line to simulate area chart
+  ctx.lineTo(width, height);
+  ctx.lineTo(0, height);
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(122, 199, 255, 0.3)';
+  ctx.fill();
+</script>
+
+</body>
+</html>
