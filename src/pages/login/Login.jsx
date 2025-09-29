@@ -5,6 +5,7 @@ import "./Login.css";
 import { AuthContext } from "../../context/AuthContext";
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from "../../api/apiRoutes";
+import logoImage from '../../assets/icons/logo.png'; 
 
 const Login = () => {
   
@@ -54,12 +55,13 @@ const Login = () => {
       <div className="login-box">
         {/* Logo */}
         <div className="logo">
-          <div className="logo-grid">
+          {/* <div className="logo-grid">
             <div className="logo-square top-left"></div>
             <div className="logo-square top-right"></div>
             <div className="logo-square bottom-left"></div>
             <div className="logo-square bottom-right"></div>
-          </div>
+          </div> */}
+          <img src={logoImage} alt="Trust AI Logo" style={{width: '140px', height: '100px'}} />
           <h2>Trust AI</h2>
         </div>
 

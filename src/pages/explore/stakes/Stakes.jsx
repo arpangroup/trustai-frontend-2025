@@ -97,7 +97,7 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
                                         <StakeCard
                                             key={item.id || index}
                                             image={item.imageUrl}
-                                            title={item.title}
+                                            title={item.name}
                                             price={item.stakePrice}
                                             currency={CURRENCY_UNIT}
                                             likes={item.totalReturnPeriods} // or any other available metric
