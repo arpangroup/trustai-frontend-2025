@@ -74,15 +74,33 @@ const ReserveNow = ({reservedStakes = [], onReservedSuccess}) => {
     fetchData();
   }, []);
 
+  // useEffect(() => {
+  //   if (
+  //     Array.isArray(reservedStakes) &&
+  //     reservedStakes.length > 0 &&
+  //     reservedStakes[0].sold &&
+  //     reservedStakes[0].expiryAt != null
+  //   ) {
+  //     setExpiryAt(reservedStakes[0].expiryAt);
+  //   }
+  // }, [reservedStakes]);
+
   useEffect(() => {
-    if (
-      Array.isArray(reservedStakes) &&
-      reservedStakes.length > 0 &&
-      reservedStakes[0].expiryAt != null
-    ) {
-      setExpiryAt(reservedStakes[0].expiryAt);
+    if (Array.isArray(reservedStakes) && reservedStakes.length > 0) {
+      const now = Date.now();
+
+      // Find the first stake that has not expired yet
+      const activeStake = reservedStakes.find(
+        (stake) => stake.sold !== true && stake.expiryAt && new Date(stake.expiryAt).getTime() > now
+      );
+
+      if (activeStake) {
+        setExpiryAt(activeStake.expiryAt);
+      } else {
+        setExpiryAt(null);
+      }
     }
-  }, [reservedStakes]);
+}, [reservedStakes]);
 
 
   // When selectedRank changes, reset selectedInvestmentRange

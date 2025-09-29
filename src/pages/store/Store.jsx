@@ -174,7 +174,7 @@ const Store = () => {
         setLoading(true);
         try {
             //await delay(1000 * 10);
-            //const response = await apiClient.get(API_ROUTES.RESERVATION_API.ACTIVE_ORDERS);
+           // const response = await apiClient.get(API_ROUTES.RESERVATION_API.ALL_ORDERS, { activeOnly: true });
             const response = await apiClient.get(API_ROUTES.RESERVATION_API.ALL_ORDERS);
             //console.log("ORDERS: ", response);
             setOrders(response.data || []);
