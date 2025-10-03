@@ -197,7 +197,7 @@ export default function UserProfile() {
             {/* Profit & Balance Cards */}
             <div className="profit-cards-container">
                 <ProfitBalanceCard amount={userInfo.walletBalance} currency={CURRENCY_UNIT} label="Wallet Balance" />
-                <ProfitBalanceCard amount={todayTotalIncome} currency={CURRENCY_UNIT} label="Today Income" />
+                <ProfitBalanceCard amount={userInfo.profitWallet} currency={CURRENCY_UNIT} label="Profit Wallet" />
             </div>
 
 

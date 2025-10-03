@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import './Header.css';
 import { AuthContext } from "../../context/AuthContext";
 
-import Image1 from '../../assets/bids1.png';
+// import Image1 from '../../assets/bids1.png';
+import Image1 from '../../assets/icons/logo.png';
 import { useNotifications } from "../../context/NotificationContext";
 import { MAIN_HEADER_TITLE, TELEGRAM_LINK, WHATSAPP_LINK } from "../../constants/config";
 
@@ -36,7 +37,7 @@ export default function Header() {
   return (
     <div className="header header-main">
       <div className="header-content" onClick={handleSignInClick} style={{ cursor: "pointer" }}>
-        <img src={Image1} className="avatar" alt="User" />
+        <img src={Image1} className="avatar" alt="User" style={{width: '38px', height: '38px'}} />
         <div className="welcome-text">
           <div className="welcome">{MAIN_HEADER_TITLE}</div>
           <div className="signin">
@@ -66,7 +67,7 @@ export default function Header() {
 
         {isAuthenticated && (
           <div className={`menu-dialog ${menuOpen ? 'show' : ''}`}>
-          <div className="menu-item"><i>🌍</i><span>Language</span></div>
+          {/* <div className="menu-item"><i>🌍</i><span>Language</span></div> */}
           
           {/* WhatsApp Support */}
           <div className="menu-item" onClick={() => {
