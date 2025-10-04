@@ -67,7 +67,7 @@ const HeaderV2 = () => {
         <div className={`menu-dialog ${menuOpen ? 'show' : ''}`}>
           <div className="menu-item" onClick={() => navigate("/settings")}><i>⚙️</i><span>Settings</span></div>
 
-          <div className="menu-item"><i>🌍</i><span>Language</span></div>
+          {/* <div className="menu-item"><i>🌍</i><span>Language</span></div> */}
           
           {/* WhatsApp Support */}
           <div className="menu-item" onClick={() => {

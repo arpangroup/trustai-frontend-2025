@@ -61,7 +61,7 @@ const Login = () => {
             <div className="logo-square bottom-left"></div>
             <div className="logo-square bottom-right"></div>
           </div> */}
-          <img src={logoImage} alt="Trust AI Logo" style={{width: '140px', height: '100px'}} />
+          <img src={logoImage} alt="Trust AI Logo" style={{width: '80px', height: '80px'}} />
           <h2>Trust AI</h2>
         </div>
 
