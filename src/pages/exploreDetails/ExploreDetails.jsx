@@ -13,6 +13,7 @@ import WarningIcon from '../../assets/icons/warming.png';
 import AlertModal from '../../components/modal/success/AlertModal';
 import { ERRORS } from '../../constants/errors';
 import confetti from 'canvas-confetti';
+import { formatDateShort } from '../../constants/dateFormatter';
 
 
 const description = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`;
@@ -71,8 +72,9 @@ const ExploreDetails = () => {
       };
 
       const response = await apiClient.post(API_ROUTES.EXPLORE.SUBSCRIBE_STAKE, payload);
+      const {investmentId, expectedReturnAmount, maturityAt} = response.data;
 
-      console.log("API response:", response);
+      console.log("API response:", response.data);
       //setShowSuccessModal(true); // Open Success modal
       // On success
       setModalData({
@@ -81,9 +83,10 @@ const ExploreDetails = () => {
         title: 'Subscription Success!',
         content: (
           <>
-            <p><strong>Subscription Amount:</strong> {schema.minimumInvestmentAmount} {schema.currency || CURRENCY_UNIT}</p>
-            <p><strong>ROI:</strong> {schema.returnPercentage || '2.5'}%</p>
-            <p><strong>Mature At:</strong> 21 AUG 2025</p>
+            <p><strong>Subscription Amount: </strong> {schema.minimumInvestmentAmount} {schema.currency || CURRENCY_UNIT}</p>
+            <p><strong>ROI: </strong>{schema.returnRate ? `${parseFloat(schema.returnRate).toFixed(2)}%` : 'NaN'}</p>
+            <p><strong>Expected Return: </strong> {expectedReturnAmount || 'NaN'} {CURRENCY_UNIT}</p>
+            <p><strong>Mature At: </strong> {formatDateShort(maturityAt)}</p>
           </>
         ),
         footerButtons: [

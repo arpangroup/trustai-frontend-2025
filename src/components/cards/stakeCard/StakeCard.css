@@ -32,6 +32,10 @@
   margin-top: 15px;
 }
 
+.bids-card-top a {
+  text-decoration: none;
+}
+
 .bids-card-bottom {
   display: flex;
   justify-content: space-between;
