@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 // import Image1 from '../../assets/bids1.png';
 import Image1 from '../../assets/icons/logo.png';
 import { useNotifications } from "../../context/NotificationContext";
-import { MAIN_HEADER_TITLE, TELEGRAM_LINK, WHATSAPP_LINK } from "../../constants/config";
+import { EMAIL_LINK, MAIN_HEADER_TITLE, TELEGRAM_LINK, WHATSAPP_LINK } from "../../constants/config";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -75,6 +75,17 @@ export default function Header() {
             setMenuOpen(false);
           }}>
             <i>💬</i><span>Support</span>
+          </div>
+
+          
+          <div
+            className="menu-item"
+            onClick={() => {
+              window.open(`https://mail.google.com/mail/?view=cm&to=${EMAIL_LINK}`, '_blank');
+              setMenuOpen(false);
+            }}
+          >
+           <i>✉️</i><span>Email</span>
           </div>
 
 

@@ -29,6 +29,7 @@ export const MAIN_HEADER_TITLE        = getConfigValue("app.config.header.main.t
 export const OLP_DALAY_SECONDS        = getConfigValue("app.config.otp.delay.seconds", 30);
 export const TELEGRAM_LINK            = getConfigValue("app.config.support.telegram.link", "https://t.me/your_username");
 export const WHATSAPP_LINK            = getConfigValue("app.config.support.whatsapp.link", "https://wa.me/919876543210");
+export const EMAIL_LINK               = getConfigValue("app.config.support.email.link", "trustaihelp@gmail.com");
 
 
 export const USER_ID            = getConfigValue("USER_ID", 1);

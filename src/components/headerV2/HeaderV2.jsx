@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { useNotifications } from '../../context/NotificationContext';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext"; 
-import { TELEGRAM_LINK, WHATSAPP_LINK } from "../../constants/config";
+import { EMAIL_LINK, TELEGRAM_LINK, WHATSAPP_LINK } from "../../constants/config";
 
 import logoImage from '../../assets/icons/logo.png'; 
 
@@ -75,6 +75,17 @@ const HeaderV2 = () => {
             setMenuOpen(false);
           }}>
             <i>💬</i><span>Support</span>
+          </div>
+
+          
+          <div
+            className="menu-item"
+            onClick={() => {
+              window.open(`https://mail.google.com/mail/?view=cm&to=${EMAIL_LINK}`, '_blank');
+              setMenuOpen(false);
+            }}
+          >
+            <i>✉️</i><span>Email</span>
           </div>
 
 
