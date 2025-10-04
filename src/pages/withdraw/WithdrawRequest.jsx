@@ -10,7 +10,9 @@ import { Navigate, useNavigate } from "react-router-dom";
 export default function WithdrawRequest() {
   const navigate = useNavigate();
   const [walletBalance, setWalletBalance] = useState("100");
+  const [profitBalance, setProfitBalance] = useState("100");
   const [walletAddress, setWalletAddress] = useState("");
+  const [isWithdrawFromProfit, setIsWithdrawFromProfit] = useState(false);
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -36,6 +38,7 @@ export default function WithdrawRequest() {
         const user = response.data;
 
         setWalletBalance(user.walletBalance);
+        setProfitBalance(user.profitWallet);
         setWalletAddress(user.walletAddress);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -112,6 +115,7 @@ export default function WithdrawRequest() {
       const payload = {
         amount: parseFloat(amount),
         walletAddress: walletAddress,
+        isWithdrawFromProfit: isWithdrawFromProfit,
       };
 
       const response = await apiClient.post(API_ROUTES.WITHDRAWAL.WITHDRAW_REQUEST, payload);
@@ -184,13 +188,26 @@ export default function WithdrawRequest() {
                 <span className="currency">{CURRENCY_UNIT}</span>
               </div>
             </div>
+            
+            <div className="form-group">
+              <label>Withdraw From</label>
+              <div className="select__wrapper" style={{marginBottom: '6px'}}>
+                  <select
+                    value={isWithdrawFromProfit ? "profit" : "main"}
+                    onChange={(e) => setIsWithdrawFromProfit(e.target.value === "profit")}
+                  >
+                    <option value="main">Main Wallet</option>
+                    <option value="profit">Profit Wallet</option>
+                  </select>
+              </div>  
+            </div>
 
             <hr className="divider" />
 
             {/* Read-only Info */}
             <div className="info-row">
               <span>Available Balance</span>
-              <span>{walletBalance} {CURRENCY_UNIT}</span>
+              <span>{isWithdrawFromProfit ? profitBalance : walletBalance} {CURRENCY_UNIT}</span>
             </div>
             <div className="info-row">
               <span>Minimum Withdraw</span>
