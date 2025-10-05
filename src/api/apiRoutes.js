@@ -17,6 +17,7 @@ export const API_ROUTES = {
     STAKE_DETAILS: (id) => `/api/v1/investment-schemas/${id}`,
     MY_STAKE: `/api/v1/investments`,
     SUBSCRIBE_STAKE: `/api/v1/investments/subscribe`,
+    REDEEM_STAKE: (investmentId) => `/api/v1/investments/redeem/${investmentId}`,
   },
 
   RESERVATION_API : {

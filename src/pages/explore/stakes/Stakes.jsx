@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import MyStakeCard from "../../../components/cards/myStakeCard/MyStakeCard";
 import MyStakeDetailsBottomSheet from "../../../components/sheet/myStakeDetailsBottomSheet/MyStakeDetailsBottomSheet";
 import StakeCard from "../../../components/cards/stakeCard/StakeCard";
+import { toast } from "react-toastify";
 
 // Demo NFT data
 const NFTS = [
@@ -38,9 +39,9 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
         fetchMytakes();
     }, []);
 
-      const fetchMytakes = async () => {
+    const fetchMytakes = async () => {
         try {
-            const res = await apiClient.get(API_ROUTES.EXPLORE.MY_STAKE);
+            const res = await apiClient.get(API_ROUTES.EXPLORE.MY_STAKE, {params: { page: 0, size: 100, status: 'ACTIVE' }});
             setMyStakes(res.data?.content || []);
         } catch (err) {
             console.error('Failed to fetch stake items:', err);
@@ -49,6 +50,24 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
             setLoading(false);
         }
     };
+
+    const redeemStake = async (stake) => {
+        if (!stake || !stake.investmentId) {
+            alert("Invalid stake selected for redemption.");
+            return;
+        }
+        try {
+            setLoading(true);
+            await apiClient.post(API_ROUTES.EXPLORE.REDEEM_STAKE(stake.investmentId));
+            alert("Stake redeemed successfully.");
+            fetchMytakes(); // Refresh the list after redemption
+        } catch (err) {
+            console.error('Failed to redeem stake:', err);
+            alert("Failed to redeem stake. Please try again later.");
+        } finally {
+            setLoading(false);
+        }
+    }
 
     const handleDetailsClick = (stake) => {  
         setSelectedStake(stake);
@@ -125,6 +144,7 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
                                     {...item}
                                     currency={item.currencyCode || CURRENCY_UNIT}
                                     onDetailsClick={() => handleDetailsClick(item)}
+                                    onRedeemClick={() => redeemStake(item)}
                                 />
                                 ))}
                             </div>

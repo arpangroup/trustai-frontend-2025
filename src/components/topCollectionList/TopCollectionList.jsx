@@ -10,6 +10,7 @@ export default function TopCollectionList({ collections, onMoreClick }) {
   const collectionsWithBg = collections.map((item) => ({
     ...item,
     rankBg: item.rankBg || bgColors[Math.floor(Math.random() * bgColors.length)],
+    badge: item.ownerName,
   }));
 
   return (
