@@ -50,6 +50,18 @@
   background-color: #f5f5f5;
 }
 
+/* Chrome, Safari, Edge, Opera */
+.withdraw-input::-webkit-outer-spin-button,
+.withdraw-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.withdraw-input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 /* Amount with currency */
 .amount-wrapper {
   position: relative;
