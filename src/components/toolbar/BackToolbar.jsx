@@ -10,7 +10,7 @@ const BackToolbar = ({title = 'Back'}) => {
   }
 
   return (
-    <div className="headerWhite">
+    <div className="headerWhite toolbar">
       <FaChevronLeft className="back-icon" onClick={handleBack} />
 
       <div className="headerTitle">{title}</div>

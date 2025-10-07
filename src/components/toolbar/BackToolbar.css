@@ -1,5 +1,5 @@
-
-.headerWhite { 
+.headerWhite.toolbar {
+  
   position: fixed;
   top: 0;
   left: 0;
@@ -12,11 +12,11 @@
   align-items: center;
   justify-content: space-between;
   background: #fff;
-  border-bottom: 1px solid #e1e6ef;
   padding-left: 16px;
   
   max-width: 420px; 
   margin: 0 auto;
+  border-bottom: 1px solid #e1e6ef;
 }
 
 .headerWhite .logo {

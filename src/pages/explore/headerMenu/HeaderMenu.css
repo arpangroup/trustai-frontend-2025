@@ -4,7 +4,7 @@
     top: 58px;
     /* left: 0; */
     /* right: 0; */
-    z-index: 1000;
+    z-index: 800;
     width: 100%;
     max-width: 410px;
 
@@ -72,5 +72,6 @@
 @media (min-width: 450px) {
   .header-menu {
     max-width: 392px;
+    max-width: 425px;
   }
 }
