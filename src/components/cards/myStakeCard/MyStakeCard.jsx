@@ -74,7 +74,6 @@ export default function MyStakeCard({
           {isMatured ? (
             <div className="info-section">
               <div className="info-group"><span>Return:</span><span>{expectedReturn} {currencyCode}</span></div>
-              <div className="info-group"><span>Total Earning Potential:</span><span>{expectedReturn} {currencyCode}</span></div>
               <div className="info-group"><span>Subscribed At:</span><span>{new Date(subscribedAt).toLocaleString()}</span></div>
             </div>
           ) : (
