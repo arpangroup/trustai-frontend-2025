@@ -158,10 +158,10 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
                     {currentTab === "collection" && (
                         <div className="tab-content active" id="collectionContent">
                             {/* ✅ Show No Data */}
-                            {!loading && !error && myStakes?.length === 0 && (
+                            {!loading && !error && myStakes.filter(item => item.investmentStatus === "COMPLETED")?.length === 0 && (
                                 <NoData message="No stakes found." />
                             )}
-                             {!loading && !error && myStakes?.length > 0 && 
+                            {!loading && !error && myStakes?.length > 0 && 
                             myStakes
                             .filter(item => item.investmentStatus === "COMPLETED")
                             .map((item, index) => (
