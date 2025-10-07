@@ -44,7 +44,7 @@ export default function MyStakeDetailsBottomSheet({ isOpen, onClose, ...stake })
         <div className="info-group"><span>Expected Return:</span><span>{expectedReturn} {currencyCode}</span></div>
         {/* <div className="info-group"><span>Total Earning Potential:</span><span>{totalEarningPotential} {currencyCode}</span></div> */}
         <div className="info-group"><span>Next Return:</span><span>{nextReturnAmount} {currencyCode}</span></div>
-        <div className="info-group"><span>Early Exit Penalty:</span><span>{earlyExitPenalty} {currencyCode}</span></div>
+        {/* <div className="info-group"><span>Early Exit Penalty:</span><span>{earlyExitPenalty} {currencyCode}</span></div> */}
         <div className="info-group"><span>Subscribed At:</span><span>{new Date(subscribedAt).toLocaleString()}</span></div>
         <div className="info-group"><span>Next Payout:</span><span>{new Date(nextPayoutDate).toLocaleString()}</span></div>
         <div className="info-group"><span>Maturity Date:</span><span>{new Date(maturityAt).toLocaleString()}</span></div>

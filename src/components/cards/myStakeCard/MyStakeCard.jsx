@@ -22,13 +22,15 @@ export default function MyStakeCard({
   nextPayoutDate = "-",
   maturityAt,
   subscribedAt,
+  investmentStatus = "ACTIVE",
   currencyCode,
-  onDetailsClick = () => {},
-  onRedeemClick = () => {}
+  onDetailsClick = () => { },
+  onRedeemClick = () => { }
 }) {
-  console.log("STATUS: ", status);
+  console.log("STATUS: ", investmentStatus);
   const formatCurrency = (value) => `${value} ${currency}`;
   const isMatured = maturityAt && new Date() > new Date(maturityAt);
+  const isCompleted = investmentStatus === "COMPLETED";
 
   return (
     <div className="stake-card">
@@ -52,41 +54,55 @@ export default function MyStakeCard({
               {roiValue}
               {roiType === 'PERCENTAGE' ? '%' : CURRENCY_SYMBOL}
             </span>
-           </div>
+          </div>
+
+          {isCompleted && (            
+            <div className="stake-card__col2">
+              <span className="stake-card__label">Matured At</span>
+              <span className="stake-card__value">{formatDateShort(maturityAt)}</span>
+            </div>
+          )}
+
         </div>
       </div>
 
-      <div className="stake-card__divider" />
+      {!isCompleted && (
+        <>
 
-      {isMatured ? (
-        <div className="info-section">
-          <div className="info-group"><span>Expected Return:</span><span>{expectedReturn} {currencyCode}</span></div>
-          <div className="info-group"><span>Total Earning Potential:</span><span>{totalEarningPotential} {currencyCode}</span></div>
-          <div className="info-group"><span>Subscribed At:</span><span>{new Date(subscribedAt).toLocaleString()}</span></div>
-        </div>
-      ) : (        
-        <div className="stake-card__bottom-row">    
-          <KeyValuePair label="Remaining" value={`${remainingPeriods} ${payoutFrequencyLabel === "Daily" ? "days" : payoutFrequencyLabel}`}/>
-          {/* <KeyValuePair label="Per Period Profit" value={formatCurrency(perPeriodProfit)} /> */}
-          {/* <KeyValuePair label="Expected Return" value={formatCurrency(expectedReturn)} /> */}
-          {/* <KeyValuePair label="Received Return" value={formatCurrency(receivedReturn)} /> */}
-          {/* <KeyValuePair label="Next Return Amount" value={formatCurrency(nextReturnAmount)} /> */}
-          {/* <KeyValuePair label="Next Payout Date" value={formatDateShort(nextPayoutDate)} /> */}
-          <KeyValuePair label="Total Earning Potential" value={formatCurrency(totalEarningPotential)}/>
-        </div>
+          <div className="stake-card__divider" />
+
+          {isMatured ? (
+            <div className="info-section">
+              <div className="info-group"><span>Expected Return:</span><span>{expectedReturn} {currencyCode}</span></div>
+              <div className="info-group"><span>Total Earning Potential:</span><span>{totalEarningPotential} {currencyCode}</span></div>
+              <div className="info-group"><span>Subscribed At:</span><span>{new Date(subscribedAt).toLocaleString()}</span></div>
+            </div>
+          ) : (
+            <div className="stake-card__bottom-row">
+              <KeyValuePair label="Remaining" value={`${remainingPeriods} ${payoutFrequencyLabel === "Daily" ? "days" : payoutFrequencyLabel}`} />
+              {/* <KeyValuePair label="Per Period Profit" value={formatCurrency(perPeriodProfit)} /> */}
+              {/* <KeyValuePair label="Expected Return" value={formatCurrency(expectedReturn)} /> */}
+              {/* <KeyValuePair label="Received Return" value={formatCurrency(receivedReturn)} /> */}
+              {/* <KeyValuePair label="Next Return Amount" value={formatCurrency(nextReturnAmount)} /> */}
+              {/* <KeyValuePair label="Next Payout Date" value={formatDateShort(nextPayoutDate)} /> */}
+              <KeyValuePair label="Total Earning Potential" value={formatCurrency(totalEarningPotential)} />
+            </div>
+          )}
+
+
+          {/* ✅ Conditionally render button */}
+          {isMatured ? (
+            <button className="stake-card__button redeem" onClick={onRedeemClick}>
+              Redeem Now
+            </button>
+          ) : (
+            <button className="stake-card__button" onClick={onDetailsClick}>
+              Details
+            </button>
+          )}
+        </>
       )}
 
-
-      {/* ✅ Conditionally render button */}
-      {isMatured ? (
-        <button className="stake-card__button redeem" onClick={onRedeemClick}>
-          Redeem Now
-        </button>
-      ) : (
-        <button className="stake-card__button" onClick={onDetailsClick}>
-          Details
-        </button>
-      )}
     </div>
   );
 

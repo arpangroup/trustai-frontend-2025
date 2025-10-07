@@ -138,7 +138,10 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
                                     <NoData message="No stakes found." />
                                 )}
                                 
-                                {!loading && !error && myStakes?.length > 0 && myStakes.map((item, index) => (
+                                {!loading && !error && myStakes?.length > 0 && 
+                                myStakes
+                                .filter(item => item.investmentStatus === "ACTIVE")
+                                .map((item, index) => (
                                 <MyStakeCard
                                     key={item.investmentId || index}
                                     {...item}
@@ -154,7 +157,22 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
                     {/* Collection Tab Content */}
                     {currentTab === "collection" && (
                         <div className="tab-content active" id="collectionContent">
-                            <NoData />
+                            {/* ✅ Show No Data */}
+                            {!loading && !error && myStakes?.length === 0 && (
+                                <NoData message="No stakes found." />
+                            )}
+                             {!loading && !error && myStakes?.length > 0 && 
+                            myStakes
+                            .filter(item => item.investmentStatus === "COMPLETED")
+                            .map((item, index) => (
+                            <MyStakeCard
+                                key={item.investmentId || index}
+                                {...item}
+                                currency={item.currencyCode || CURRENCY_UNIT}
+                                onDetailsClick={() => handleDetailsClick(item)}
+                                onRedeemClick={() => redeemStake(item)}
+                            />
+                            ))}
                         </div>
                     )}
                 </div>
