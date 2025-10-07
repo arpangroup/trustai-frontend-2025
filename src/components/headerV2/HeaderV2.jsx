@@ -70,12 +70,12 @@ const HeaderV2 = () => {
           {/* <div className="menu-item"><i>🌍</i><span>Language</span></div> */}
           
           {/* WhatsApp Support */}
-          <div className="menu-item" onClick={() => {
+          {/* <div className="menu-item" onClick={() => {
             window.open(WHATSAPP_LINK, "_blank"); // Replace with real number
             setMenuOpen(false);
           }}>
             <i>💬</i><span>Support</span>
-          </div>
+          </div> */}
 
           
           <div
@@ -85,7 +85,7 @@ const HeaderV2 = () => {
               setMenuOpen(false);
             }}
           >
-            <i>✉️</i><span>Email</span>
+            <i>✉️</i><span>Support</span>
           </div>
 
 
