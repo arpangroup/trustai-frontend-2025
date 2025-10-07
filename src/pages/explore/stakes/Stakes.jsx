@@ -67,8 +67,10 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
             toast.success("Stake redeemed successfully!");
             fetchMytakes(); // Refresh the list after redemption
         } catch (err) {
-            console.error('Failed to redeem stake:', err);
-            toast.error("Failed to redeem stake. Please try again later.");
+            //console.error('Failed to redeem stake:', err);
+            toast.error(
+                "Failed to redeem stake. " + (err.message ? `(${err.message})` : ''), { autoClose: false }
+            );
         } finally {
             setLoading(false);
         }
@@ -158,7 +160,7 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
 
                     {/* Collection Tab Content */}
                     {currentTab === "collection" && (
-                        <div className="tab-content active" id="collectionContent">
+                        <div className="tab-content active" id="collectionContent" style={{ padding: '8px 16px 16px 16px' }}>
                             {/* ✅ Show No Data */}
                             {!loading && !error && completedStakes?.length === 0 && (
                                 <NoData message="No stakes found." />
@@ -182,6 +184,24 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
                 onClose={() => setIsMyStakeDetailsBottomSheetOpen(false)}
                 {...selectedStake}
             />
+
+            {/* <AnimationModal
+                isOpen={showTradingAnimationModal}
+                title="Reservation Successful!"
+                animationSrc={Animations[1]}
+                loopCount={1000}
+                onClose={() => {
+                setTradingAnimationModal(false);
+                window.location.reload();
+                }}
+                footerButtons={[
+                  {
+                    label: 'Go to Reservations',
+                    onClick: () => navigate('/reservation'),
+                    className: 'btn-success'
+                  }
+                ]}
+            /> */}
             
         </div>
     );

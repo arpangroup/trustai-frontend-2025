@@ -21,14 +21,17 @@ import AnimationGrowth from '../../../assets/animation/Growth.json';
 import AnimationLoading from '../../../assets/animation/loading-animation.json';
 import AnimationGraph from '../../../assets/animation/LottieGraphs.json';
 import AnimationCandleLoading from '../../../assets/animation/Stock-candle-loading.json';
-import AnimationConfetti from '../../../assets/animation/Confetti-FullScreen.json';
+import AnimationConfetti from '../../../assets/animation/Confetti -FullScreen.json';
 
 
-const animationSequence = [
-  { id: 'loading', src: AnimationLoading, loop: 4, title: 'Matching you with a trader...' },
-  { id: 'trading', src: AnimationGrowth, loop: 2, title: 'Executing your reservation...' },
-  { id: 'success', src: AnimationConfetti, loop: 2, title: 'Reservation Successful!' },
-];
+
+const Animations = [
+  AnimationLoading,
+  AnimationGrowth,
+  AnimationConfetti
+]
+
+
 
 
 function formatAmount(value) {
@@ -47,7 +50,8 @@ const ReserveNow = ({reservedStakes = [], onReservedSuccess}) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [expiryAt, setExpiryAt] = useState(null);
-  const [animationStep, setAnimationStep] = useState(null);
+  const [showLoadingAnimationModal, setShowLoadingAnimationModal] = useState(false);
+  const [showTradingAnimationModal, setTradingAnimationModal] = useState(false);
 
   const [modalData, setModalData] = useState({
     isOpen: false,
@@ -193,9 +197,9 @@ const ReserveNow = ({reservedStakes = [], onReservedSuccess}) => {
         rankCode: selectedRank.rankCode,
         investmentRange: selectedInvestmentRange,
       };
-      setAnimationStep('loading');
+      setShowLoadingAnimationModal(true);
 
-      const response = await apiClient.post(API_ROUTES.RESERVATION_API.RESERVE_NOW, payload);
+      //const response = await apiClient.post(API_ROUTES.RESERVATION_API.RESERVE_NOW, payload);
       //window.location.reload();
 
       //setExpiryAt(response.expiryAt);
@@ -280,26 +284,34 @@ const ReserveNow = ({reservedStakes = [], onReservedSuccess}) => {
                 </AlertModal>
             )}
 
-            {/* Unified Animation Modal */}
-            {animationStep && (
-              <AnimationModal
-                isOpen={!!animationStep}
-                title={animationSequence.find(a => a.id === animationStep)?.title}
-                animationSrc={animationSequence.find(a => a.id === animationStep)?.src}
-                loopCount={animationSequence.find(a => a.id === animationStep)?.loop || 1}
-                onClose={() => {
-                  const currentIndex = animationSequence.findIndex(a => a.id === animationStep);
-                  const next = animationSequence[currentIndex + 1];
-                  if (next) {
-                    setAnimationStep(next.id);
-                  } else {
-                    setTimeout(() => setTradingAnimationModal(true), 1000);
-                    setAnimationStep(null);
-                    window.location.reload();
-                  }
-                }}
-              />
-            )}
+            <AnimationModal
+              isOpen={showLoadingAnimationModal}
+              title="Matching you with a trader..."
+              animationSrc={Animations[0]}
+              loopCount={5}
+              onClose={() => {
+                setShowLoadingAnimationModal(false);
+                setTimeout(() => setTradingAnimationModal(true), 100);
+              }}
+            />
+
+            <AnimationModal
+              isOpen={showTradingAnimationModal}
+              // title="Reservation Successful!"
+              animationSrc={Animations[1]}
+              loopCount={1000}
+              onClose={() => {
+                setTradingAnimationModal(false);
+                window.location.reload();
+              }}
+              // footerButtons={[
+              //   {
+              //     label: 'Go to Reservations',
+              //     onClick: () => navigate('/reservation'),
+              //     className: 'btn-success'
+              //   }
+              // ]}
+            />
 
         </div>
     );

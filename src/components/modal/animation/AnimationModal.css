@@ -1,0 +1,74 @@
+/* Full-screen dark overlay */
+.animation-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* semi-transparent dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050; /* higher than normal content */
+}
+
+/* Modal container */
+.animation-modal {
+  background-color: #ffffff; /* light theme */
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+  max-width: 90%;
+  /* min-height: 300px; */
+  width: 320px; /* mobile-friendly width */
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: modalFadeIn 0.3s ease-in-out;
+}
+
+/* Close button */
+.animation-modal .close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Modal title */
+.animation-modal h5 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* Animation image container */
+.animation-modal .animation-container img {
+  max-height: 180px;
+  width: auto;
+  margin: 0 auto 1rem;
+}
+
+/* Footer buttons */
+.animation-modal .modal-footer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Fade-in animation */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
