@@ -13,7 +13,7 @@ export const API_ROUTES = {
   },
 
   EXPLORE: {
-    STAKE_LIST: "/api/v1/investment-schemas?type=STAKE",
+    STAKE_LIST: "/api/v1/investment-schemas?type=STAKE&page=0&size=9999",
     STAKE_DETAILS: (id) => `/api/v1/investment-schemas/${id}`,
     MY_STAKE: `/api/v1/investments`,
     SUBSCRIBE_STAKE: `/api/v1/investments/subscribe`,
