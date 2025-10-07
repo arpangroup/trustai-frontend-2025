@@ -28,6 +28,7 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
     const [currentTab, setCurrentTab] = useState(initialTab);
     const [showOptions, setShowOptions] = useState(true);
     const [myStakes, setMyStakes] = useState([]);
+    const [completedStakes, setCompletedStakes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isMyStakeDetailsBottomSheetOpen, setIsMyStakeDetailsBottomSheetOpen] = useState(false);
     const [isStakeDetailsOpen, setIsStakeDetailsOpen] = useState(false);
@@ -42,7 +43,11 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
     const fetchMytakes = async () => {
         try {
             const res = await apiClient.get(API_ROUTES.EXPLORE.MY_STAKE, {params: { page: 0, size: 100, status: 'ACTIVE' }});
-            setMyStakes(res.data?.content || []);
+            const allStakes = res.data?.content || [];
+            const activeStakes = allStakes.filter(stake => stake.investmentStatus === 'ACTIVE');
+            const completedStakes = allStakes.filter(stake => stake.investmentStatus === 'COMPLETED');
+            setMyStakes(activeStakes);
+            setCompletedStakes(completedStakes);
         } catch (err) {
             console.error('Failed to fetch stake items:', err);
             setError('Failed to load stake items.');
@@ -138,10 +143,7 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
                                     <NoData message="No stakes found." />
                                 )}
                                 
-                                {!loading && !error && myStakes?.length > 0 && 
-                                myStakes
-                                .filter(item => item.investmentStatus === "ACTIVE")
-                                .map((item, index) => (
+                                {!loading && !error && myStakes?.length > 0 && myStakes.map((item, index) => (
                                 <MyStakeCard
                                     key={item.investmentId || index}
                                     {...item}
@@ -158,16 +160,15 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
                     {currentTab === "collection" && (
                         <div className="tab-content active" id="collectionContent">
                             {/* ✅ Show No Data */}
-                            {!loading && !error && myStakes.filter(item => item.investmentStatus === "COMPLETED")?.length === 0 && (
+                            {!loading && !error && completedStakes?.length === 0 && (
                                 <NoData message="No stakes found." />
                             )}
-                            {!loading && !error && myStakes?.length > 0 && 
-                            myStakes
-                            .filter(item => item.investmentStatus === "COMPLETED")
-                            .map((item, index) => (
+                            {!loading && !error && completedStakes?.length > 0 && 
+                            completedStakes.map((item, index) => (
                             <MyStakeCard
                                 key={item.investmentId || index}
                                 {...item}
+                                investmentStatus="COMPLETED"
                                 currency={item.currencyCode || CURRENCY_UNIT}
                                 onDetailsClick={() => handleDetailsClick(item)}
                                 onRedeemClick={() => redeemStake(item)}
