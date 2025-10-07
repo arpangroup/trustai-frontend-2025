@@ -73,8 +73,8 @@ export default function MyStakeCard({
 
           {isMatured ? (
             <div className="info-section">
-              <div className="info-group"><span>Expected Return:</span><span>{expectedReturn} {currencyCode}</span></div>
-              <div className="info-group"><span>Total Earning Potential:</span><span>{totalEarningPotential} {currencyCode}</span></div>
+              <div className="info-group"><span>Return:</span><span>{expectedReturn} {currencyCode}</span></div>
+              <div className="info-group"><span>Total Earning Potential:</span><span>{expectedReturn} {currencyCode}</span></div>
               <div className="info-group"><span>Subscribed At:</span><span>{new Date(subscribedAt).toLocaleString()}</span></div>
             </div>
           ) : (
@@ -85,7 +85,7 @@ export default function MyStakeCard({
               {/* <KeyValuePair label="Received Return" value={formatCurrency(receivedReturn)} /> */}
               {/* <KeyValuePair label="Next Return Amount" value={formatCurrency(nextReturnAmount)} /> */}
               {/* <KeyValuePair label="Next Payout Date" value={formatDateShort(nextPayoutDate)} /> */}
-              <KeyValuePair label="Total Earning Potential" value={formatCurrency(totalEarningPotential)} />
+              <KeyValuePair label="Expected Return:" value={formatCurrency(expectedReturn)} />
             </div>
           )}
 
