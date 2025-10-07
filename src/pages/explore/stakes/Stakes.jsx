@@ -109,8 +109,8 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
                             )}
 
                             {!loading && !error && (                                
-                                <div className="stakes-container" style={{marginBottom: '80px'}}>
-                                    <div className="stakes-container-card">
+                                <div className="stakes-container">
+                                    <div className="stakes-container-card" style={{marginBottom: '200px'}}>
 
                                         {stakes.map((item, index) => (
                                         <StakeCard
