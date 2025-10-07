@@ -163,8 +163,7 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
                             {!loading && !error && completedStakes?.length === 0 && (
                                 <NoData message="No stakes found." />
                             )}
-                            {!loading && !error && completedStakes?.length > 0 && 
-                            completedStakes.map((item, index) => (
+                            {!loading && !error && completedStakes?.length > 0 && completedStakes.map((item, index) => (
                             <MyStakeCard
                                 key={item.investmentId || index}
                                 {...item}
