@@ -58,17 +58,17 @@ export default function Stakes({ stakes, initialTab = "stake" }) {
 
     const redeemStake = async (stake) => {
         if (!stake || !stake.investmentId) {
-            alert("Invalid stake selected for redemption.");
+            toast.info("Invalid stake selected for redemption.");
             return;
         }
         try {
             setLoading(true);
             await apiClient.post(API_ROUTES.EXPLORE.REDEEM_STAKE(stake.investmentId));
-            alert("Stake redeemed successfully.");
+            toast.success("Stake redeemed successfully!");
             fetchMytakes(); // Refresh the list after redemption
         } catch (err) {
             console.error('Failed to redeem stake:', err);
-            alert("Failed to redeem stake. Please try again later.");
+            toast.error("Failed to redeem stake. Please try again later.");
         } finally {
             setLoading(false);
         }

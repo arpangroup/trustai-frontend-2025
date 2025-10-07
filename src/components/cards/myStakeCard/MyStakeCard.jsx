@@ -21,6 +21,7 @@ export default function MyStakeCard({
   nextReturnAmount = 0,
   nextPayoutDate = "-",
   maturityAt,
+  matured,
   subscribedAt,
   investmentStatus = "ACTIVE",
   currencyCode,
@@ -29,7 +30,8 @@ export default function MyStakeCard({
 }) {
   console.log("STATUS: ", investmentStatus);
   const formatCurrency = (value) => `${value} ${currency}`;
-  const isMatured = maturityAt && new Date() > new Date(maturityAt);
+  // const isMatured = maturityAt && new Date() > new Date(maturityAt);
+  const isMatured = matured;
   const isCompleted = investmentStatus === "COMPLETED";
 
   return (
