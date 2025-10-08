@@ -99,12 +99,14 @@
 /* ---------- Menu Dialog ---------- */
 .menu-trigger {
   cursor: pointer;
+  z-index: 2001;
 }
 
 .menu-dialog {
   position: absolute;
-  top: 40px; /* push it below the icon */
+  top: 64px;       /* directly below fixed header */
   right: 0px;
+  right: calc(50% - 210px); /* align with 420px header center */
   width: 180px;
   background: #ffffff;
   border-radius: 12px;
@@ -113,7 +115,8 @@
   transform: translateY(-10px);
   pointer-events: none;
   transition: opacity 0.25s ease, transform 0.25s ease;
-  z-index: 999;
+  z-index: 3000; /* higher than headerWhite (800) */
+  display: flex;
   flex-direction: column;
   overflow: hidden;
 }
@@ -122,8 +125,6 @@
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
-  z-index: 999;
-  font-size: 18px;
 }
 
 .menu-item {
