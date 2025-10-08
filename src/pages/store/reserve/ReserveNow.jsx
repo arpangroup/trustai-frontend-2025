@@ -25,8 +25,8 @@ import AnimationConfetti from '../../../assets/animation/Confetti-FullScreen.jso
 
 
 const animationSequence = [
-  { id: 'loading', src: AnimationLoading, loop: 4, title: 'Matching you with a trader...' },
-  { id: 'trading', src: AnimationGrowth, loop: 2, title: 'Executing your reservation...' },
+  { id: 'loading', src: AnimationLoading, loop: 3, title: 'Matching you with a trader...' },
+  { id: 'trading', src: AnimationGrowth, loop: 6, title: 'Executing your reservation...' },
   { id: 'success', src: AnimationConfetti, loop: 2, title: 'Reservation Successful!' },
 ];
 
