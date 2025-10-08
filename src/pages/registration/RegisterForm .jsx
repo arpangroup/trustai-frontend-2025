@@ -28,13 +28,13 @@ const RegisterForm = () => {
   const [registrationResponse, setRregistrationResponse] = useState(null);
 
   const [formData, setFormData] = useState({
-    username: "johndoe",
-    password: "12345",
-    confirmPassword: "12345",
+    username: "",
+    password: "",
+    confirmPassword: "",
     countryCode: "+91",
     mobile: "",
-    email: "john@doe.com",
-    referralCode: "REF2",
+    email: "",
+    referralCode: "",
     otp: "",
   });
 
