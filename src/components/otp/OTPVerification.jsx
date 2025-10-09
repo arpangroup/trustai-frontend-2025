@@ -202,7 +202,7 @@ function OTPVerification({ sessionId, username, email = '@trustai.com', onOtpVer
 
   const handleResendOTP = async () => {
     setIsResendDisabled(true); // Start countdown
-    setCountdown(OTP_RESEND_DELAY_SECONDS); // Reset to 60 seconds
+    setCountdown(OLP_DALAY_SECONDS); // Reset to 60 seconds
     setOtp(Array(inputLength).fill('')); // Clear OTP fields
 
     try {
