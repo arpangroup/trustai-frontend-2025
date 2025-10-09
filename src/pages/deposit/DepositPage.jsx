@@ -3,7 +3,7 @@ import './DepositPage.css';
 import { useNavigate } from 'react-router-dom';
 import { QRCodeCanvas } from 'qrcode.react';
 import DepositManual from './DepositManual';
-import { CURRENCY_UNIT, DEPOSIT_ADDRESS, DEPOSIT_WARNING, MINIMUM_DEPOSIT } from '../../constants/config';
+import { CURRENCY_UNIT, DEPOSIT_ADDRESS, DEPOSIT_WARNING, MINIMUM_DEPOSIT, PAYMENT_METHODS } from '../../constants/config';
 import CopyToClipboard from '../../components/clipboard/CopyToClipboard';
 
 
@@ -43,7 +43,16 @@ const DepositPage = () => {
       <div className="deposit-main" style={{marginBottom: '80px'}}>
           <div className="select__wrapper">
             <select>
-              <option>USDT-BEP-20</option>
+              {/* <option>USDT-BEP-20</option> */}
+              {PAYMENT_METHODS.map((method) => (
+                  <option
+                  key={method.value}
+                  value={method.value}
+                  disabled={method.disabled || false}
+                  >
+                  {method.label}
+                  </option>
+              ))}
             </select>
           </div>
 

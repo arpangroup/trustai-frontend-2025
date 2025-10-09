@@ -74,6 +74,22 @@ export const RANK_TO_NUMBER_MAP = {
 
 export const REQUIRED_KYC_FIELDS = ["walletAddress", "firstname", "lastname", "mobile", "state", "city", "address", "zipCode"];
 
+
+export const PAYMENT_METHODS = [
+  { label: "Binance", value: "BINANCE",},
+  { label: "BItget Wallet", value: "BITGET"},
+  { label: "Trust Wallet", value: "TRUST_WALLET"},
+  { label: "safepal Wallet", value: "SAFEPAL_WALLET"},
+  { label: "Coinbase", value: "COINBASE",  disabled: true, },
+  // { label: "UPI", value: "UPI" },
+  // { label: "Bank Transfer", value: "BANK" },
+  // { label: "Paytm", value: "PAYTM" },
+  // { label: "Google Pay", value: "GPay" },
+  // { label: "PhonePe", value: "PhonePe" },
+  // { label: "Other", value: "Other" },
+];
+
+
 export const INDIAN_STATES = [
   { code: "AP", name: "Andhra Pradesh" },
   { code: "AR", name: "Arunachal Pradesh" },

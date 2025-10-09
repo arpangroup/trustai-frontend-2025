@@ -4,7 +4,7 @@ import FileUpload from './components/FileUpload';
 import apiClient from '../../api/apiClient'; 
 import { API_ROUTES } from '../../api/apiRoutes';
 import Toast from '../../components/toast/Toast';
-import { MINIMUM_DEPOSIT } from '../../constants/config';
+import { MINIMUM_DEPOSIT, PAYMENT_METHODS } from '../../constants/config';
 import { toast } from 'react-toastify';
 
 const DepositManual = ({ onClose, onSuccess }) => {
@@ -119,8 +119,17 @@ const DepositManual = ({ onClose, onSuccess }) => {
                             <label htmlFor="payment_method">Payment Method</label>
                             <select id="payment_method" name="payment_method" defaultValue="BINANCE">
                                 <option disabled value="">--Select Gateway--</option>
-                                <option value="BINANCE">Binance</option>
-                                <option value="COINBASE" disabled={true}>Coinbase</option>
+                                {/* <option value="BINANCE">Binance</option>
+                                <option value="COINBASE" disabled={true}>Coinbase</option> */}
+                                {PAYMENT_METHODS.map((method) => (
+                                    <option
+                                    key={method.value}
+                                    value={method.value}
+                                    disabled={method.disabled || false}
+                                    >
+                                    {method.label}
+                                    </option>
+                                ))}
                             </select>
                         </div>
 
