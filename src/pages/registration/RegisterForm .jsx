@@ -11,6 +11,7 @@ import OTPVerification from "../../components/otp/OTPVerification";
 import SlidePanel from "../../components/panels/SlidePanel";
 import { toast } from "react-toastify";
 import { COUNTRY_CODES } from "../../constants/config";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 // import RightPanel from "../../components/panel/RightPanel"; // Path to your RightPanel component
 
 const defaultRegistrationResponse = {
@@ -27,6 +28,10 @@ const RegisterForm = () => {
   const [timer, setTimer] = useState(30);
   const [showOtpPanel, setShowOtpPanel] = useState(false);
   const [registrationResponse, setRregistrationResponse] = useState(null);
+  const [showPassword, setShowPassword] = useState({
+    password: false,
+    confirmPassword: false
+  });
 
   const [formData, setFormData] = useState({
     username: "",
@@ -38,6 +43,11 @@ const RegisterForm = () => {
     referralCode: "",
     otp: "",
   });
+
+  // Toggle handler
+  const togglePasswordVisibility = (field) => {
+    setShowPassword(prev => ({ ...prev, [field]: !prev[field] }));
+  };
 
   // Populate referralCode from URL
   useEffect(() => {
@@ -166,28 +176,54 @@ const RegisterForm = () => {
           {/* Password */}
           <label>
             Password <span className="required">*</span>
-            <input              
+            {/* <input              
               type="password"
               name="password"
               placeholder="Please enter your password"
               value={formData.password}
               onChange={handleChange}
               required 
-            />
+            /> */}
+            <div className="password-wrapper">
+              <input
+                type={showPassword.password ? "text" : "password"}
+                name="password"
+                placeholder="Please enter your password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+              <span className="eye-icon" onClick={() => togglePasswordVisibility("password")}>
+                {showPassword.password ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
           </label>
 
 
           {/* Confirm Password */}
           <label>
             Confirm password <span className="required">*</span>
-            <input
+            {/* <input
               type="password"
               name="confirmPassword"
               placeholder="Please re-enter your password"
               value={formData.confirmPassword}
               onChange={handleChange}
               required
-            />
+            /> */}
+            <div className="password-wrapper">
+              <input
+                type={showPassword.confirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                placeholder="Please re-enter your password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+              <span className="eye-icon" onClick={() => togglePasswordVisibility("confirmPassword")}>
+                {showPassword.confirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
           </label>
 
           {/* Mobile */}

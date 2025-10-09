@@ -178,3 +178,29 @@ body {
   font-size: 0.9rem;
   text-align: center;
 }
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 36px; /* space for icon */
+}
+
+.eye-icon {
+  position: absolute;
+  margin-top: 4px;
+  right: 10px;
+  cursor: pointer;
+  color: #666;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+}
+
+.eye-icon:hover {
+  color: #000;
+}
