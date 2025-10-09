@@ -10,6 +10,7 @@ import { API_ROUTES } from "../../api/apiRoutes";
 import OTPVerification from "../../components/otp/OTPVerification";
 import SlidePanel from "../../components/panels/SlidePanel";
 import { toast } from "react-toastify";
+import { COUNTRY_CODES } from "../../constants/config";
 // import RightPanel from "../../components/panel/RightPanel"; // Path to your RightPanel component
 
 const defaultRegistrationResponse = {
@@ -194,9 +195,12 @@ const RegisterForm = () => {
             Phone Number
             <div className="phone-input">
               <select name="countryCode" value={formData.countryCode} onChange={handleChange}>
-                <option value="+91">+91</option>
-                {/* <option value="+1">+1</option>
-                <option value="+44">+44</option> */}
+                {/* <option value="+91">+91</option> */}
+                {COUNTRY_CODES.map((country) => (
+                    <option key={country.code} value={country.code}>
+                    {country.name} ({country.code})
+                    </option>
+                ))}
               </select>
               <input               
                 type="number"

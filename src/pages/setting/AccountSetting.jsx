@@ -5,7 +5,7 @@ import { Link, useLocation, useSearchParams } from "react-router-dom";
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from "../../api/apiRoutes";
 import { toast } from "react-toastify";
-import { INDIAN_STATES, REQUIRED_KYC_FIELDS } from "../../constants/config";
+import { COUNTRY_CODES, INDIAN_STATES, REQUIRED_KYC_FIELDS } from "../../constants/config";
 
 
 const AccountSetting = () => {
@@ -13,15 +13,15 @@ const AccountSetting = () => {
     const [initialData, setInitialData] = useState({});
 
     const [formData, setFormData] = useState({
-        username: "johndoe",
-        firstname: "john",
-        lastname: "doe",
-        country: "India",
-        walletAddress: "0xABCD1234EFGH5678IJKL",
+        username: "",
+        firstname: "",
+        lastname: "",
+        country: "",
+        walletAddress: "",
         countryCode: "+91",
-        mobile: "987654321",
-        email: "john@doe.com",
-        state: "WB",
+        mobile: "",
+        email: "",
+        state: "",
     });
 
     // ✅ Fetch user data on component mount
@@ -205,10 +205,17 @@ const AccountSetting = () => {
                 <div className="mb-3">
                     <label className="form-label">Mobile</label>
                     <div className="phone-input">
-                        <select name="countryCode" value={formData.countryCode} onChange={handleChange} style={{ maxHeight: '38px' }}>
-                            <option value="+91">+91</option>
-                            {/* <option value="+1">+1</option>
-                <option value="+44">+44</option> */}
+                        <select 
+                            name="countryCode" 
+                            value={formData.countryCode} 
+                            onChange={handleChange} 
+                            style={{ maxHeight: '38px' }}>
+                            {/* <option value="+91">+91</option> */}
+                            {COUNTRY_CODES.map((country) => (
+                                <option key={country.code} value={country.code}>
+                                {country.name} ({country.code})
+                                </option>
+                            ))}
                         </select>
                         <input
                             type="number"
@@ -216,6 +223,7 @@ const AccountSetting = () => {
                             placeholder="Enter Mobile No."
                             value={formData.mobile}
                             onChange={handleChange}
+                            required
                         />
                     </div>
                 </div>
@@ -224,14 +232,23 @@ const AccountSetting = () => {
                 <div style={{ display: 'flex', gap: '1rem' }}>
                     <div style={{ flexBasis: '50%' }}>
                         <label className="form-label">State</label>
-                        <select name="state" value={formData.state} onChange={handleChange} style={{ maxHeight: '38px', width: '100%' }}>
+                        {/* <select name="state" value={formData.state} onChange={handleChange} style={{ maxHeight: '38px', width: '100%' }}>
                             <option value="" disabled>Select a State</option>
                             {INDIAN_STATES.map(({ code, name }) => (
                                 <option key={code} value={code}>
                                 {name}
                                 </option>
                             ))}                      
-                        </select>
+                        </select> */}
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="state"
+                            value={formData.state}
+                            onChange={handleChange}
+                            style={{ width: '100%' }}
+                        />
+
                     </div>
                      <div style={{ flexBasis: '50%' }}>
                         <label className="form-label">City</label>

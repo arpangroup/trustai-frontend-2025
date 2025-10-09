@@ -12,7 +12,7 @@ export default function ReferralScreen() {
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState({});
   const [referralCode, setReferralCode] = useState("REF12345");
-  const referralLink = REFERRAL_URL(referralCode);
+  const [referralLink, setReferralLink] = useState(REFERRAL_URL('REF12345'));
 
   useEffect(() => {
     fetchUserDetails();
@@ -25,6 +25,8 @@ export default function ReferralScreen() {
       //console.log("USER_RESPONSE: ", resp.data);
       setUserInfo(userInfo);
       setReferralCode(userInfo.referralCode);
+      setReferralLink(REFERRAL_URL(userInfo.referralCode));
+      console.log("Referral Link: ", REFERRAL_URL(userInfo.referralCode));
     } catch (err) {
       //setError('Failed to load data');
       //console.error(err);
