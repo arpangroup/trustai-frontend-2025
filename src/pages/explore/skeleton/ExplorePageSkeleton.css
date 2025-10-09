@@ -1,0 +1,73 @@
+.explore-skeleton {
+  padding: 16px;
+  background: #f3f8fa;
+  min-height: 100vh;
+}
+
+.header-menu-skeleton {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.menu-item-skeleton {
+  width: 70px;
+  height: 20px;
+  background: #e2e5e7;
+  border-radius: 6px;
+  animation: pulse 1.5s infinite;
+}
+
+.tab-content-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stake-card-skeleton {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  align-items: center;
+}
+
+.image-skeleton {
+  width: 100px;
+  height: 100px;
+  background: #e2e5e7;
+  border-radius: 8px;
+  animation: pulse 1.5s infinite;
+}
+
+.text-block-skeleton {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.line-skeleton {
+  height: 14px;
+  background: #e2e5e7;
+  border-radius: 6px;
+  animation: pulse 1.5s infinite;
+}
+
+.line-skeleton.short {
+  width: 50%;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}

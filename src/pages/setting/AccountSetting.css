@@ -1,0 +1,24 @@
+.user-setting-container {  
+  background: #fff;
+  width: 100%;
+  max-width: 420px;
+  padding: 24px 24px 24px 24px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
+}
+
+input[disabled],
+select[disabled],
+textarea[disabled] {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+  font-style: italic;
+  border-color: #ddd;
+}
+
+input,
+select,
+textarea {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

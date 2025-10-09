@@ -1,0 +1,154 @@
+
+.headerWhite { 
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  width: 100%;
+  height: 64px;
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-bottom: 1px solid #e1e6ef;
+  padding-left: 16px;
+  
+  max-width: 420px; 
+  margin: 0 auto;
+}
+
+
+.headerWhite .logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.headerWhite .logoIcon {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    background: linear-gradient(135deg, #98e7ff 30%, #a584ff 100%);
+    border-radius: 8px;
+}
+
+.headerWhite .logoText {
+    font-weight: bold;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+}
+
+.headerWhite .headerTitle {
+    flex: 1;
+    margin-left: 8px;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.headerWhite .headerIcons {
+    display: flex;
+    gap: 16px;
+    margin-right: 16px;
+}
+
+.headerWhite .headerIcon {
+    width: 22px;
+    height: 22px;
+    opacity: 0.65;
+}
+
+.headerWhite .headerIcons {
+  display: flex;
+  gap: 24px;
+  padding-right: 16px; /* Optional: adds some spacing on the right */
+  color: #807f7f;
+}
+
+.headerWhite .headerIcon {
+  width: 22px;
+  height: 22px;
+  opacity: 0.65;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.headerWhite .headerIcon:hover {
+  opacity: 1;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  right: -6px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  padding: 1px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  min-width: 16px;
+  text-align: center;
+}
+
+
+/* ---------- Menu Dialog ---------- */
+.menu-trigger {
+  cursor: pointer;
+  z-index: 2001;
+}
+
+.menu-dialog {
+  position: absolute;
+  top: 64px;       /* directly below fixed header */
+  right: 0px;
+  right: calc(50% - 210px); /* align with 420px header center */
+  width: 180px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 3000; /* higher than headerWhite (800) */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.menu-dialog.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 0.95em;
+}
+.menu-item:hover {
+  background: #f4f8ff;
+}
+.menu-item span {
+  margin-left: 10px;
+  font-weight: 500;
+  color: #333;
+}
+.menu-item i {
+  font-size: 1.1em;
+  width: 20px;
+  text-align: center;
+}
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-10px);}
+  to {opacity: 1; transform: translateY(0);}
+}

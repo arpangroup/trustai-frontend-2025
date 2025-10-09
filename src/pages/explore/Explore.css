@@ -1,0 +1,134 @@
+body {
+    margin: 0;
+    font-family: 'Inter', Arial, sans-serif;
+    background: #f7fbfd;
+    overflow-x: hidden;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: 22px 20px 0 20px;
+    background: #fff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    position: relative;
+    z-index: 10;
+}
+
+.header span.title {
+    color: #000;
+}
+
+
+#headerContentArea {
+    position: relative;
+    overflow: hidden;
+    height: 540px;
+    margin: 0 0 20px 0;
+}
+
+.header-tab-content {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    opacity: 0;
+    transition: opacity .4s ease, left .4s ease;
+    padding-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
+    background: transparent;
+    pointer-events: none;
+}
+
+.header-tab-content.active {
+    left: 0;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.header-tab-content.slide-in-left {
+    animation: slideInLeft 0.45s forwards;
+}
+
+.header-tab-content.slide-in-right {
+    animation: slideInRight 0.45s forwards;
+}
+
+.header-tab-content.slide-out-left {
+    animation: slideOutLeft 0.45s forwards;
+}
+
+.header-tab-content.slide-out-right {
+    animation: slideOutRight 0.45s forwards;
+}
+
+@keyframes slideInLeft {
+    from {
+        left: -100%;
+        opacity: 0;
+    }
+
+    to {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        left: 100%;
+        opacity: 0;
+    }
+
+    to {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        left: 0;
+        opacity: 1;
+    }
+
+    to {
+        left: -100%;
+        opacity: 0;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        left: 0;
+        opacity: 1;
+    }
+
+    to {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+.options-area {
+    display: flex;
+    gap: 34px;
+    align-items: center;
+    margin: 28px 18px 0 18px;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.options-area .selected {
+    color: #222;
+    border-bottom: 2px solid #316afd;
+}
+
+.options-area span:not(.selected) {
+    color: #979ba2;
+    cursor: pointer;
+    user-select: none;
+}

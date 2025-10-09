@@ -1,0 +1,30 @@
+.chip {
+  background-color: #2b2b2b;
+  color: #fff;
+  border: none;
+  padding: 0.1rem 0.5rem;
+  border-radius: 12px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+.chip.active {
+  background-color: #4cafef;
+  color: #121212;
+}
+
+.chip:active {
+  transform: scale(0.96);
+}
+
+/* 🌞 Light theme override */
+.light-theme .chip {
+  background-color: #eaeaea;
+  color: #1a1a1a;
+}
+
+.light-theme .chip.active {
+  background-color: #4cafef;
+  color: #fff;
+}

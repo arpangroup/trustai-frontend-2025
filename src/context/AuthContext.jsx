@@ -7,6 +7,11 @@ export function AuthProvider({ children }) {
   const [accessExpAt, setAccessExpAt] = useState(() => Number(localStorage.getItem('accessTokenExpiry')));
   const [refreshExpAt, setRefreshExpAt] = useState(() => Number(localStorage.getItem('refreshTokenExpiry')));
 
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem('username');
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
+
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     // ✅ Authenticated if we have refresh token and it's not expired
     const refreshToken = localStorage.getItem('refreshToken');
@@ -21,15 +26,17 @@ export function AuthProvider({ children }) {
     setIsAuthenticated(!!refreshToken && Date.now() < refreshExpiry);
   }, [token, refreshExpAt]);
 
-  const login = (accessToken, refreshToken, accessExpiry, refreshExpiry) => {
+  const login = (accessToken, refreshToken, accessExpiry, refreshExpiry, username) => {
     setToken(accessToken);
     setAccessExpAt(accessExpiry);
     setRefreshExpAt(refreshExpiry);
+    setUser({ username });
 
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
     localStorage.setItem('accessTokenExpiry', accessExpiry);
     localStorage.setItem('refreshTokenExpiry', refreshExpiry);
+    localStorage.setItem('username', JSON.stringify({ username }));
     
     setIsAuthenticated(true);
   };
@@ -39,11 +46,13 @@ export function AuthProvider({ children }) {
     setAccessExpAt(null);
     setRefreshExpAt(null);
     setIsAuthenticated(false);
+    setUser(null);
     
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('accessTokenExpiry');
     localStorage.removeItem('refreshTokenExpiry');
+    localStorage.removeItem('username');
   };
 
   
@@ -59,7 +68,8 @@ export function AuthProvider({ children }) {
       login,
       logout,
       isAccessTokenExpired,
-      isRefreshTokenExpired
+      isRefreshTokenExpired,
+      user,
     }}>
       {children}
     </AuthContext.Provider>

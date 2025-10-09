@@ -1,0 +1,52 @@
+.skeleton {
+  background: linear-gradient(90deg, #e0e0e0 25%, #f3f3f3 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+
+@keyframes shimmer {
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Header placeholders */
+.skeleton-title {
+  width: 100px;
+  height: 18px;
+}
+
+.skeleton-chevron {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+
+/* Item placeholders */
+.skeleton-line {
+  height: 12px;
+  margin-top: 4px;
+}
+
+.skeleton-line.short {
+  width: 120px;
+}
+
+.skeleton-line.thinner {
+  width: 80px;
+  height: 10px;
+}
+
+.skeleton-amount {
+  width: 60px;
+  height: 16px;
+  margin-bottom: 4px;
+  border-radius: 4px;
+}
+
+.skeleton-txn {
+  width: 50px;
+  height: 12px;
+  border-radius: 4px;
+}

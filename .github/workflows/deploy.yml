@@ -2,7 +2,7 @@ name: Deploy React App
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "fix-18-sept-dynamic-config"]
 
 env:
   DEPLOY_PATH: "/var/www/trustai.co.in"
@@ -29,7 +29,21 @@ jobs:
       - name: Build React app
         run: npm run build
 
-      # 4. Copy build folder to remote server
+      # 4. Clean target directory on server before deployment
+      - name: Clean target directory on server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "Cleaning target directory: ${{ env.DEPLOY_PATH }}"
+            sudo rm -rf ${{ env.DEPLOY_PATH }}/*
+            echo "Contents after clean:"
+            ls -la ${{ env.DEPLOY_PATH }}
+
+
+      # 5. Copy build folder to remote server
       - name: Deploy to server
         uses: appleboy/scp-action@v1
         with:

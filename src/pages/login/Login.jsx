@@ -5,6 +5,7 @@ import "./Login.css";
 import { AuthContext } from "../../context/AuthContext";
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from "../../api/apiRoutes";
+import logoImage from '../../assets/icons/logo.png'; 
 
 const Login = () => {
   
@@ -39,7 +40,7 @@ const Login = () => {
       refreshTokenExpiry
     } = res.data;
       // Store tokens in AuthContext
-      login(accessToken, refreshToken, accessTokenExpiry, refreshTokenExpiry);
+      login(accessToken, refreshToken, accessTokenExpiry, refreshTokenExpiry, username);
 
       // Navigate to previous or default route
       navigate(from, { replace: true });
@@ -54,18 +55,25 @@ const Login = () => {
       <div className="login-box">
         {/* Logo */}
         <div className="logo">
-          <div className="logo-grid">
+          {/* <div className="logo-grid">
             <div className="logo-square top-left"></div>
             <div className="logo-square top-right"></div>
             <div className="logo-square bottom-left"></div>
             <div className="logo-square bottom-right"></div>
-          </div>
+          </div> */}
+          <img src={logoImage} alt="Trust AI Logo" style={{width: '80px', height: '80px'}} />
           <h2>Trust AI</h2>
         </div>
 
         {/* Form */}
         <h3>Sign in to your account</h3>
         <p className="sub-text">Enter your email and password to sign in</p>
+        
+        {error && (
+          <div className="alert mt-3 alert-danger" role="alert">
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleLogin} autoComplete="off">
           <label htmlFor="account">
@@ -95,19 +103,15 @@ const Login = () => {
           </div>
 
           <div className="forgot">
-            <a href="#">Forgot Password?</a>
+            <a href="/forgot">Forgot Password?</a>
           </div>
 
           <button className="btn-signin" type='submit'>Sign In</button>
         </form>
 
         <p className="signup-text">
-          No account? <Link to="/signup">SIGN UP</Link>
+          No account? <Link to="/register">SIGN UP</Link>
         </p>
-
-        <div className="alert">
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-        </div>
       </div>
     </div>
   );

@@ -1,0 +1,50 @@
+.skeleton {
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+
+@keyframes shimmer {
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-title {
+  width: 120px;
+  height: 20px;
+  margin-bottom: 8px;
+}
+
+.skeleton-btn {
+  width: 60px;
+  height: 20px;
+  border-radius: 12px;
+}
+
+.skeleton-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.skeleton-line {
+  height: 12px;
+  margin-top: 4px;
+}
+
+.skeleton-line.short {
+  width: 100px;
+}
+
+.skeleton-line.thinner {
+  width: 70px;
+  height: 10px;
+}
+
+.skeleton-amount {
+  width: 50px;
+  height: 16px;
+  border-radius: 4px;
+}

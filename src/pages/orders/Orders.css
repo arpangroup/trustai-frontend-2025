@@ -1,0 +1,19 @@
+/* Dark theme */
+.order-container {
+  background-color: #121212;
+  color: #ffffff;
+  padding: 1rem;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+
+/* Light theme */
+.light-theme .order-container {
+  background-color: #f9f9f9; /* Light background */
+  color: #1c1c1c; /* Dark text */
+}
+
+
+
+

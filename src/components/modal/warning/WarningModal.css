@@ -1,0 +1,78 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.modal-content {
+  background-color: #1f1f1f;
+  color: #fff;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  padding: 24px 16px 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.close-button {
+  position: absolute;
+  /* top: 12px; */
+  right: 32px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.modal-image {
+  display: block;
+  margin: 0 auto 16px; /* top-bottom margin of 0 and 16px bottom spacing */
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.modal-description p {
+  font-size: 14px;
+  color: #aaa;
+  margin: 4px 0;
+  font-weight: 500;
+}
+
+.modal-footer {
+  margin-top: 24px;
+}
+
+.upgrade-button {
+  width: 100%;
+  background-color: #ffc107;
+  color: #000;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.upgrade-button:hover {
+  background-color: #ffb300;
+}
+

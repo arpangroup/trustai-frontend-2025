@@ -1,0 +1,164 @@
+/* Fullscreen light modal */
+.drawer-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #222;
+  z-index: 1000;
+  overflow-y: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Centered content box */
+.drawer-body {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  max-width: 100%;
+  height: 100vh;
+}
+
+/* Title section */
+.step1-area .title {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Cancel icon */
+.cancel-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* NFT image */
+.img-item {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0 auto 15px;
+  display: block;
+  border: 1px solid #ddd;
+}
+
+/* Item name */
+.item-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #444;
+  text-align: center;
+}
+
+/* Section subtitles */
+.sub-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+/* Price display */
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Coin selector */
+.select-coin {
+  display: flex;
+  align-items: center;
+  background-color: #f1f1f1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  transition: background-color 0.2s ease;
+}
+
+.select-coin:hover {
+  background-color: #eaeaea;
+}
+
+/* Coin icon inside selector */
+.coin-img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+/* Coin label */
+.coin-label {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Price text */
+.price-value {
+  font-size: 16px;
+  font-weight: bold;
+  color: #222;
+}
+
+/* Fees section */
+.fee-area {
+  margin-bottom: 20px;
+}
+
+.fee-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Bottom action button */
+.footer {
+  text-align: center;
+}
+
+.btn-sell {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+
+  margin-top: 4px;
+  background-color: #316afd;
+  border: none;
+  border-radius: 12px;
+  padding: 7px 0;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-sell:hover {
+  background-color: #43a047;
+}

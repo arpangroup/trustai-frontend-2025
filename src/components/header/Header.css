@@ -1,0 +1,134 @@
+
+/* HEADER */
+.header.header-main {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  background: linear-gradient(135deg, #a4d1ff, #e5ecfc);
+  padding: 16px 14px 8px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  z-index: 1000; /* keeps it above everything else */
+}
+.header-main {  
+  background: linear-gradient(135deg, #a4d1ff, #e5ecfc);
+}
+
+.header-main .header-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header-main .avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+.header-main .welcome-text {
+  margin-left: 4px;
+}
+.header-main .welcome {
+  font-size: 15px;
+  font-weight: 600;
+}
+.header-main .signin {
+  color: #3896e1;
+  font-size: 12px;
+}
+.header-main .header-icons {
+  display: flex;
+  gap: 10px;
+}
+.header-main .icon-btn {
+  background: #fff;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 18px;
+  box-shadow: 0 1px 6px rgba(131, 154, 213, 0.09);
+  color: #4b7ade;
+}
+
+
+.notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  right: -6px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  padding: 1px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  min-width: 16px;
+  text-align: center;
+}
+
+
+
+
+/* ---------- Menu Dialog ---------- */
+.menu-trigger {
+  cursor: pointer;
+}
+
+.menu-dialog {
+  position: absolute;
+  top: 40px; /* push it below the icon */
+  right: 0px;
+  width: 180px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 99;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.menu-dialog.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 0.95em;
+}
+.menu-item:hover {
+  background: #f4f8ff;
+}
+.menu-item span {
+  margin-left: 10px;
+  font-weight: 500;
+  color: #333;
+}
+.menu-item i {
+  font-size: 1.1em;
+  width: 20px;
+  text-align: center;
+}
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-10px);}
+  to {opacity: 1; transform: translateY(0);}
+}

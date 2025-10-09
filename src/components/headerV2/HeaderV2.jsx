@@ -1,17 +1,112 @@
-import styles from './HeaderV2.module.css';
+import React, { useEffect, useRef, useState } from "react";
+
+import './HeaderV2.css';
+import { FaRegBell } from "react-icons/fa";
+import { FaEllipsisV } from 'react-icons/fa';
+import {RiNotification3Line} from 'react-icons/ri';
+import { useContext } from "react";
+import { useNotifications } from '../../context/NotificationContext';
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext"; 
+import { EMAIL_LINK, TELEGRAM_LINK, WHATSAPP_LINK } from "../../constants/config";
+
+import logoImage from '../../assets/icons/logo.png'; 
+
 
 const HeaderV2 = () => {
+  const navigate = useNavigate();
+  const [notificationCount, setNotificationCount] = useState(3);
+  const { unreadCount } = useNotifications();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+  const { logout } = useContext(AuthContext);
+
+  // Close menu on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+
   return (
-    <div className={styles.headerWhite}>
-      <div className={styles.logo}>
-        <div className={styles.logoIcon}></div>
-        <div className={styles.logoText}>
+    <div className="headerWhite">
+      <div className="logo" onClick={() => window.location.href = '/'}>
+        {/* <div className="logoIcon"></div> */}
+        <img src={logoImage}/>
+        <div className="logoText">
           Trust<span style={{ color: "#46dbff" }}>AI</span>
         </div>
       </div>
-      <div className={styles.headerTitle}>Reserve</div>
-      <div className={styles.headerIcons}>
-        {/* SVGs */}
+
+      <div className="headerTitle"></div>
+
+      <div className="headerIcons">
+        {/* Alarm Icon */}
+        <div className="notification-icon">
+          <Link to="/notifications" className="notification-icon-wrapper" style={{textDecoration: 'none'}}>
+            <FaRegBell size={24}/>
+            {/* <RiNotification3Line size={28} /> */}
+            {unreadCount > 0 && (
+              <span className="notification-badge">{unreadCount}</span>
+            )}
+          </Link>
+        </div>
+       
+        {/* More Vert Icon */}
+         <div onClick={() => setMenuOpen(!menuOpen)} className="menu-trigger">
+          <FaEllipsisV size={20}/>
+        </div>
+
+        
+        {/* MENU DROPDOWN */}
+        <div className={`menu-dialog ${menuOpen ? 'show' : ''}`}>
+          <div className="menu-item" onClick={() => navigate("/settings")}><i>⚙️</i><span>Settings</span></div>
+
+          {/* <div className="menu-item"><i>🌍</i><span>Language</span></div> */}
+          
+          {/* WhatsApp Support */}
+          {/* <div className="menu-item" onClick={() => {
+            window.open(WHATSAPP_LINK, "_blank"); // Replace with real number
+            setMenuOpen(false);
+          }}>
+            <i>💬</i><span>Support</span>
+          </div> */}
+
+          
+          <div
+            className="menu-item"
+            onClick={() => {
+              window.open(`https://mail.google.com/mail/?view=cm&to=${EMAIL_LINK}`, '_blank');
+              setMenuOpen(false);
+            }}
+          >
+            <i>✉️</i><span>Support</span>
+          </div>
+
+
+          {/* Telegram Link */}
+          <div className="menu-item" onClick={() => {
+            window.open(TELEGRAM_LINK, "_blank"); // Replace with real username
+            setMenuOpen(false);
+          }}>
+            <i>📱</i><span>Telegram</span>
+          </div>
+
+
+          {/* Logout */}
+          <div className="menu-item" onClick={() => {
+            logout();
+            setMenuOpen(false);
+            navigate("/login");
+          }}><i>🚪</i><span>Logout</span></div>
+
+        </div>
+
       </div>
     </div>
   );

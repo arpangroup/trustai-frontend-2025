@@ -31,3 +31,26 @@ export function formatDateTime(dateStr) {
   });
 }
 
+/**
+ * Input TimeStamp, Output: "YYYY-MM-DD HH:mm:ss"
+ * Example Input: 2025-09-05T04:11:35.379138
+ * Output: 2025-05-14 06:06:16
+ * @returns 
+ */
+
+export function formatTimestampTo_YY_MM_DD_HH_MM_SS(dateString) {
+    const date = new Date(dateString);
+
+    const pad = (num) => num.toString().padStart(2, '0');
+
+    const year = date.getFullYear();
+    const month = pad(date.getMonth() + 1); // Months are 0-based
+    const day = pad(date.getDate());
+
+    const hours = pad(date.getHours());
+    const minutes = pad(date.getMinutes());
+    const seconds = pad(date.getSeconds());
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+

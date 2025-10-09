@@ -1,0 +1,27 @@
+.stakes-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 90%;
+}
+
+.stakes-container-text h1 {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 42px;
+  color: #222; /* Dark text instead of white */
+  margin-bottom: 1rem;
+}
+
+.stakes-container-card {
+  margin: 0 -5px;
+}
+
+.stakes-container-card:after {
+  content: "";
+  display: table;
+  clear: both;
+}

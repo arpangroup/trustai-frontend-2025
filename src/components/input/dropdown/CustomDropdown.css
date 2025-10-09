@@ -1,0 +1,127 @@
+.custom-dropdown {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  font-family: sans-serif;
+  z-index: 1000;
+}
+
+.dropdown-header {
+  background: #fff;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #333;
+}
+
+.dropdown-header-content {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.dropdown-arrow {
+  font-size: 12px;
+  color: #888;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  max-height: 230px;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dropdown-list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.dropdown-list:hover::-webkit-scrollbar-thumb {
+  background: #aaa;
+}
+
+.dropdown-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  color: #333;
+}
+
+.dropdown-item:hover {
+  background: #f2f2f2;
+}
+
+.dropdown-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-item-left {
+  text-align: left;
+  flex: 1;
+  font-weight: 500;
+}
+
+.dropdown-item-right {
+  text-align: right;
+  flex: 1;
+  font-size: 13px;
+  color: #2e7d32;
+}
+
+.dropdown-text {
+  font-weight: 500;
+  color: #333;
+}
+
+.dropdown-sublabel {
+  font-size: 13px;
+  color: #2e7d32;
+  white-space: nowrap;
+  margin-left: 10px;
+}
+
+.dropdown-item.disabled {
+  color: #aaa;
+  cursor: not-allowed;
+  background: #fff;
+}
+
+.dropdown-item.disabled:hover {
+  background: #fff;
+}
+
+.dropdown-item.disabled .dropdown-item-right {
+  color: #ccc !important;
+}
+
+.dropdown-item.selected {
+  background-color: #e0f2f1;
+  color: #000;
+  font-weight: 600;
+}
+
+.dropdown-item.selected:hover {
+  background-color: #b2dfdb;
+}

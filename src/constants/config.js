@@ -3,20 +3,37 @@ import { getConfigValue } from '../utils/configHelper';
 
 // BASE_URL from localStorage or fallback
 // export const BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
-export const BASE_URL = getConfigValue("BASE_URL", process.env.REACT_APP_API_BASE_URL || 'https://trustai.co.in/');
-export const API_VERSION = '/api/v1';
-export const USER_ID = getConfigValue("USER_ID", 1);
 
-export const REGISTRATION_URL = `${BASE_URL}/register`;
-export const REFERRAL_URL = (referralCode) => `${BASE_URL}/register?ref=${referralCode}`;
+// Common:
+export const BASE_URL                 = getConfigValue("app.config.url.base", "http://trustai.co.in");
+export const API_VERSION              = getConfigValue("app.config.api.version", '/api/v1');
+export const CURRENCY_UNIT            = getConfigValue("app.config.currency.unit", "USDT");
+export const CURRENCY_SYMBOL          = getConfigValue("app.config.currency.symbol", "$");
+export const REGISTRATION_URL         = `${BASE_URL}/register`
+export const REFERRAL_URL             = (referralCode) => `${BASE_URL}/register?ref=${referralCode}`;
+export const CURRENCY_UNIT_DEFAULT    = "INR";
+export const CURRENCY_SYMBOL_DEFAULT  = "₹";
+// Deposit:
+export const DEPOSIT_ADDRESS          = getConfigValue("app.config.deposit.address", "0x5987d451a2d9f7db04d8e539e4d3d6f8aede71bb");
+export const MINIMUM_DEPOSIT          = getConfigValue("app.config.deposit.amount.min", 50);
+export const DEPOSIT_WARNING          = getConfigValue("app.config.deposit.warning", "*Only USDT-BEP-20 deposits accepted. Others will be lost.");
+// Withdraw:
+export const WITHDRAW_WARNING         = getConfigValue("withdraw.config.warning", "warning");
+export const MINIMUM_WITHDRAW         = getConfigValue("withdraw.config.amount-min", "10");
+export const SERVICE_CHARGE_PERCENTAGE= getConfigValue("withdraw.config.service-charge-percentage", "0.05");
+export const SERVICE_CHARGE_FIXED     = getConfigValue("withdraw.config.service-charge-fixed", "2.0");
+export const SERVICE_CHARGE_THRESHOLD = getConfigValue("withdraw.config.service-charge-threshold", "10");
+// UI
+export const ACCEPTED_FILE_TYPES      = getConfigValue("app.config.accepted.file.types", "image/png, image/jpeg, image/gif");
+export const MAIN_HEADER_TITLE        = getConfigValue("app.config.header.main.title", "Welcome to TrustAI");
+export const OLP_DALAY_SECONDS        = getConfigValue("app.config.otp.delay.seconds", 30);
+export const TELEGRAM_LINK            = getConfigValue("app.config.support.telegram.link", "https://t.me/your_username");
+export const WHATSAPP_LINK            = getConfigValue("app.config.support.whatsapp.link", "https://wa.me/919876543210");
+export const EMAIL_LINK               = getConfigValue("app.config.support.email.link", "trustaihelp@gmail.com");
 
-// Currency configs
-export const CURRENCY_UNIT = getConfigValue("CURRENCY_UNIT", "USDT");
-export const CURRENCY_UNIT_DEFAULT = getConfigValue("CURRENCY_UNIT_DEFAULT", "INR");
-export const CURRENCY_SYMBOL = getConfigValue("CURRENCY_SYMBOL", "$");
-export const CURRENCY_SYMBOL_DEFAULT = getConfigValue("CURRENCY_SYMBOL_DEFAULT", "₹");
 
-export const DEPOSIT_ADDRESS = getConfigValue("DEPOSIT_ADDRESS", "0x5987d451a2d9f7db04d8e539e4d3d6f8aede71bb");
+export const USER_ID            = getConfigValue("USER_ID", 1);
+
 
 export const SCHEDULE_OPTIONS = [
   { label: "Hourly", value: 1, disabled: true,},
@@ -28,16 +45,17 @@ export const SCHEDULE_OPTIONS = [
 ];
 
 export const RANK_LABEL_MAP = {
-  RANK_0: "LV1",
-  RANK_1: "LV2",
-  RANK_2: "LV3",
-  RANK_3: "LV4",
-  RANK_4: "LV5",
-  RANK_5: "LV6",
-  RANK_6: "LV7",
-  RANK_7: "LV8",
-  RANK_8: "LV9",
-  RANK_9: "LV10",
+  RANK_0: "LV0",
+  RANK_1: "LV1",
+  RANK_2: "LV2",
+  RANK_3: "LV3",
+  RANK_4: "LV4",
+  RANK_5: "LV5",
+  RANK_6: "LV6",
+  RANK_7: "LV7",
+  RANK_8: "LV8",
+  RANK_9: "LV9",
+  RANK_10: "LV10",
 };
 
 export const RANK_TO_NUMBER_MAP = {
@@ -54,5 +72,294 @@ export const RANK_TO_NUMBER_MAP = {
   RANK_10: "10",
 };
 
-const imageFileTypes = "image/png, image/jpeg, image/gif";
-export const ACCEPTED_FILE_TYPES = getConfigValue("ACCEPTED_FILE_TYPES", imageFileTypes);
+export const REQUIRED_KYC_FIELDS = ["walletAddress", "firstname", "lastname", "mobile", "state", "city", "address", "zipCode"];
+
+
+export const PAYMENT_METHODS = [
+  { label: "Binance", value: "BINANCE",},
+  { label: "BItget Wallet", value: "BITGET"},
+  { label: "Trust Wallet", value: "TRUST_WALLET"},
+  { label: "safepal Wallet", value: "SAFEPAL_WALLET"},
+  { label: "Coinbase", value: "COINBASE",  disabled: true, },
+  // { label: "UPI", value: "UPI" },
+  // { label: "Bank Transfer", value: "BANK" },
+  // { label: "Paytm", value: "PAYTM" },
+  // { label: "Google Pay", value: "GPay" },
+  // { label: "PhonePe", value: "PhonePe" },
+  // { label: "Other", value: "Other" },
+];
+
+
+export const INDIAN_STATES = [
+  { code: "AP", name: "Andhra Pradesh" },
+  { code: "AR", name: "Arunachal Pradesh" },
+  { code: "AS", name: "Assam" },
+  { code: "BR", name: "Bihar" },
+  { code: "CT", name: "Chhattisgarh" },
+  { code: "GA", name: "Goa" },
+  { code: "GJ", name: "Gujarat" },
+  { code: "HR", name: "Haryana" },
+  { code: "HP", name: "Himachal Pradesh" },
+  { code: "JH", name: "Jharkhand" },
+  { code: "KA", name: "Karnataka" },
+  { code: "KL", name: "Kerala" },
+  { code: "MP", name: "Madhya Pradesh" },
+  { code: "MH", name: "Maharashtra" },
+  { code: "MN", name: "Manipur" },
+  { code: "ML", name: "Meghalaya" },
+  { code: "MZ", name: "Mizoram" },
+  { code: "NL", name: "Nagaland" },
+  { code: "OR", name: "Odisha" },
+  { code: "PB", name: "Punjab" },
+  { code: "RJ", name: "Rajasthan" },
+  { code: "SK", name: "Sikkim" },
+  { code: "TN", name: "Tamil Nadu" },
+  { code: "TG", name: "Telangana" },
+  { code: "TR", name: "Tripura" },
+  { code: "UP", name: "Uttar Pradesh" },
+  { code: "UT", name: "Uttarakhand" },
+  { code: "WB", name: "West Bengal" },
+  { code: "AN", name: "Andaman and Nicobar Islands" },
+  { code: "CH", name: "Chandigarh" },
+  { code: "DN", name: "Dadra and Nagar Haveli and Daman and Diu" },
+  { code: "DL", name: "Delhi" },
+  { code: "JK", name: "Jammu and Kashmir" },
+  { code: "LA", name: "Ladakh" },
+  { code: "LD", name: "Lakshadweep" },
+  { code: "PY", name: "Puducherry" }
+];
+
+export const COUNTRY_CODES = [
+  { name: "Afghanistan", code: "+93", displayName: "+93" },
+  { name: "Albania", code: "+355", displayName: "+355" },
+  { name: "Algeria", code: "+213", displayName: "+213" },
+  { name: "American Samoa", code: "+1-684", displayName: "+1-684" },
+  { name: "Andorra", code: "+376", displayName: "+376" },
+  { name: "Angola", code: "+244", displayName: "+244" },
+  { name: "Anguilla", code: "+1-264", displayName: "+1-264" },
+  { name: "Antarctica", code: "+672", displayName: "+672" },
+  { name: "Antigua and Barbuda", code: "+1-268", displayName: "+1-268" },
+  { name: "Argentina", code: "+54", displayName: "+54" },
+  { name: "Armenia", code: "+374", displayName: "+374" },
+  { name: "Aruba", code: "+297", displayName: "+297" },
+  { name: "Australia", code: "+61", displayName: "+61" },
+  { name: "Austria", code: "+43", displayName: "+43" },
+  { name: "Azerbaijan", code: "+994", displayName: "+994" },
+  { name: "Bahamas", code: "+1-242", displayName: "+1-242" },
+  { name: "Bahrain", code: "+973", displayName: "+973" },
+  { name: "Bangladesh", code: "+880", displayName: "+880" },
+  { name: "Barbados", code: "+1-246", displayName: "+1-246" },
+  { name: "Belarus", code: "+375", displayName: "+375" },
+  { name: "Belgium", code: "+32", displayName: "+32" },
+  { name: "Belize", code: "+501", displayName: "+501" },
+  { name: "Benin", code: "+229", displayName: "+229" },
+  { name: "Bermuda", code: "+1-441", displayName: "+1-441" },
+  { name: "Bhutan", code: "+975", displayName: "+975" },
+  { name: "Bolivia", code: "+591", displayName: "+591" },
+  { name: "Bosnia and Herzegovina", code: "+387", displayName: "+387" },
+  { name: "Botswana", code: "+267", displayName: "+267" },
+  { name: "Brazil", code: "+55", displayName: "+55" },
+  { name: "British Indian Ocean Territory", code: "+246", displayName: "+246" },
+  { name: "British Virgin Islands", code: "+1-284", displayName: "+1-284" },
+  { name: "Brunei Darussalam", code: "+673", displayName: "+673" },
+  { name: "Bulgaria", code: "+359", displayName: "+359" },
+  { name: "Burkina Faso", code: "+226", displayName: "+226" },
+  { name: "Burundi", code: "+257", displayName: "+257" },
+  { name: "Cabo Verde", code: "+238", displayName: "+238" },
+  { name: "Cambodia", code: "+855", displayName: "+855" },
+  { name: "Cameroon", code: "+237", displayName: "+237" },
+  { name: "Canada", code: "+1", displayName: "+1" },
+  { name: "Cayman Islands", code: "+1-345", displayName: "+1-345" },
+  { name: "Central African Republic", code: "+236", displayName: "+236" },
+  { name: "Chad", code: "+235", displayName: "+235" },
+  { name: "Chile", code: "+56", displayName: "+56" },
+  { name: "China", code: "+86", displayName: "+86" },
+  { name: "Colombia", code: "+57", displayName: "+57" },
+  { name: "Comoros", code: "+269", displayName: "+269" },
+  { name: "Congo (Congo-Brazzaville)", code: "+242", displayName: "+242" },
+  { name: "Congo (Congo-Kinshasa)", code: "+243", displayName: "+243" },
+  { name: "Cook Islands", code: "+682", displayName: "+682" },
+  { name: "Costa Rica", code: "+506", displayName: "+506" },
+  { name: "Croatia", code: "+385", displayName: "+385" },
+  { name: "Cuba", code: "+53", displayName: "+53" },
+  { name: "Curaçao", code: "+599", displayName: "+599" },
+  { name: "Cyprus", code: "+357", displayName: "+357" },
+  { name: "Czech Republic (Czechia)", code: "+420", displayName: "+420" },
+  { name: "Denmark", code: "+45", displayName: "+45" },
+  { name: "Djibouti", code: "+253", displayName: "+253" },
+  { name: "Dominica", code: "+1-767", displayName: "+1-767" },
+  { name: "Dominican Republic", code: "+1-809, +1-829, +1-849", displayName: "+1-809, +1-829, +1-849" },
+  { name: "Ecuador", code: "+593", displayName: "+593" },
+  { name: "Egypt", code: "+20", displayName: "+20" },
+  { name: "El Salvador", code: "+503", displayName: "+503" },
+  { name: "Equatorial Guinea", code: "+240", displayName: "+240" },
+  { name: "Eritrea", code: "+291", displayName: "+291" },
+  { name: "Estonia", code: "+372", displayName: "+372" },
+  { name: "Eswatini (fmr. 'Swaziland')", code: "+268", displayName: "+268" },
+  { name: "Ethiopia", code: "+251", displayName: "+251" },
+  { name: "Falkland Islands", code: "+500", displayName: "+500" },
+  { name: "Faroe Islands", code: "+298", displayName: "+298" },
+  { name: "Fiji", code: "+679", displayName: "+679" },
+  { name: "Finland", code: "+358", displayName: "+358" },
+  { name: "France", code: "+33", displayName: "+33" },
+  { name: "Gabon", code: "+241", displayName: "+241" },
+  { name: "Gambia", code: "+220", displayName: "+220" },
+  { name: "Georgia", code: "+995", displayName: "+995" },
+  { name: "Germany", code: "+49", displayName: "+49" },
+  { name: "Ghana", code: "+233", displayName: "+233" },
+  { name: "Gibraltar", code: "+350", displayName: "+350" },
+  { name: "Greece", code: "+30", displayName: "+30" },
+  { name: "Greenland", code: "+299", displayName: "+299" },
+  { name: "Grenada", code: "+1-473", displayName: "+1-473" },
+  { name: "Guadeloupe", code: "+590", displayName: "+590" },
+  { name: "Guam", code: "+1-671", displayName: "+1-671" },
+  { name: "Guatemala", code: "+502", displayName: "+502" },
+  { name: "Guernsey", code: "+44-1481", displayName: "+44-1481" },
+  { name: "Guinea", code: "+224", displayName: "+224" },
+  { name: "Guinea-Bissau", code: "+245", displayName: "+245" },
+  { name: "Guyana", code: "+592", displayName: "+592" },
+  { name: "Haiti", code: "+509", displayName: "+509" },
+  { name: "Honduras", code: "+504", displayName: "+504" },
+  { name: "Hong Kong", code: "+852", displayName: "+852" },
+  { name: "Hungary", code: "+36", displayName: "+36" },
+  { name: "Iceland", code: "+354", displayName: "+354" },
+  { name: "India", code: "+91", displayName: "+91" },
+  { name: "Indonesia", code: "+62", displayName: "+62" },
+  { name: "Iran", code: "+98", displayName: "+98" },
+  { name: "Iraq", code: "+964", displayName: "+964" },
+  { name: "Ireland", code: "+353", displayName: "+353" },
+  { name: "Israel", code: "+972", displayName: "+972" },
+  { name: "Italy", code: "+39", displayName: "+39" },
+  { name: "Jamaica", code: "+1-876", displayName: "+1-876" },
+  { name: "Japan", code: "+81", displayName: "+81" },
+  { name: "Jersey", code: "+44-1534", displayName: "+44-1534" },
+  { name: "Jordan", code: "+962", displayName: "+962" },
+  { name: "Kazakhstan", code: "+7", displayName: "+7" },  
+  { name: "Kenya", code: "+254", displayName: "+254" },
+  { name: "Kiribati", code: "+686", displayName: "+686" },
+  { name: "Kuwait", code: "+965", displayName: "+965" },
+  { name: "Kyrgyzstan", code: "+996", displayName: "+996" },
+  { name: "Laos", code: "+856", displayName: "+856" },
+  { name: "Latvia", code: "+371", displayName: "+371" },
+  { name: "Lebanon", code: "+961", displayName: "+961" },
+  { name: "Lesotho", code: "+266", displayName: "+266" },
+  { name: "Liberia", code: "+231", displayName: "+231" },
+  { name: "Libya", code: "+218", displayName: "+218" },
+  { name: "Liechtenstein", code: "+423", displayName: "+423" },
+  { name: "Lithuania", code: "+370", displayName: "+370" },
+  { name: "Luxembourg", code: "+352", displayName: "+352" },
+  { name: "Macau", code: "+853", displayName: "+853" },
+  { name: "Madagascar", code: "+261", displayName: "+261" },
+  { name: "Malawi", code: "+265", displayName: "+265" },
+  { name: "Malaysia", code: "+60", displayName: "+60" },
+  { name: "Maldives", code: "+960", displayName: "+960" },
+  { name: "Mali", code: "+223", displayName: "+223" },
+  { name: "Malta", code: "+356", displayName: "+356" },
+  { name: "Marshall Islands", code: "+692", displayName: "+692" },
+  { name: "Martinique", code: "+596", displayName: "+596" },
+  { name: "Mauritania", code: "+222", displayName: "+222" },
+  { name: "Mauritius", code: "+230", displayName: "+230" },
+  { name: "Mayotte", code: "+262", displayName: "+262" },
+  { name: "Mexico", code: "+52", displayName: "+52" },
+  { name: "Micronesia", code: "+691", displayName: "+691" },
+  { name: "Moldova", code: "+373", displayName: "+373" },
+  { name: "Monaco", code: "+377", displayName: "+377" },
+  { name: "Mongolia", code: "+976", displayName: "+976" },
+  { name: "Montenegro", code: "+382", displayName: "+382" },
+  { name: "Montserrat", code: "+1-664", displayName: "+1-664" },
+  { name: "Morocco", code: "+212", displayName: "+212" },
+  { name: "Mozambique", code: "+258", displayName: "+258" },
+  { name: "Myanmar", code: "+95", displayName: "+95" },
+  { name: "Namibia", code: "+264", displayName: "+264" },
+  { name: "Nauru", code: "+674", displayName: "+674" },
+  { name: "Nepal", code: "+977", displayName: "+977" },
+  { name: "Netherlands", code: "+31", displayName: "+31" },
+  { name: "New Caledonia", code: "+687", displayName: "+687" },
+  { name: "New Zealand", code: "+64", displayName: "+64" },
+  { name: "Nicaragua", code: "+505", displayName: "+505" },
+  { name: "Niger", code: "+227", displayName: "+227" },
+  { name: "Nigeria", code: "+234", displayName: "+234" },
+  { name: "Niue", code: "+683", displayName: "+683" },
+  { name: "Norfolk Island", code: "+672", displayName: "+672" },
+  { name: "North Korea", code: "+850", displayName: "+850" },
+  { name: "North Macedonia", code: "+389", displayName: "+389" },
+  { name: "Northern Mariana Islands", code: "+1-670", displayName: "+1-670" },
+  { name: "Norway", code: "+47", displayName: "+47" },
+  { name: "Oman", code: "+968", displayName: "+968" },
+  { name: "Pakistan", code: "+92", displayName: "+92" },
+  { name: "Palau", code: "+680", displayName: "+680" },
+  { name: "Palestine", code: "+970", displayName: "+970" },
+  { name: "Panama", code: "+507", displayName: "+507" },
+  { name: "Papua New Guinea", code: "+675", displayName: "+675" },
+  { name: "Paraguay", code: "+595", displayName: "+595" },
+  { name: "Peru", code: "+51", displayName: "+51" },
+  { name: "Philippines", code: "+63", displayName: "+63" },
+  { name: "Pitcairn", code: "+64", displayName: "+64" },
+  { name: "Poland", code: "+48", displayName: "+48" },
+  { name: "Portugal", code: "+351", displayName: "+351" },
+  { name: "Puerto Rico", code: "+1-787, +1-939", displayName: "+1-787, +1-939" },
+  { name: "Qatar", code: "+974", displayName: "+974" },
+  { name: "Réunion", code: "+262", displayName: "+262" },
+  { name: "Romania", code: "+40", displayName: "+40" },
+  { name: "Russia", code: "+7", displayName: "+7" },
+  { name: "Rwanda", code: "+250", displayName: "+250" },
+  { name: "Saint Barthélemy", code: "+590", displayName: "+590" },
+  { name: "Saint Helena", code: "+290", displayName: "+290" },
+  { name: "Saint Kitts and Nevis", code: "+1-869", displayName: "+1-869" },
+  { name: "Saint Lucia", code: "+1-758", displayName: "+1-758" },
+  { name: "Saint Martin", code: "+590", displayName: "+590" },
+  { name: "Saint Pierre and Miquelon", code: "+508", displayName: "+508" },
+  { name: "Saint Vincent and the Grenadines", code: "+1-784", displayName: "+1-784" },
+  { name: "Samoa", code: "+685", displayName: "+685" },
+  { name: "San Marino", code: "+378", displayName: "+378" },
+  { name: "Saudi Arabia", code: "+966", displayName: "+966" },
+  { name: "Senegal", code: "+221", displayName: "+221" },
+  { name: "Serbia", code: "+381", displayName: "+381" },
+  { name: "Seychelles", code: "+248", displayName: "+248" },
+  { name: "Sierra Leone", code: "+232", displayName: "+232" },
+  { name: "Singapore", code: "+65", displayName: "+65" },
+  { name: "Sint Maarten", code: "+1-721", displayName: "+1-721" },
+  { name: "Slovakia", code: "+421", displayName: "+421" },
+  { name: "Slovenia", code: "+386", displayName: "+386" },
+  { name: "Solomon Islands", code: "+677", displayName: "+677" },
+  { name: "Somalia", code: "+252", displayName: "+252" },
+  { name: "South Africa", code: "+27", displayName: "+27" },
+  { name: "South Korea", code: "+82", displayName: "+82" },
+  { name: "South Sudan", code: "+211", displayName: "+211" },
+  { name: "Spain", code: "+34", displayName: "+34" },
+  { name: "Sri Lanka", code: "+94", displayName: "+94" },
+  { name: "Sudan", code: "+249", displayName: "+249" },
+  { name: "Suriname", code: "+597", displayName: "+597" },
+  { name: "Sweden", code: "+46", displayName: "+46" },
+  { name: "Switzerland", code: "+41", displayName: "+41" },
+  { name: "Syria", code: "+963", displayName: "+963" },
+  { name: "Taiwan", code: "+886", displayName: "+886" },
+  { name: "Tajikistan", code: "+992", displayName: "+992" },
+  { name: "Tanzania", code: "+255", displayName: "+255" },
+  { name: "Thailand", code: "+66", displayName: "+66" },
+  { name: "Timor-Leste", code: "+670", displayName: "+670" },
+  { name: "Togo", code: "+228", displayName: "+228" },
+  { name: "Tokelau", code: "+690", displayName: "+690" },
+  { name: "Tonga", code: "+676", displayName: "+676" },
+  { name: "Trinidad and Tobago", code: "+1-868", displayName: "+1-868" },
+  { name: "Tunisia", code: "+216", displayName: "+216" },
+  { name: "Turkey", code: "+90", displayName: "+90" },
+  { name: "Turkmenistan", code: "+993", displayName: "+993" },
+  { name: "Tuvalu", code: "+688", displayName: "+688" },
+  { name: "Uganda", code: "+256", displayName: "+256" },
+  { name: "Ukraine", code: "+380", displayName: "+380" },
+  { name: "United Arab Emirates", code: "+971", displayName: "+971" },
+  { name: "United Kingdom", code: "+44", displayName: "+44" },
+  { name: "United States", code: "+1", displayName: "+1" },
+  { name: "Uruguay", code: "+598", displayName: "+598" },
+  { name: "Uzbekistan", code: "+998", displayName: "+998" },
+  { name: "Vanuatu", code: "+678", displayName: "+678" },
+  { name: "Vatican City", code: "+379", displayName: "+379" },
+  { name: "Venezuela", code: "+58", displayName: "+58" },
+  { name: "Vietnam", code: "+84", displayName: "+84" },
+  { name: "Wallis and Futuna", code: "+681", displayName: "+681" },
+  { name: "Western Sahara", code: "+212", displayName: "+212" },
+  { name: "Yemen", code: "+967", displayName: "+967" },
+  { name: "Zambia", code: "+260", displayName: "+260" },
+  { name: "Zimbabwe", code: "+263", displayName: "+263" }
+]

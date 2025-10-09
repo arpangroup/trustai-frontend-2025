@@ -39,8 +39,9 @@
   flex-direction: column;
   gap: 9px;
   margin: 0 0 16px 0;
-  padding-left: 0;
+  padding: 16px 0px 24px 0px;
   width: 100%;
+  
 }
 .collection-item {
   background: #fff;
@@ -51,8 +52,11 @@
   margin: 0 14px;
   /* box-shadow: 0 2px 7px 1px rgba(143, 175, 255, 0.06); */
    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
-  position: relative;
+  /* position: relative; */
   gap: 10px;
+}
+.collection-item :hover {
+  cursor: pointer;
 }
 .collection-rank {
   background: linear-gradient(135deg, #ffbb4c 55%, #f5831f);

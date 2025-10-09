@@ -1,0 +1,92 @@
+.dashboard-skeleton {
+  padding: 16px;
+}
+
+/* Panel skeletons */
+.panel-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.panel-skeleton {
+  flex: 1;
+  background: #fff;
+  border-radius: 13px;
+  padding: 16px;
+  box-shadow: 0 1px 3px 0 #e6e9f1;
+}
+
+.panel-mid-skeleton {
+  flex: 1;
+  background: #fff;
+  border-radius: 13px;
+  padding: 12px;
+  box-shadow: 0 1px 3px 0 #e6e9f1;
+  text-align: center;
+}
+/* StorePageSkeleton.css */
+.tabs-skeleton {
+  margin-top: 20px;
+}
+
+.tab-skeleton {
+  flex: 1;
+  height: 38px;
+  margin: 0 5px;
+  background: #e0e6ef;
+  border-radius: 6px;
+  animation: pulse 1.5s infinite;
+}
+
+.card-skeleton {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #e0e6ef;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  background-color: #f6f8fb;
+  animation: pulse 1.5s infinite;
+}
+
+.skeleton-img {
+  width: 80px;
+  height: 80px;
+  background: #e0e6ef;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.skeleton-body {
+  flex: 1;
+}
+
+.skeleton-line {
+  height: 12px;
+  margin: 6px 0;
+  background: #e0e6ef;
+  border-radius: 4px;
+}
+
+.skeleton-line.short {
+  width: 30%;
+}
+.skeleton-line.medium {
+  width: 60%;
+}
+.skeleton-line.long {
+  width: 90%;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}

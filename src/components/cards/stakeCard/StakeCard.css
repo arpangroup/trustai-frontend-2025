@@ -1,0 +1,132 @@
+.card-column {
+  float: left;
+  width: 20%;
+}
+
+.bids-card {
+  background: #ffffff; /* White card background */
+  border-radius: 20px;
+  padding: 11px 12px 19px 11px;
+  margin-inline: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.08); /* Light shadow for depth */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bids-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 6px 16px rgba(0,0,0,0.12);
+}
+
+.bids-card img {
+  border-radius: 20px;
+  width: 100%;
+}
+
+.bids-card-top p {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  color: #333; /* Dark text */
+  margin-top: 15px;
+}
+
+.bids-card-top a {
+  text-decoration: none;
+}
+
+.bids-card-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bids-card-bottom p {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  color: #555; /* Medium-dark text */
+}
+
+.bids-card-bottom p:last-child {
+  font-weight: normal;
+}
+
+.bids-card-bottom span {
+  font-weight: normal;
+  color: #888; /* Subtle text */
+}
+
+.load-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.load-more button {
+  background: #f9f9f9;
+  border: 1px solid var(--primary-color);
+  margin: 0 1rem;
+  color: var(--primary-color);
+  border-radius: 10px;
+  padding: 10px 100px;
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.load-more button:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+@media screen and (max-width: 1440px) {
+  .card-column {
+    /* width: 25%; */
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .card-column {
+    /* width: 33.33%; */
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .card-column {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .section__padding {
+    padding: 2rem 14px !important;
+  }
+
+  .bids-card {
+    margin-bottom: 10px;
+    margin-inline: 5px;
+  }
+
+  .bids-card-top p {
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 5px;
+  }
+
+  .bids-card-bottom p {
+    font-size: 10px;
+    line-height: 15px;
+  }
+
+  .bids-container {
+    width: 100%;
+  }
+}

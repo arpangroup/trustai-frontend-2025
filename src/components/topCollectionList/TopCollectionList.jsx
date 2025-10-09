@@ -1,7 +1,18 @@
 import React from "react";
 import "./TopCollectionList.css";
 
-export default function TopCollectionList({ collections, onMoreClick }) {
+export default function TopCollectionList({ collections, onMoreClick }) {  
+  const imageUrl = "https://picsum.photos/200/300";
+  const avatar = "https://picsum.photos/200/300";
+  const bgColors = ['#FFD700', '#FF69B4', '#87CEFA', '#90EE90', '#FFA07A', '#b5beca', '#d19b53', '#c2bbd2', '#ffbb4c', '#f5831f'];
+
+  // Enhance collections with random rankBg if not already provided
+  const collectionsWithBg = collections.map((item) => ({
+    ...item,
+    rankBg: item.rankBg || bgColors[Math.floor(Math.random() * bgColors.length)],
+    badge: item.ownerName,
+  }));
+
   return (
     <div className="section" style={{ background: "#fff" }}>
       <div className="section-title">
@@ -29,15 +40,15 @@ export default function TopCollectionList({ collections, onMoreClick }) {
             </button>
       </div>
       <div className="collection-list">
-        {collections.map(({ rank, rankBg, imgSrc, alt, title, floor, value, change }, i) => (
-          <div className="collection-item" key={i}>
+        {collectionsWithBg.map(({ rank, rankBg, imgSrc, alt, title, badge, value, change }, i) => (
+          <div className="collection-item" key={i} onClick={onMoreClick} >
             <div className="collection-rank" style={{ background: rankBg }}>
-              {rank}
+              {i+1}
             </div>
-            <img src={imgSrc} className="collection-avatar" alt={alt} />
+            <img src={imgSrc || imageUrl} className="collection-avatar" alt={alt} />
             <div className="collection-details">
               <div className="collection-title">{title}</div>
-              <div className="collection-floor">{floor}</div>
+              <div className="collection-floor">{badge}</div>
             </div>
             <div className="collection-value">{value}</div>
             <div className="collection-change">{change}</div>

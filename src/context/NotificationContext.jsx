@@ -2,12 +2,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import apiClient from "../api/apiClient";
 import { API_ROUTES } from "../api/apiRoutes";
+import { AuthContext } from "./AuthContext";
 
 const NotificationContext = createContext();
 
 export const NotificationProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { isAuthenticated } = useContext(AuthContext);
 
   const fetchNotifications = async () => {
     try {
@@ -15,7 +17,7 @@ export const NotificationProvider = ({ children }) => {
       const data = res?.data?.content || [];
       setNotifications(data);
     } catch (err) {
-      console.error("Failed to fetch notifications", err);
+      //console.error("Failed to fetch notifications", err);
     } finally {
       setLoading(false);
     }
@@ -23,10 +25,12 @@ export const NotificationProvider = ({ children }) => {
 
   // Fetch initially + every 60s
   useEffect(() => {
-    fetchNotifications();
-    const interval = setInterval(fetchNotifications, 60_000);
-    return () => clearInterval(interval);
-  }, []);
+    if (isAuthenticated) {
+      fetchNotifications();
+      const interval = setInterval(fetchNotifications, 60_000);
+      return () => clearInterval(interval);
+    }
+  }, [isAuthenticated]);
 
   const unreadCount = notifications.filter((n) => !n.viewed).length;
 

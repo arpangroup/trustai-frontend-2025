@@ -1,9 +1,136 @@
 // RegisterForm.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./RegisterForm.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
+
+import { AuthContext } from "../../context/AuthContext";
+import apiClient from "../../api/apiClient";
+import { API_ROUTES } from "../../api/apiRoutes";
+
+import OTPVerification from "../../components/otp/OTPVerification";
+import SlidePanel from "../../components/panels/SlidePanel";
+import { toast } from "react-toastify";
+import { COUNTRY_CODES } from "../../constants/config";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+// import RightPanel from "../../components/panel/RightPanel"; // Path to your RightPanel component
+
+const defaultRegistrationResponse = {
+  sessionId: '123',
+  username: 'johndoe'
+}
 
 const RegisterForm = () => {
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const [attempts, setAttempts] = useState(0);
+  const maxAttempts = 3;
+  const [loading, setLoading] = useState(false);
+  const [timer, setTimer] = useState(30);
+  const [showOtpPanel, setShowOtpPanel] = useState(false);
+  const [registrationResponse, setRregistrationResponse] = useState(null);
+  const [showPassword, setShowPassword] = useState({
+    password: false,
+    confirmPassword: false
+  });
+
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+    countryCode: "+91",
+    mobile: "",
+    email: "",
+    referralCode: "",
+    otp: "",
+  });
+
+  // Toggle handler
+  const togglePasswordVisibility = (field) => {
+    setShowPassword(prev => ({ ...prev, [field]: !prev[field] }));
+  };
+
+  // Populate referralCode from URL
+  useEffect(() => {
+    const referral = searchParams.get("ref");
+    if (referral) {
+      setFormData((prev) => ({ ...prev, referralCode: referral }));
+    }
+  }, [searchParams]);
+
+
+  // Timer countdown
+  useEffect(() => {
+    let interval;
+    if (timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [timer]);
+
+  
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!formData.username || !formData.password || !formData.email || !formData.referralCode) {
+      toast.warning("Please fill all mandatory fields.");
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      toast.warning("Passwords do not match.");
+      return;
+    }
+
+    if (attempts >= maxAttempts) {
+      toast.warning("You have exceeded the maximum number of attempts.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const payload = {
+        username: formData.username,
+        password: formData.password,
+        email: formData.email,
+        mobile: formData.mobile,
+        referralCode: formData.referralCode,
+      };
+
+      const response = await apiClient.post(API_ROUTES.AUTH_API.REGISTRATION, payload);
+      setRregistrationResponse(response.data);
+      //console.log("RESPONSE: ", response.data);
+      
+      // Instead of registering immediately, show OTP panel
+      setShowOtpPanel(true);
+    } catch (error) {
+      console.error("Registration error:", error);
+
+      // Increment attempt count on error
+      setAttempts((prev) => prev + 1);
+
+      if (attempts + 1 >= maxAttempts) {
+        toast.warning("You have exceeded the maximum number of registration attempts. Please try again later.");
+      } else {
+        toast.error(error.message || "Failed to register. Please try again.", "error");
+      }
+
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
   return (
     <div className="register-container">
       <div className="register-card">
@@ -31,55 +158,158 @@ const RegisterForm = () => {
 
         <p className="register-subtitle">Create your account to continue</p>
 
-        <form className="register-form">
+        <form className="register-form" autoComplete="off" onSubmit={handleSubmit}>
+          
+          {/* Username */}
           <label>
-            Account <span className="required">*</span>
-            <input type="text" placeholder="Please enter account" required />
-          </label>
-
-          <label>
-            Password <span className="required">*</span>
-            <input type="password" placeholder="Please enter password" required />
-          </label>
-
-          <label>
-            Second Confirmation Password <span className="required">*</span>
-            <input
-              type="password"
-              placeholder="Please enter your password again"
+            Username <span className="required">*</span>
+            <input 
+              type="text"
+              name="username"
+              placeholder="Please enter user name"
+              value={formData.username}
+              onChange={handleChange}
               required
             />
           </label>
 
-          <label className="phone-label">
-            Phone Number
-            <div className="phone-input">
-              <select>
-                <option value="+91" selected>+91</option>
-              </select>
-              <input type="tel" placeholder="Enter mobile number" />
+          {/* Password */}
+          <label>
+            Password <span className="required">*</span>
+            {/* <input              
+              type="password"
+              name="password"
+              placeholder="Please enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              required 
+            /> */}
+            <div className="password-wrapper">
+              <input
+                type={showPassword.password ? "text" : "password"}
+                name="password"
+                placeholder="Please enter your password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+              <span className="eye-icon" onClick={() => togglePasswordVisibility("password")}>
+                {showPassword.password ? <FaEyeSlash /> : <FaEye />}
+              </span>
             </div>
           </label>
 
+
+          {/* Confirm Password */}
           <label>
-            Email
-            <input type="email" placeholder="Please enter your email" />
+            Confirm password <span className="required">*</span>
+            {/* <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Please re-enter your password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+            /> */}
+            <div className="password-wrapper">
+              <input
+                type={showPassword.confirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                placeholder="Please re-enter your password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+              <span className="eye-icon" onClick={() => togglePasswordVisibility("confirmPassword")}>
+                {showPassword.confirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
           </label>
 
-          <label>
-            Invitation code (required) <span className="required">*</span>
-            <input type="text" placeholder="Please enter the invitation code" required />
+          {/* Mobile */}
+          <label className="phone-label">
+            Phone Number
+            <div className="phone-input">
+              <select name="countryCode" value={formData.countryCode} onChange={handleChange}>
+                {/* <option value="+91">+91</option> */}
+                {COUNTRY_CODES.map((country) => (
+                    <option key={country.code} value={country.code}>
+                    {country.name} ({country.code})
+                    </option>
+                ))}
+              </select>
+              <input               
+                type="number"
+                name="mobile"
+                placeholder="Enter Mobile No."
+                value={formData.mobile}
+                onChange={handleChange}
+              />
+            </div>
           </label>
 
-          <button type="submit" className="register-btn" disabled>
+          {/* Email */}
+          <label>
+            Email <span className="required">*</span>
+            <input 
+              type="email"
+              name="email"
+              placeholder="Please enter your email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </label>
+
+          {/* Referral Code */}
+          <label>
+            Referral code (required) <span className="required">*</span>
+            <input 
+              type="text"
+              name="referralCode"
+              placeholder="Enter your Referral Code"
+              value={formData.referralCode}
+              onChange={handleChange}
+              required 
+            />
+          </label>
+
+          {/* Register Button */}
+          <button 
+            type="submit" 
+            className="register-btn"            
+            disabled={loading || attempts >= maxAttempts}
+          >
             Register
           </button>
         </form>
 
+        {/* Link to Login */}
         <p className="signin-text">
           Have an account?<Link to="/login">Sign In</Link>
         </p>
-      </div>
+
+        {attempts >= maxAttempts && (
+          <p className="lockout-msg">Too many attempts. Try again in {timer}s.</p>
+        )}
+
+      </div>    
+
+      <SlidePanel
+        isOpen={showOtpPanel}
+        onClose={() => setShowOtpPanel(false)}
+        title="Verify OTP"
+      >
+        {registrationResponse && registrationResponse.sessionId && (
+        <OTPVerification
+          sessionId={registrationResponse.sessionId}
+          username={registrationResponse.username || formData.username}
+          email={formData.email}
+          onClose={() => setShowOtpPanel(false)}
+        />
+        )}
+      </SlidePanel>
+
     </div>
   );
 };
