@@ -37,7 +37,7 @@ const AccountSetting = () => {
                     username: user.username || "",
                     firstname: user.firstname || "",
                     lastname: user.lastname || "",
-                    country: user.country || "",
+                    // country: user.country || "",
                     walletAddress: user.walletAddress || "",
                     countryCode: user.countryCode || "+91",
                     mobile: user.mobile || "",
@@ -47,6 +47,10 @@ const AccountSetting = () => {
                     address: user.address || "",
                     zipCode: user.zipCode || "",
                 };
+
+                // Get country name from country code
+                const countryEntry = COUNTRY_CODES.find(c => c.code === userData.countryCode);
+                userData.country = countryEntry ? countryEntry.name : "";
 
                 
                 setFormData(userData);
@@ -61,6 +65,17 @@ const AccountSetting = () => {
 
         fetchUserData();
     }, []);
+
+    // ✅ Sync country name with selected country code
+    useEffect(() => {
+        const selectedCountry = COUNTRY_CODES.find(c => c.code === formData.countryCode);
+        if (selectedCountry && selectedCountry.name !== formData.country) {
+            setFormData((prev) => ({
+                ...prev,
+                country: selectedCountry.name,
+            }));
+        }
+    }, [formData.countryCode]);
 
 
 
