@@ -115,7 +115,7 @@ export default function UserProfile() {
 
             const filterTodayTotalIncome = incomeResponse.filter(d => d.incomeType==='TOTAL')?.[0]?.todayAmount || '0';
             setTodayTotalIncome(filterTodayTotalIncome);
-            console.log("TODAY_INCOME: ", incomeResponse.filter(d => d.incomeType==='TOTAL'));
+            //console.log("TODAY_INCOME: ", incomeResponse.filter(d => d.incomeType==='TOTAL'));
             setIncomeData(formattedIncomeData);
         } catch (err) {
             console.error("Failed to fetch income data:", err);

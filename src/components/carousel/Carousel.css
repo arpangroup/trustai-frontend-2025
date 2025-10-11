@@ -27,17 +27,19 @@
   height: 120px;
   overflow: hidden;
   position: relative;
-  padding: 16px;
+  /* padding: 16px; */
 }
 .banner-img {
-  width: 90px;
+  /* width: 90px; */
+  width: 100%;
   height: 100%;
   border-radius: 0 18px 18px 0;
   object-fit: cover;
-  margin-right: 13px;
+  /* margin-right: 13px; */
 }
 .banner-txt {
   padding: 10px 0;
+  position: absolute;
 }
 .banner-title {
   font-size: 19px;

@@ -5,7 +5,7 @@ import { getConfigValue } from '../utils/configHelper';
 // export const BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
 
 // Common:
-export const BASE_URL                 = getConfigValue("app.config.url.base", "http://trustai.co.in");
+export const BASE_URL                 = getConfigValue("app.config.url.base", "https://trustai.co.in");
 export const API_VERSION              = getConfigValue("app.config.api.version", '/api/v1');
 export const CURRENCY_UNIT            = getConfigValue("app.config.currency.unit", "USDT");
 export const CURRENCY_SYMBOL          = getConfigValue("app.config.currency.symbol", "$");
@@ -30,6 +30,13 @@ export const OLP_DALAY_SECONDS        = getConfigValue("app.config.otp.delay.sec
 export const TELEGRAM_LINK            = getConfigValue("app.config.support.telegram.link", "https://t.me/your_username");
 export const WHATSAPP_LINK            = getConfigValue("app.config.support.whatsapp.link", "https://wa.me/919876543210");
 export const EMAIL_LINK               = getConfigValue("app.config.support.email.link", "trustaihelp@gmail.com");
+// BANNER:
+export const BANNER_WALLER_INVITE = {
+  title: getConfigValue("banner.wallet.invite.title", "Cashback 100%"),
+  message: getConfigValue("banner.wallet.invite.message", "Invite your friends and get Cashback"),
+  link: getConfigValue("banner.wallet.invite.link", "https://trustai.co.in/referral"),  
+}
+
 
 
 export const USER_ID            = getConfigValue("USER_ID", 1);

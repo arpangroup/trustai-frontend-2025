@@ -122,7 +122,7 @@ export default function PendingTransactions() { // Pending Deposit or Pending Wi
 
     
     const fetchPendingWithdraws = async () => {     
-        console.log("Fetching pending withdraws..."); 
+        //console.log("Fetching pending withdraws..."); 
         const response = await apiClient.get(API_ROUTES.WITHDRAWAL.WITHDRAWAL_HISTORY, {
             params: { status: 'PENDING' }
         });
@@ -140,7 +140,7 @@ export default function PendingTransactions() { // Pending Deposit or Pending Wi
             credit: false,
         }));
 
-        console.log("transformPendingWithdraws: ", transformPendingWithdraws);
+        //console.log("transformPendingWithdraws: ", transformPendingWithdraws);
         return transformPendingWithdraws;
     };
 

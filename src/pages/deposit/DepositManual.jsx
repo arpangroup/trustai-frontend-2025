@@ -59,10 +59,10 @@ const DepositManual = ({ onClose, onSuccess }) => {
             const formData = new FormData();
             formData.append('paymentGateway', paymentMethod);
             formData.append('amount', amount);
-            formData.append('txnId', transactionId);
+            formData.append('txnRefId', transactionId);
             formData.append('screenshot', screenshotFile);
 
-            console.log("Submit Deposit Request......");
+            //console.log("Submit Deposit Request......");
             const response = await apiClient.post(API_ROUTES.DEPOSIT.DEPOSIT_REQUEST, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',

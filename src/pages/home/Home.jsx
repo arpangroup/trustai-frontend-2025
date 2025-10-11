@@ -13,27 +13,27 @@ import TopCollectionList from "../../components/topCollectionList/TopCollectionL
 import FeatureSection from "./feature/FeatureSection";
 import BiddingSection from "./bidding/BiddingSection";
 import { useNavigate } from "react-router-dom";
-import { WEB_ROUTES } from "../../api/apiRoutes";
+import { API_ROUTES, WEB_ROUTES } from "../../api/apiRoutes";
 import HtmlRenderer from "./HtmlRenderer";
 
-const carouselSlides = [
-    {
-        title: "TrustAI",
-        desc: "Explore the next miracle of NFT.",
-        learnText: "LEARN MORE",
-        subText: "TrustAI",
-        imgSrc: Image1,
-        alt: "Banner1",
-    },
-    {
-        title: "Exclusive Drop",
-        desc: "Collect rare NFTs today. Limited time only!",
-        learnText: "LEARN MORE",
-        subText: "TrustAI Collection",
-        imgSrc: Image1,
-        alt: "Banner2",
-    },
-];
+// const carouselSlides = [
+//     {
+//         title: "TrustAI",
+//         description: "Explore the next miracle of NFT.",
+//         learnText: "LEARN MORE",
+//         subText: "TrustAI",
+//         imgSrc: Image1,
+//         alt: "Banner1",
+//     },
+//     {
+//         title: "Exclusive Drop",
+//         description: "Collect rare NFTs today. Limited time only!",
+//         learnText: "LEARN MORE",
+//         subText: "TrustAI Collection",
+//         imgSrc: Image1,
+//         alt: "Banner2",
+//     },
+// ];
 
 
 const collections = [
@@ -89,21 +89,27 @@ const navButtons = [
 
 export default function Home() {
     const navigate = useNavigate();
+    const [carouselSlides, setCarouselSlides] = useState([]);
     const [activeCarouselIndex, setActiveCarouselIndex] = useState(0);
     const [activeTab, setActiveTab] = useState("all");
     const intervalRef = useRef(null);
     const [nfts, setNfts] = useState([]);
+    const [html, setHtml] = useState(null);
+    const [css, setCss] = useState(null);
 
     const tabsData = [
-        { id: "all", label: "All", Component: () => <NftList items={nfts.slice(0, 3)} /> },
-        { id: "art", label: "Art", Component: NftList },
-        { id: "celebrities", label: "Celebrities", Component: NftList },
-        { id: "gaming", label: "Gaming", Component: NftList },
-        { id: "more", label: "More", Component: NftList },
+        // { id: "all", label: "all", Component: NftList },
+        { id: "all", label: "all", Component: () => <NftList items={nfts.slice(0, 3)} /> },
+        { id: "art", label: "Art", Component: () => <NftList items={nfts.slice(3, 6)} /> },
+        { id: "celebrities", label: "Celebrities", Component: () => <NftList items={nfts.slice(6, 9)} /> },
+        // { id: "gaming", label: "Gaming", Component: () => <NftList items={nfts.slice(9, 12)} /> },
+        { id: "more", label: "More", Component: () => <NftList items={nfts.slice(9, 12)} /> },
     ];
 
     useEffect(() => {
         fetchNfts();
+        fetchSliders();
+        fetchHtmlContent();
         // intervalRef.current = setInterval(() => {
         //     setActiveCarouselIndex((prev) => (prev + 1) % carouselSlides.length);
         // }, 4000);
@@ -113,12 +119,49 @@ export default function Home() {
 
     const fetchNfts = async () => {
         try{
-            const res = await fetch("/api/nfts");
+            const res = await fetch(API_ROUTES.APP.NFTS);
             if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
 
             const data = await res.json();
             //console.log("NFT_LIST: ", data);
             setNfts(data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        } finally {
+
+        }
+    };
+
+    
+    const fetchSliders = async () => {
+        try{
+            const res = await fetch(API_ROUTES.APP.SLIDERS);
+            if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+
+            const data = await res.json();
+            //console.log("SLIDERS: ", data);
+            const slider = data.filter(s => s.active)[0] || [];
+            //console.log("SLIDES: ", slider);
+
+            setCarouselSlides(slider.slides || []);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        } finally {
+
+        }
+    };
+
+    
+    const fetchHtmlContent = async () => {
+        try{
+            const res = await fetch(API_ROUTES.APP.HTML_CONTENT);
+            if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+
+            const data = await res.json();
+            //console.log("HTML_DATA: ", data);
+            
+            setHtml(data ? data[0].html || null : null);
+            setCss(data ? data[0].css || null : null);
         } catch (error) {
             console.error("Error fetching data:", error);
         } finally {
@@ -163,7 +206,7 @@ export default function Home() {
             {/* Stake and Bidding Section */}
             {/* <BiddingSection/> */}
 
-            <HtmlRenderer/>
+            <HtmlRenderer htmlContent={html} css={css}/>
 
             {/* BOTTOM NAV */}
             <BottomNav />

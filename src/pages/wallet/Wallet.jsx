@@ -7,7 +7,7 @@ import apiClient from '../../api/apiClient';
 import { API_ROUTES } from '../../api/apiRoutes';
 import { BsCurrencyDollar } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
-import { CURRENCY_SYMBOL } from '../../constants/config';
+import { BANNER_WALLER_INVITE, CURRENCY_SYMBOL } from '../../constants/config';
 import WalletPageSkeleton from './skeleton/WalletPageSkeleton';
 
 // Section icons data
@@ -34,12 +34,14 @@ const Wallet = () => {
     const [toastMessage, setToastMessage] = useState('');
     const [showToast, setShowToast] = useState(false);
     const [wallet, setWallet] = useState({});
+    const [banner, setBanner] = useState({});
     const [loadingWallet, setLoadingWallet] = useState(true);
     const [loadingTransactions, setLoadingTransactions] = useState(true);
     
     useEffect(() => {
         fetchWalletBalance();
         fetchRecentTransactions();
+        fetchBanners();
     }, []);
 
     const fetchWalletBalance = async () => {
@@ -58,7 +60,7 @@ const Wallet = () => {
 
         try {
             const response = await apiClient.get(API_ROUTES.TRANSACTIONS.TRANSACTION_HISTORY);
-            console.log("Transactions Response: ", response.data);
+            //console.log("Transactions Response: ", response.data);
             const transactions = response.data?.content || [];
 
             const transformedTransactions = transactions.map(txn => ({
@@ -72,8 +74,19 @@ const Wallet = () => {
         } finally {
             setLoadingTransactions(false);
         }
-
     };
+
+    
+    const fetchBanners = async () => {
+        try {
+            //await delay(1000 * 5);
+            const response = await apiClient.get(API_ROUTES.APP.BANNER);
+            //console.log("Banners Response: ", response.data);
+            setBanner(response.data? response.data.filter(b => b.type === 'wallet')[0] || {} : {});
+        } finally {
+            setLoadingWallet(false); 
+        }
+    };    
 
 
     const handleIconClick = (message) => {
@@ -101,9 +114,13 @@ const Wallet = () => {
             {/* Cashback Banner */}
             <div className="cashback-banner">
                 <div className="megaphone">📢</div>
-                <div onClick={() => navigate("/referral")}>
-                    <b>Cashback 100%</b><br />
-                    <p>Invite your friends and get Cashback</p>
+                {/* <div onClick={() => navigate(BANNER_WALLER_INVITE.link)} style={{ cursor: 'pointer' }}>
+                    <b>{BANNER_WALLER_INVITE.title}</b><br />
+                    <p>{BANNER_WALLER_INVITE.message}</p>
+                </div> */}
+                <div onClick={() => navigate(banner.link)} style={{ cursor: 'pointer' }}>
+                    <b>{banner?.title || BANNER_WALLER_INVITE.title}</b><br />
+                    <p>{banner?.description || BANNER_WALLER_INVITE.message}</p>
                 </div>
             </div>
 

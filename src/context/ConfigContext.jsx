@@ -39,7 +39,7 @@ export const ConfigProvider = ({ children }) => {
 
   const fetchConfig = async () => {
     try {
-      const res = await apiClient.get(API_ROUTES.CONFIGS);
+      const res = await apiClient.get(API_ROUTES.APP.CONFIGS);
       const data = res.data || {};
       setConfig(data);
 
