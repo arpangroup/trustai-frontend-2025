@@ -193,10 +193,10 @@ const ReserveNow = ({reservedStakes = [], onReservedSuccess}) => {
         rankCode: selectedRank.rankCode,
         investmentRange: selectedInvestmentRange,
       };
-      setAnimationStep('loading');
 
       const response = await apiClient.post(API_ROUTES.RESERVATION_API.RESERVE_NOW, payload);
       //window.location.reload();
+      setAnimationStep('loading');
 
       //setExpiryAt(response.expiryAt);
       //onReservedSuccess(response);
