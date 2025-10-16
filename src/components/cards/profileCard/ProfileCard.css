@@ -87,6 +87,7 @@ body.dark .user-id {
   font-size: 14px;
   color: #374151;                      /* Gray-700 text */
   background-color: #f9fafb;           /* Subtle light bg */
+  cursor: pointer;
 }
 
 body.dark .info-box {
