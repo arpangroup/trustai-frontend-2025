@@ -9,6 +9,7 @@ const Tabs = ({ tabs, activeTab, onTabChange }) => {
           key={tab.key}
           className={`tab ${activeTab === tab.key ? "active" : ""}`}
           onClick={() => onTabChange(tab.key)}
+          style={tab.style}
         >
           {tab.label}
         </button>

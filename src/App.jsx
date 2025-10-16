@@ -33,6 +33,7 @@ import WithdrawRequest from './pages/withdraw/WithdrawRequest';
 import Level from './pages/level/Level';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import RankScreen from './pages/level/RankScreen';
 
 
 function App() {
@@ -71,7 +72,9 @@ function App() {
               <Route path="/referral" element={<ReferralScreen />} />
               <Route path="/deposit" element={<DepositPage />} />
               <Route path="/withdraw" element={<WithdrawRequest />} />
-              <Route path="/level" element={<Level />} />
+              {/* <Route path="/level" element={<Level />} /> */}              
+              <Route path="/level" element={<RankScreen />} />
+
               {/* <Route path="/tree" element={<MLMTree />} /> */}
 
               
@@ -85,7 +88,12 @@ function App() {
       </Routes>
 
       {/* Add this ONCE, globally */}
-      <ToastContainer position="bottom-center" autoClose={3000} />
+      <ToastContainer 
+        position="bottom-center" 
+        autoClose={5000} 
+        hideProgressBar={false}
+        theme="light"
+      />
     </>
   )
 }

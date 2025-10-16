@@ -29,7 +29,7 @@ const ProfileCard = ({ username, uuid, level, points, profileImage }) => {
       </div>
 
       <div className="bottom-row">
-        <div className="info-box">Level {level}</div>
+        <div className="info-box" onClick={() => navigate(`/level`)}>Level {level}</div>
         <div className="info-box">{points} Points</div>
       </div>
     </div>

@@ -35,6 +35,7 @@ export const API_ROUTES = {
   
   USER_INFO: "/api/v1/users/info",
   UPDATE_USER_INFO: "/api/v1/users/info/update",
+  EVALUATE_RANK: (userId) => `/api/v1/rankings/re-evaluate/${userId}`,
 
 
   INCOME_SUMMARY: "/api/v1/incomes/summary",
