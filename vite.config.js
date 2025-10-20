@@ -20,9 +20,9 @@ export default defineConfig({
         name: 'TrustAI',
         short_name: 'TrustAI',
         description: 'TrustAI - Trade with AI',
-        theme_color: '#317EFB',
+        theme_color: '#a4d1ff',
         background_color: '#ffffff',
-        display: 'standalone',
+        display: 'fullscreen', // instead of 'standalone'
         scope: '/',
         start_url: '/',
         icons: [
