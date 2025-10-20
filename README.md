@@ -196,3 +196,17 @@ http
     ...
 ````
 Without `.cors(cors -> {})`, Spring Security ignores the `WebMvcConfigurer` CORS settings.
+
+
+
+## Convert to a PWA APP
+
+### ⚙️ Step 1: Install Bubblewrap CLI
+````
+npm install -g @bubblewrap/cli
+````
+
+### ⚙️ Step 2: Build and deploy your PWA
+You need your PWA to be hosted over HTTPS and accessible online.
+
+

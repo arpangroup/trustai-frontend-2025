@@ -2,7 +2,7 @@ name: Deploy React App
 
 on:
   push:
-    branches: ["main", "fix-18-sept-dynamic-config"]
+    branches: ["20-oct-pwa"]
 
 env:
   DEPLOY_PATH: "/var/www/trustai.co.in"
