@@ -15,6 +15,8 @@ import BiddingSection from "./bidding/BiddingSection";
 import { useNavigate } from "react-router-dom";
 import { API_ROUTES, WEB_ROUTES } from "../../api/apiRoutes";
 import HtmlRenderer from "./HtmlRenderer";
+import InstallPrompt from "./InstallPrompt";
+import InstallBanner from "./InstallBanner";
 
 // const carouselSlides = [
 //     {
@@ -207,16 +209,13 @@ export default function Home() {
             {/* <BiddingSection/> */}
 
             <HtmlRenderer htmlContent={html} css={css}/>
+
+            {/* Install Prompt above BottomNav */}
+            {/* <InstallPrompt /> */}
+            <InstallBanner/>
         
             {/* BOTTOM NAV */}
             <BottomNav />
-
-            <button
-                id="installBtn"
-                style={{ display: 'none', position: 'fixed', bottom: '20px', right: '20px', zIndex: 1000 }}
-                >
-                Install App
-            </button>
         </div>
     );
 }
