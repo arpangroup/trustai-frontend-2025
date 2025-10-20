@@ -4,13 +4,20 @@ import AppIcon from "../../assets/pwa-192x192.png"; // small app icon
 
 const InstallBanner = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [isInstalled, setIsInstalled] = useState(false);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+
+    // Check if running as standalone (already installed)
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+        setIsInstalled(true);
+    }
+
     const handler = (e) => {
       e.preventDefault();
       setDeferredPrompt(e);
-      setVisible(true);
+      if (!isInstalled) setVisible(true);
     };
     window.addEventListener("beforeinstallprompt", handler);
 
