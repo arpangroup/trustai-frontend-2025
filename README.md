@@ -202,6 +202,7 @@ Without `.cors(cors -> {})`, Spring Security ignores the `WebMvcConfigurer` CORS
 ## Convert to a PWA APP
 
 ### ⚙️ Step 1: Install Bubblewrap CLI
+````bash
 ````
 npm install -g @bubblewrap/cli
 ````
@@ -209,4 +210,32 @@ npm install -g @bubblewrap/cli
 ### ⚙️ Step 2: Build and deploy your PWA
 You need your PWA to be hosted over HTTPS and accessible online.
 
+If you don’t have hosting yet:
+- Temporarily deploy it using Vercel, Netlify, or Firebase Hosting
+- Get a live HTTPS URL like http://trustai.co.in/
 
+### ⚙️ Step 3: Initialize Bubblewrap
+Now run this (replace the manifest URL with your hosted app):
+````bash
+bubblewrap init --manifest=https://yourapp.vercel.app/manifest.webmanifest
+````
+This will:
+- Fetch your manifest automatically
+- Ask for:
+    - App name (TrustAI)
+    - Package ID (e.g. com.trustai.aggregator)
+    - Signing key details (you can press enter to auto-generate)
+It creates a folder .bubblewrap/ containing an Android project.
+
+### ⚙️ Step 4: Build the APK
+Once initialization completes, run:
+````bash
+bubblewrap build
+````
+✅ This generates:
+- `app-release.apk` - installable on any Android device
+- `app-release.aab` — for Play Store upload
+You’ll see output like:
+````
+✔ APK generated successfully: build/app-release.apk
+````

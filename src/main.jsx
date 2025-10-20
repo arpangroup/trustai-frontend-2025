@@ -16,6 +16,22 @@ registerSW({
   onOfflineReady() {},
 })
 
+let deferredPrompt;
+const installBtn = document.getElementById('installBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();          // Prevent Chrome's automatic prompt
+  deferredPrompt = e;          // Save the event for later
+  installBtn.style.display = 'block'; // Show the button
+
+  installBtn.addEventListener('click', async () => {
+    installBtn.style.display = 'none';
+    deferredPrompt.prompt();   // Show the prompt
+    const choice = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  });
+});
+
 
 createRoot(document.getElementById('root')).render(
   // <StrictMode>

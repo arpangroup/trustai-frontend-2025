@@ -207,9 +207,16 @@ export default function Home() {
             {/* <BiddingSection/> */}
 
             <HtmlRenderer htmlContent={html} css={css}/>
-
+        
             {/* BOTTOM NAV */}
             <BottomNav />
+
+            <button
+                id="installBtn"
+                style={{ display: 'none', position: 'fixed', bottom: '20px', right: '20px', zIndex: 1000 }}
+                >
+                Install App
+            </button>
         </div>
     );
 }
