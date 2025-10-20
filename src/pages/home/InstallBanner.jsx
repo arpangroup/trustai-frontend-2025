@@ -4,7 +4,7 @@ import AppIcon from "../../assets/pwa-192x192.png"; // small app icon
 
 const InstallBanner = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const handler = (e) => {
