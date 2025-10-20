@@ -22,7 +22,7 @@ export default defineConfig({
         description: 'TrustAI - Trade with AI',
         theme_color: '#a4d1ff',
         background_color: '#ffffff',
-        display: 'fullscreen', // instead of 'standalone'
+        display: 'standalone', // instead of ['standalone', 'fullscreen']
         scope: '/',
         start_url: '/',
         icons: [
